@@ -13,5 +13,5 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 ReactDOM.render(
         <Provider store={store}>
             <App />
-        </Provider>
-        , document.querySelector('#root'));
+        </Provider>,
+        document.querySelector('#root'));
