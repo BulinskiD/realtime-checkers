@@ -1,5 +1,5 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED} from '../constants/actionTypes';
-import { auth } from '../api/firebase';
+import { auth } from '../../api/firebase';
 
 export const loginWithEmailAndPassword = (email, password) => async dispatch => {
     try {

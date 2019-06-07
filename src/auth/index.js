@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {connect} from "react-redux";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {loginWithEmailAndPassword} from "../actions/auth";
+import {loginWithEmailAndPassword} from "../store/actions/auth";
 
 const Login = (props) => {
 

@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Login from './auth';
 
 import Board from './board';
-import {onUserAuthChange} from "./actions/auth";
+import {onUserAuthChange} from "./store/actions/auth";
 
 const App = (props) => {
 
