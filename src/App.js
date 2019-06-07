@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
+import Container from 'react-bootstrap/Container';
 import Login from './auth';
 
 import Board from './board';
@@ -11,14 +12,13 @@ const App = (props) => {
 
     useEffect(()=>{
         props.onUserAuthChange();
-    },
-        //eslint-disable-next-line
+    }, //eslint-disable-next-line
         []);
 
     return (
-        <div>
+        <Container>
             {props.authenticated ? <Board /> : <Login />}
-        </div>
+        </Container>
     );
 }
 
