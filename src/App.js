@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { testAction } from "./actions";
 
+import Board from './board';
+
 const App = (props) => {
 
     useEffect(()=>{
@@ -9,7 +11,7 @@ const App = (props) => {
     }, [props]);
 
     return (
-        <div>{props.info}</div>
+        <div><Board /></div>
     );
 }
 
