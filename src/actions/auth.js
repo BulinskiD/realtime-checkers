@@ -1,15 +1,38 @@
-import { LOGIN_SUCCESS } from '../constants/actionTypes';
+import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED} from '../constants/actionTypes';
 import { auth } from '../api/firebase';
 
 export const loginWithEmailAndPassword = (email, password) => async dispatch => {
-
     try {
-        await auth.signInWithEmailAndPassword("dawidbulinski132@gmail.com", "Bulion1!");
+        await auth.signInWithEmailAndPassword(email, password);
     } catch(error) {
-        console.log(error);
+        dispatch({
+           type: LOGIN_FAILED,
+           payload: error
+        });
     }
+}
 
-    dispatch({
-        type: LOGIN_SUCCESS,
+export const userLogout = () => async dispatch => {
+    try {
+        await auth.signOut();
+    } catch(error) {
+        dispatch({
+            type: LOGOUT_FAILED,
+        });
+    }
+}
+
+export const onUserAuthChange = () => async dispatch => {
+    auth.onAuthStateChanged((user)=>{
+       if(user) {
+           dispatch({
+               type: LOGIN_SUCCESS,
+               payload: user
+           });
+       } else {
+           dispatch({
+               type: LOGOUT_SUCCESS
+           })
+       }
     });
 }

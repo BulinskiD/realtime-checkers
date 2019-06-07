@@ -1,25 +1,29 @@
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import { testAction } from "./actions";
-import { loginWithEmailAndPassword } from "./actions/auth";
+import Login from './auth';
 
 import Board from './board';
+import {onUserAuthChange} from "./actions/auth";
 
 const App = (props) => {
 
     useEffect(()=>{
-       props.loginWithEmailAndPassword("test", "test");
-    }, [props]);
+        props.onUserAuthChange();
+    },
+        //eslint-disable-next-line
+        []);
 
     return (
-        <div><Board /></div>
+        <div>
+            {props.authenticated ? <Board /> : <Login />}
+        </div>
     );
 }
 
 const mapStateToProps = (state) =>{
     return {
-        info: state.test
+        authenticated: state.user.isLoggedIn
     }
 }
 
-export default connect(mapStateToProps, {testAction, loginWithEmailAndPassword})(App);
+export default connect(mapStateToProps, {onUserAuthChange})(App);

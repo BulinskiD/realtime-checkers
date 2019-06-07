@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Logout from '../auth/logout';
 import Index from './pole/';
 
 const Board = () => {
@@ -30,9 +30,12 @@ const Board = () => {
 
 
     return (
-        <BoardContainer>
-            {renderBoard()}
-        </BoardContainer>
+        <React.Fragment>
+            <Logout />
+            <BoardContainer>
+                {renderBoard()}
+            </BoardContainer>
+        </React.Fragment>
     );
 }
 
