@@ -1,21 +1,24 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS} from "../constants/actionTypes";
 
-export default (user = {email: null, isLoggedIn: false}, action) => {
+export default (user = {email: null, isLoggedIn: false, initial: true}, action) => {
     switch(action.type) {
         case LOGIN_SUCCESS:
             return {
                 email: action.payload.email,
-                isLoggedIn: true
+                isLoggedIn: true,
+                initial: false
                 };
         case LOGIN_FAILED:
             return {
                 email: null,
-                isLoggedIn: false
+                isLoggedIn: false,
+                initial: false,
             };
         case LOGOUT_SUCCESS:
             return {
                 email: null,
-                isLoggedIn: false
+                isLoggedIn: false,
+                initial: false
             };
         default:
             return user;
