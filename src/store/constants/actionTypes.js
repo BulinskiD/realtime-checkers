@@ -1,5 +1,8 @@
-export const TEST_ACTION = 'TEST_ACTION';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const GET_CHECKERS = 'GET_CHECKERS';
+export const MOVE_CHECKER = "MOVE_CHECKER";
+export const SEED_CHECKERS = "SEED_CHECKERS";
