@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux';
+import { testAction } from "./actions";
 
-const App = () => {
+const App = (props) => {
+
+    useEffect(()=>{
+       props.testAction();
+    }, [props]);
+
     return (
-        <div>Hello World!</div>
+        <div>{props.info}</div>
     );
 }
 
-export default App;
+const mapStateToProps = (state) =>{
+    return {
+        info: state.test
+    }
+}
+
+export default connect(mapStateToProps, {testAction})(App);
