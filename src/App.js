@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { testAction } from "./actions";
