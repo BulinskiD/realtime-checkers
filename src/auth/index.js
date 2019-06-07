@@ -11,7 +11,7 @@ const Login = (props) => {
 
     const handleLogin = e => {
         e.preventDefault();
-        props.loginWithEmailAndPassword(email, password);
+        props.loginWithEmailAndPassword(email, password, props.history);
     };
 
     return (
