@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Pole from './pole';
+import Index from './pole/';
 
 const Board = () => {
 
@@ -22,7 +22,7 @@ const Board = () => {
         const board = new Array(8);
         for(let row = 0; row < 8; row++) {
             for(let col = 0; col < 8; col++) {
-              rowComp[col] = <Pole x={row} y={col} key={`${row}/${col}`} />
+              rowComp[col] = <Index col={col} row={row} key={`${row}/${col}`} />
             }
             board[row] = rowComp;
             rowComp = new Array(8);
