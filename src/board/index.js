@@ -18,15 +18,13 @@ const Board = () => {
 
 
     const renderBoard = () => {
-        let rowComp = new Array(8);
-        const board = new Array(8);
-        for(let row = 0; row < 8; row++) {
-            for(let col = 0; col < 8; col++) {
-              rowComp[col] = <Index col={col} row={row} key={`${row}/${col}`} />
-            }
-            board[row] = rowComp;
-            rowComp = new Array(8);
-        }
+        let rowComp = new Array(8).fill(1);
+        let board = new Array(8).fill(1);
+
+        board = board.map((item, row) => {
+            return rowComp.map((item, col)=> <Index col={col} row={row} key={`${row}/${col}`} />);
+        });
+
         return board;
     }
 

@@ -10,7 +10,7 @@ export default (props) => {
     `;
 
     const WhiteChecker = styled(CheckerItem)`
-        background-color: gray;
+        background-color: lightgray;
     `;
 
     const BlackChecker = styled(CheckerItem)`
