@@ -24,3 +24,5 @@ yarn-error.log*
 
 #ide folders
 /.idea
+
+*.orig
