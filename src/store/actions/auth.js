@@ -1,5 +1,5 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED} from '../constants/actionTypes';
-import { auth } from '../../api/firebase';
+import {auth} from '../../api/firebase';
 
 export const loginWithEmailAndPassword = (email, password, history) => async dispatch => {
     try {
@@ -23,9 +23,8 @@ export const userLogout = () => async dispatch => {
     }
 }
 
-export const onUserAuthChange = () => async dispatch => {
-    auth.onAuthStateChanged((user)=>{
-        console.log(user);
+export const onUserAuthChange = () => dispatch => {
+    auth.onAuthStateChanged(async (user)=>{
        if(user) {
            dispatch({
                type: LOGIN_SUCCESS,
