@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logout from '../auth/logout';
-import Index from './pole/';
+import Pole from './pole/';
 
 const Board = () => {
 
@@ -22,7 +22,7 @@ const Board = () => {
         let board = new Array(8).fill(1);
 
         board = board.map((item, row) => {
-            return rowComp.map((item, col)=> <Index col={col} row={row} key={`${row}/${col}`} />);
+            return rowComp.map((item, col)=> <Pole col={col} row={row} key={`${row}/${col}`} />);
         });
 
         return board;

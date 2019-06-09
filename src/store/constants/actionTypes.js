@@ -10,4 +10,5 @@ export const SELECT_GAME = 'SELECT_GAME';
 
 export const GET_CHECKERS = 'GET_CHECKERS';
 export const MOVE_CHECKER = "MOVE_CHECKER";
+export const SELECT_CHECKER = 'SELECT_CHECKER';
 export const SEED_CHECKERS = "SEED_CHECKERS";

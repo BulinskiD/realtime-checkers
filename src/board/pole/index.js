@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import styled from 'styled-components';
 import Checker from '../checker';
 
-const Index = (props) => {
+const Pole = (props) => {
     const PoleContainer = styled.div`
         border: solid 1px black;
         display: flex;
@@ -10,22 +11,17 @@ const Index = (props) => {
         align-items: center;
     `;
 
-    const [checker, setChecker] = useState(false);
-
-    useEffect(()=>{
-        if(props.col % 2 === props.row % 2) {
-            if (props.row <= 2)
-                setChecker('white');
-            else if (props.row >= 5)
-                setChecker('black');
-        }
-    }, [props]);
-
     return (
       <PoleContainer>
-          {checker && <Checker color={checker} />}
+          {props.pole.length === 1 && <Checker selected={props.pole[0].selected} col={props.pole[0].col} row={props.pole[0].row} color={props.pole[0].color} />}
       </PoleContainer>
     );
 }
 
-export default Index;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        pole: state.currentGame.gameState.checkersPosition.filter(item => (item.col === ownProps.col && item.row === ownProps.row))
+    }
+}
+
+export default connect(mapStateToProps, null)(Pole);

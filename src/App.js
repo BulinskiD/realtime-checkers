@@ -10,11 +10,13 @@ import Login from './auth';
 
 import Board from './board';
 import {onUserAuthChange} from "./store/actions/auth";
+import {startGame} from "./store/actions/checkers";
 
 const App = (props) => {
 
     useEffect(()=>{
         props.onUserAuthChange();
+        props.startGame('HmM1A6FZ341cT8jyqISC');
     }, //eslint-disable-next-line
         []);
 
@@ -40,4 +42,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, {onUserAuthChange})(App);
+export default connect(mapStateToProps, {onUserAuthChange, startGame})(App);
