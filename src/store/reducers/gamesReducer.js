@@ -19,9 +19,11 @@ export default (currentGame = initialState, action) => {
                 }
             }
         case SELECT_CHECKER:
+            let selectedChecker;
             const checkersPosition = currentGame.gameState.checkersPosition.map(item => {
                 if(action.payload.col === item.col && action.payload.row === item.row) {
                     item.selected = true;
+                    selectedChecker = item;
                 } else {
                     item.selected = false;
                 }
@@ -30,9 +32,11 @@ export default (currentGame = initialState, action) => {
 
             return {
                 ...currentGame,
+                selectedChecker: selectedChecker,
                 gameState: {
+                    ...currentGame.gameState,
                     checkersPosition: checkersPosition
-                }
+                    }
             }
 
         default:

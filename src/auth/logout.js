@@ -1,10 +1,11 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 import {connect} from "react-redux";
 import { userLogout } from "../store/actions/auth";
 
 const Logout = (props) => {
     return (
-      <button onClick={props.userLogout}>Logout</button>
+      <Button variant="danger" onClick={props.userLogout}>Logout</Button>
     );
 }
 

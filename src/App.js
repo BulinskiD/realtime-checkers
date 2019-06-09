@@ -16,7 +16,6 @@ const App = (props) => {
 
     useEffect(()=>{
         props.onUserAuthChange();
-        props.startGame('HmM1A6FZ341cT8jyqISC');
     }, //eslint-disable-next-line
         []);
 
@@ -27,8 +26,8 @@ const App = (props) => {
         return (
             <BrowserRouter>
                 <Container>
-                    <Route path="/" exact component={(propsFromRoute) => <Authenticated {...propsFromRoute} authenticated={props.authenticated} display={<ListGames />} />} />
-                    <Route path="/game/:id" component={(propsFromRoute) => <Authenticated {...propsFromRoute} authenticated={props.authenticated} display={<Board />} />} />
+                    <Route path="/" exact component={(propsFromRoute) => <Authenticated authenticated={props.authenticated} display={<ListGames {...propsFromRoute} />} />} />
+                    <Route path="/game/:id" component={(propsFromRoute) => <Authenticated authenticated={props.authenticated} display={<Board {...propsFromRoute} />} />} />
                     <Route path="/login" component={(propsFromRoute)=> <Login {...propsFromRoute} />} />
                 </Container>
             </BrowserRouter>

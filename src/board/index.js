@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Logout from '../auth/logout';
-import Pole from './pole/';
+import Button from 'react-bootstrap/Button';
+import Pole from './pole';
+import { connect } from 'react-redux';
+import { startGame } from '../store/actions/checkers';
 
-const Board = () => {
+const Board = props => {
 
     const BoardContainer = styled.div`
         margin: 0 auto;
@@ -32,6 +35,7 @@ const Board = () => {
     return (
         <React.Fragment>
             <Logout />
+            {props.status !== 'started' && <Button onClick={()=>props.startGame(props.match.params.id)} variant='primary'>Zacznij grę</Button>}
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>
@@ -39,5 +43,9 @@ const Board = () => {
     );
 }
 
-
-export default Board;
+const mapStateToProps = state => {
+    return {
+        status: state.currentGame.gameState.status
+    }
+}
+export default connect(mapStateToProps, {startGame})(Board);
