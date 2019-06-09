@@ -35,12 +35,18 @@ const ListGames = (props) => {
         []);
 
     return (
-        <ListGroup>
-            {list.map( item => {
-                const path = "/game/" + item.id;
-               return <ListGroup.Item><Link key={item.id} to={path} >{item.data.test}</Link></ListGroup.Item>
-            })}
-        </ListGroup>
+        <React.Fragment>
+            <h4 className="my-3">Dostępne gry: </h4>
+            <hr />
+            <ListGroup className="d-flex justify-content-center">
+                {list.map( item => {
+                    const path = "/game/" + item.id;
+                    return <Link key={item.id} to={path} >
+                            <ListGroup.Item className="text-center">{item.data.title}</ListGroup.Item>
+                           </Link>
+                })}
+            </ListGroup>
+        </React.Fragment>
     )
 }
 
