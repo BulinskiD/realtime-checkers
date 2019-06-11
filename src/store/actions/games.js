@@ -7,6 +7,6 @@ export const selectGame = (id) => {
     }
 }
 
-export const removeGame = () => {
+export const setActivePoles = (activePoles) => {
 
 }

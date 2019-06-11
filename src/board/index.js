@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { setNewGameState } from '../store/actions/checkers';
 import { selectGame } from '../store/actions/games';
 import startGame from '../utils/startGame';
+import getActivePoles from '../utils/getActivePoles';
 
 const Board = props => {
 
@@ -21,6 +22,15 @@ const Board = props => {
         grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
         justify-items: stretch;
     `;
+
+    const {selectedChecker} = props.currentGame;
+
+    useEffect(()=>{
+        if(selectedChecker){
+            console.log(getActivePoles(selectedChecker));
+        }
+
+    }, [selectedChecker]);
 
     useEffect(()=>{
         props.selectGame(props.match.params.id);

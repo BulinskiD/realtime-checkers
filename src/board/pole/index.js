@@ -26,8 +26,10 @@ const Pole = props => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {pole: getPole(ownProps.col, ownProps.row, state.currentGame),
-            selectedChecker: state.currentGame.selectedChecker}
+    return {
+        pole: getPole(ownProps.col, ownProps.row, state.currentGame),
+        selectedChecker: state.currentGame.selectedChecker
+    }
 }
 
 export default connect(mapStateToProps, null)(Pole);

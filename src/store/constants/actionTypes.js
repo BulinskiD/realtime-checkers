@@ -5,12 +5,8 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
 
-export const SET_NEW_GAME = 'SET_NEW_GAME';
 export const SELECT_GAME = 'SELECT_GAME';
 
-export const GET_CHECKERS = 'GET_CHECKERS';
-export const MOVE_CHECKER = "MOVE_CHECKER";
 export const SELECT_CHECKER = 'SELECT_CHECKER';
-export const SEED_CHECKERS = "SEED_CHECKERS";
 
 export const SET_NEW_STATE = 'SET_NEW_STATE';
