@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';

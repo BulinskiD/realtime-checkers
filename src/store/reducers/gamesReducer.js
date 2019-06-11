@@ -1,6 +1,6 @@
 import {SEED_CHECKERS, SELECT_GAME, SELECT_CHECKER} from "../constants/actionTypes";
 
-const initialState = {id: null, playerIds: {}, gameState: {}};
+const initialState = {id: null, playerIds: {}, gameState: { status: 'not-started', checkersPosition: []}};
 
 export default (currentGame = initialState, action) => {
     switch(action.type) {
@@ -13,9 +13,10 @@ export default (currentGame = initialState, action) => {
         case SEED_CHECKERS:
             return {
                 ...currentGame,
+                id: action.payload.id,
                 gameState: {
                     status: 'started',
-                    checkersPosition: action.payload
+                    checkersPosition: action.payload.board
                 }
             }
         case SELECT_CHECKER:
@@ -27,6 +28,7 @@ export default (currentGame = initialState, action) => {
                 } else {
                     item.selected = false;
                 }
+
                 return item;
             });
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import ListGroup from 'react-bootstrap/ListGroup';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -34,6 +35,7 @@ const ListGames = (props) => {
     }, //eslint-disable-next-line
         []);
 
+
     return (
         <React.Fragment>
             <h4 className="my-3">Dostępne gry: </h4>
@@ -56,6 +58,19 @@ const mapStateToProps = (state) => {
         currentGame: state.currentGame
   };
 };
+
+ListGames.propTypes = {
+    user: PropTypes.shape({
+       email: PropTypes.string,
+       isLoggedIn: PropTypes.bool,
+       initial: PropTypes.bool
+    }),
+    currentGame: PropTypes.shape({
+        id: PropTypes.string,
+        playerIds: PropTypes.object,
+        gameState: PropTypes.object
+    })
+}
 
 
 export default connect(mapStateToProps, {selectGame})(ListGames);

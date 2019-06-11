@@ -19,13 +19,15 @@ const Pole = props => {
 
     return (
       <PoleContainer>
-          {props.pole && props.pole.length !== 0 && <Checker selected={props.pole[0].selected} col={props.pole[0].col} row={props.pole[0].row} color={props.pole[0].color} />}
+          {props.pole && props.pole.length !== 0 &&
+          <Checker selected={props.pole[0].selected} col={props.pole[0].col} row={props.pole[0].row} color={props.pole[0].color} />}
       </PoleContainer>
     );
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {pole: getPole(ownProps.col, ownProps.row, state.currentGame)}
+    return {pole: getPole(ownProps.col, ownProps.row, state.currentGame),
+            selectedChecker: state.currentGame.selectedChecker}
 }
 
 export default connect(mapStateToProps, null)(Pole);
