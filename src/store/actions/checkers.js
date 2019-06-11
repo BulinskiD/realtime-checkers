@@ -1,23 +1,4 @@
-import {MOVE_CHECKER, SEED_CHECKERS, SELECT_CHECKER} from "../constants/actionTypes";
-import seedCheckers from "../../utils/seedCheckers";
-import {firestore} from "../../api/firebase";
-
-export const startGame = id => async dispatch => {
-    const board = seedCheckers();
-
-    try {
-        await firestore.collection("games").doc(id)
-            .collection('checkersPosition')
-            .doc('checkers').set({board});
-
-        dispatch({
-            type: SEED_CHECKERS,
-            payload: {id, board}
-        });
-    } catch(error) {
-        console.log(error);
-    }
-}
+import {SET_NEW_STATE, SELECT_CHECKER} from "../constants/actionTypes";
 
 export const selectChecker = (col, row) => {
     return {
@@ -26,9 +7,9 @@ export const selectChecker = (col, row) => {
     }
 }
 
-export const moveChecker = (from, to, checkersPosition) => {
+export const setNewGameState = (id, gameState) => {
     return {
-        type: MOVE_CHECKER,
-        payload: {from, to}
+        type: SET_NEW_STATE,
+        payload: {id, gameState}
     }
 }

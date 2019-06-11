@@ -12,3 +12,5 @@ export const GET_CHECKERS = 'GET_CHECKERS';
 export const MOVE_CHECKER = "MOVE_CHECKER";
 export const SELECT_CHECKER = 'SELECT_CHECKER';
 export const SEED_CHECKERS = "SEED_CHECKERS";
+
+export const SET_NEW_STATE = 'SET_NEW_STATE';

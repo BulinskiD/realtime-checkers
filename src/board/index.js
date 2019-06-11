@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';
 import Pole from './pole';
+import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
-import { startGame } from '../store/actions/checkers';
+import { setNewGameState } from '../store/actions/checkers';
+import { selectGame } from '../store/actions/games';
+import startGame from '../utils/startGame';
 
 const Board = props => {
 
@@ -19,6 +22,16 @@ const Board = props => {
         justify-items: stretch;
     `;
 
+    useEffect(()=>{
+        props.selectGame(props.match.params.id);
+        const gameSubscribe = firestore.collection("games").doc(props.match.params.id).onSnapshot(data => {
+            props.setNewGameState(data.id, data.data());
+        });
+
+        return ()=> gameSubscribe();
+
+    }, //eslint-disable-next-line
+        []);
 
     const renderBoard = () => {
         let rowComp = new Array(8).fill(1);
@@ -31,11 +44,10 @@ const Board = props => {
         return board;
     }
 
-
     return (
         <React.Fragment>
             <Logout />
-            {props.status !== 'started' && <Button onClick={()=>props.startGame(props.match.params.id)} variant='primary'>Zacznij grę</Button>}
+            {props.currentGame.status !== 'started' && <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>
@@ -45,7 +57,8 @@ const Board = props => {
 
 const mapStateToProps = state => {
     return {
-        status: state.currentGame.gameState.status
+        currentGame: state.currentGame
     }
 }
-export default connect(mapStateToProps, {startGame})(Board);
+
+export default connect(mapStateToProps, {selectGame, setNewGameState})(Board);

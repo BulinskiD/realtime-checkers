@@ -1,27 +1,17 @@
-import {SEED_CHECKERS, SELECT_GAME, SELECT_CHECKER} from "../constants/actionTypes";
+import {SELECT_GAME, SELECT_CHECKER, SET_NEW_STATE} from "../constants/actionTypes";
 
-const initialState = {id: null, playerIds: {}, gameState: { status: 'not-started', checkersPosition: []}};
+const initialState = {id: null, playerIds: {}, status: 'not-started', checkersPosition: []};
 
 export default (currentGame = initialState, action) => {
     switch(action.type) {
         case SELECT_GAME:
             return {
-                id: action.payload,
-                ...currentGame
-            };
-
-        case SEED_CHECKERS:
-            return {
                 ...currentGame,
-                id: action.payload.id,
-                gameState: {
-                    status: 'started',
-                    checkersPosition: action.payload.board
-                }
-            }
+                id: action.payload
+            };
         case SELECT_CHECKER:
             let selectedChecker;
-            const checkersPosition = currentGame.gameState.checkersPosition.map(item => {
+            const checkersPosition = currentGame.checkersPosition.map(item => {
                 if(action.payload.col === item.col && action.payload.row === item.row) {
                     item.selected = true;
                     selectedChecker = item;
@@ -35,11 +25,14 @@ export default (currentGame = initialState, action) => {
             return {
                 ...currentGame,
                 selectedChecker: selectedChecker,
-                gameState: {
-                    ...currentGame.gameState,
-                    checkersPosition: checkersPosition
-                    }
+                checkersPosition: checkersPosition
             }
+
+        case SET_NEW_STATE:
+            return {
+                id: action.payload.id,
+                ...action.payload.gameState
+            };
 
         default:
             return currentGame;
