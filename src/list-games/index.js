@@ -33,7 +33,7 @@ const ListGames = () => {
                 {list.map( item => {
                     const path = "/game/" + item.id;
                     return <Link key={item.id} to={path} >
-                            <ListGroup.Item className="text-center">{item.data.title}</ListGroup.Item>
+                            <ListGroup.Item className="text-center">{item.id}</ListGroup.Item>
                            </Link>
                 })}
             </ListGroup>

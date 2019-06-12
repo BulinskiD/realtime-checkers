@@ -6,7 +6,3 @@ export const selectGame = (id) => {
         payload: id
     }
 }
-
-export const setActivePoles = (activePoles) => {
-
-}

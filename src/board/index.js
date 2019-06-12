@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Pole from './pole';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
-import { setNewGameState } from '../store/actions/checkers';
+import { setNewGameState, setActivePoles } from '../store/actions/checkers';
 import { selectGame } from '../store/actions/games';
 import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
@@ -27,10 +27,11 @@ const Board = props => {
 
     useEffect(()=>{
         if(selectedChecker){
-            console.log(getActivePoles(selectedChecker));
+            props.setActivePoles(getActivePoles(selectedChecker));
         }
 
-    }, [selectedChecker]);
+    }, //eslint-disable-next-line
+        [selectedChecker]);
 
     useEffect(()=>{
         props.selectGame(props.match.params.id);
@@ -71,4 +72,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {selectGame, setNewGameState})(Board);
+export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles})(Board);

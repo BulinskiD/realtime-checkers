@@ -15,20 +15,25 @@ const Pole = props => {
     const ActivePlace = styled.div`
         background-color: red;
         cursor: pointer;
+        width: 100%;
+        height: 100%;
     `;
 
     return (
       <PoleContainer>
           {props.pole && props.pole.length !== 0 &&
           <Checker selected={props.pole[0].selected} col={props.pole[0].col} row={props.pole[0].row} color={props.pole[0].color} />}
+          {props.active && <ActivePlace />}
       </PoleContainer>
     );
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({currentGame} , ownProps) => {
+    const {checkersPosition, activePoles, selectedChecker} = currentGame;
     return {
-        pole: getPole(ownProps.col, ownProps.row, state.currentGame),
-        selectedChecker: state.currentGame.selectedChecker
+        pole: getPole(ownProps.col, ownProps.row, checkersPosition),
+        selectedChecker: selectedChecker,
+        active: activePoles && activePoles.filter(item => item.col === ownProps.col && item.row ===ownProps.row).length === 1
     }
 }
 

@@ -10,3 +10,4 @@ export const SELECT_GAME = 'SELECT_GAME';
 export const SELECT_CHECKER = 'SELECT_CHECKER';
 
 export const SET_NEW_STATE = 'SET_NEW_STATE';
+export const SET_ACTIVE_POLES = 'SET_ACTIVE_POLES';

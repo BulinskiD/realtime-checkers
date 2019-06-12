@@ -1,6 +1,6 @@
-import {SELECT_GAME, SELECT_CHECKER, SET_NEW_STATE} from "../constants/actionTypes";
+import {SELECT_GAME, SELECT_CHECKER, SET_NEW_STATE, SET_ACTIVE_POLES} from "../constants/actionTypes";
 
-const initialState = {id: null, playerIds: {}, status: 'not-started', checkersPosition: []};
+const initialState = {id: null, playerIds: {}, status: 'not-started', checkersPosition: [], activePoles: null};
 
 export default (currentGame = initialState, action) => {
     switch(action.type) {
@@ -31,8 +31,15 @@ export default (currentGame = initialState, action) => {
         case SET_NEW_STATE:
             return {
                 id: action.payload.id,
+                activePoles: null,
                 ...action.payload.gameState
             };
+
+        case SET_ACTIVE_POLES:
+            return {
+                ...currentGame,
+                activePoles: action.payload
+            }
 
         default:
             return currentGame;

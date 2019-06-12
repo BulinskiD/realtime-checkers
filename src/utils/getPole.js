@@ -1,7 +1,7 @@
-export default (col, row, currentGame) => {
+export default (col, row, position) => {
     let pole;
-    if(currentGame && currentGame.checkersPosition)
-        pole = currentGame.checkersPosition.filter(item => (item.col === col && item.row === row));
+    if(position)
+        pole = position.filter(item => (item.col === col && item.row === row));
 
     return pole;
 }
