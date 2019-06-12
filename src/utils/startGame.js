@@ -8,7 +8,7 @@ export default async (gameState) => {
     try {
         await firestore.collection("games").doc(gameState.id).set({
             ...gameState,
-            status: 'started',
+            status: 'white',
             checkersPosition: board
         });
     } catch (error) {

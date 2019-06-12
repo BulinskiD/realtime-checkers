@@ -58,7 +58,7 @@ const Board = props => {
     return (
         <React.Fragment>
             <Logout />
-            {props.currentGame.status !== 'started' && <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
+            {props.currentGame.status === 'not-started' && <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>

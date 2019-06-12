@@ -24,6 +24,7 @@ const Pole = props => {
     const handleMove = async () => {
         try {
             await firestore.collection("games").doc(props.id).update({
+                status: props.status==='black' ? 'white' : 'black',
                 checkersPosition: moveChecker(props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row})
             });
         } catch (error) {
@@ -41,9 +42,10 @@ const Pole = props => {
 }
 
 const mapStateToProps = ({currentGame} , ownProps) => {
-    const {checkersPosition, activePoles, selectedChecker, id} = currentGame;
+    const {checkersPosition, activePoles, selectedChecker, id, status} = currentGame;
     return {
         id: id,
+        status: status,
         checkersPosition: checkersPosition,
         pole: getPole(ownProps.col, ownProps.row, checkersPosition),
         selectedChecker: selectedChecker,
