@@ -35,7 +35,7 @@ const Pole = props => {
       <PoleContainer>
           {props.pole && props.pole.length !== 0 &&
           <Checker selected={props.pole[0].selected} col={props.pole[0].col} row={props.pole[0].row} color={props.pole[0].color} />}
-          {props.active && <ActivePlace onClick={handleMove} />}
+          {(props.pole && props.active) && <ActivePlace onClick={handleMove} />}
       </PoleContainer>
     );
 }

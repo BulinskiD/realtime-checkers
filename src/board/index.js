@@ -23,11 +23,11 @@ const Board = props => {
         justify-items: stretch;
     `;
 
-    const {selectedChecker} = props.currentGame;
+    const {selectedChecker, checkersPosition} = props.currentGame;
 
     useEffect(()=>{
         if(selectedChecker){
-            props.setActivePoles(getActivePoles(selectedChecker));
+            props.setActivePoles(getActivePoles(selectedChecker, checkersPosition));
         }
 
     }, //eslint-disable-next-line
