@@ -6,7 +6,6 @@ import {selectChecker, setActivePoles} from "../../store/actions/checkers";
 import { firestore } from "../../api/firebase";
 import getPole from '../../utils/getPole';
 import moveChecker from '../../utils/moveChecker';
-import getActivePoles from "../../utils/getActivePoles";
 
 const Pole = props => {
     const PoleContainer = styled.div`
@@ -36,13 +35,15 @@ const Pole = props => {
     }
 
     const handleMove = async () => {
-        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row});
+        console.log(props.nextMove);
+        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove, props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row});
 
         try {
             await firestore.collection("games").doc(props.id).update({
                 status: checkNextStatus(props.status, hasNextMove),
                 checkersPosition: checkersPosition,
-                selectedChecker: selectedChecker
+                selectedChecker: selectedChecker,
+                nextMove: hasNextMove
             });
         } catch (error) {
             console.log(error);
@@ -59,10 +60,11 @@ const Pole = props => {
 }
 
 const mapStateToProps = ({currentGame} , ownProps) => {
-    const {checkersPosition, activePoles, selectedChecker, id, status} = currentGame;
+    const {checkersPosition, activePoles, selectedChecker, id, status, nextMove} = currentGame;
     return {
         id: id,
         status: status,
+        nextMove: nextMove,
         checkersPosition: checkersPosition,
         pole: getPole(ownProps.col, ownProps.row, checkersPosition),
         selectedChecker: selectedChecker,

@@ -1,6 +1,6 @@
 import getActivePoles from "./getActivePoles";
 
-export default (checkersPosition, from, to) => {
+export default (isNextMove, checkersPosition, from, to) => {
 
     let row = from.color === 'black' ? from.row - 1 : from.row + 1;
 
@@ -10,6 +10,7 @@ export default (checkersPosition, from, to) => {
 
     if((from.col - to.col) === 2) {
         hasNextMove = true;
+        //Check if move kills opponent
         checkersPosition = checkersPosition.filter(item => {
             if((from.col - 1 === item.col) && (row === item.row)) {
                 return item.color === from.color;
@@ -20,6 +21,7 @@ export default (checkersPosition, from, to) => {
 
     if((from.col - to.col) === -2) {
         hasNextMove = true;
+        //Check if move kills opponent
         checkersPosition = checkersPosition.filter(item => {
             if((from.col + 1 === item.col) && (row === item.row)) {
                 return item.color === from.color;
@@ -32,11 +34,12 @@ export default (checkersPosition, from, to) => {
 
     if(hasNextMove) {
         const selected = { col: to.col, row: to.row, color: from.color };
-        if (getActivePoles(selected, checkersPosition).length === 0) {
+        const {availablePoles, containsDoubleMove} = getActivePoles(selected, checkersPosition, isNextMove);
+        if (availablePoles.length !== 0 && containsDoubleMove) {
+            selectedChecker = selected;
+        } else {
             hasNextMove = false;
             checkersPosition[indexOfChecker].selected = false;
-        } else {
-            selectedChecker = selected;
         }
     } else {
         checkersPosition[indexOfChecker].selected = false;
@@ -48,3 +51,21 @@ export default (checkersPosition, from, to) => {
 
     return {checkersPosition, hasNextMove, selectedChecker};
 }
+
+
+// TODO pull helper functions outside the main function
+// const checkToTheLeft = (item, from, to) => {
+//     if((from.col - to.col) === 2) {
+//         hasNextMove = true;
+//         checkersPosition = checkersPosition.filter(item => {
+//             if((from.col - 1 === item.col) && (row === item.row)) {
+//                 return item.color === from.color;
+//             }
+//             return true;
+//         });
+//     }
+// }
+
+// const checkToTheRight = () => {
+//
+// }
