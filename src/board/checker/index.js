@@ -15,6 +15,9 @@ const Checker = (props) => {
 
     const WhiteChecker = styled(CheckerItem)`
         background-color: lightgray;
+         &:hover {
+            outline: ${props => props.color === 'white' && '2px solid lightgray'};
+         }
     `;
 
     const SelectedChecker = styled(CheckerItem)`
@@ -25,7 +28,7 @@ const Checker = (props) => {
     const BlackChecker = styled(CheckerItem)`
         background-color: black;
         &:hover {
-            outline: 2px solid black;
+            outline: ${props => props.color === 'black' && '2px solid black'};
          }
     `;
 
@@ -35,7 +38,7 @@ const Checker = (props) => {
 
     return (
         <React.Fragment>
-            {props.color === 'white' ? <WhiteChecker /> : props.selected ? <SelectedChecker /> : <BlackChecker onClick={handleClick} />}
+            {props.color === 'white' ? <WhiteChecker onClick={handleClick} color={props.status} /> : props.selected ? <SelectedChecker /> : <BlackChecker onClick={handleClick} color={props.status} />}
         </React.Fragment>
     );
 }
