@@ -5,9 +5,11 @@ export default async (gameState) => {
 
     const board = seedCheckers();
 
+    const {selectedChecker, activePoles, ...withoutChecker} = gameState;
+
     try {
         await firestore.collection("games").doc(gameState.id).set({
-            ...gameState,
+            ...withoutChecker,
             status: 'white',
             checkersPosition: board
         });

@@ -2,9 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import Checker from '../checker';
+import {selectChecker, setActivePoles} from "../../store/actions/checkers";
 import { firestore } from "../../api/firebase";
 import getPole from '../../utils/getPole';
 import moveChecker from '../../utils/moveChecker';
+import getActivePoles from "../../utils/getActivePoles";
 
 const Pole = props => {
     const PoleContainer = styled.div`
@@ -21,11 +23,26 @@ const Pole = props => {
         height: 100%;
     `;
 
+    const checkNextStatus  = (status, hasNextMove) => {
+        if(status === 'black' && hasNextMove) {
+            return 'black';
+        } else if (status ==='black' && !hasNextMove) {
+            return 'white';
+        } else if (status === 'white' && hasNextMove) {
+            return 'white';
+        } else if (status === 'white' && !hasNextMove) {
+            return 'black';
+        }
+    }
+
     const handleMove = async () => {
+        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row});
+
         try {
             await firestore.collection("games").doc(props.id).update({
-                status: props.status==='black' ? 'white' : 'black',
-                checkersPosition: moveChecker(props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row})
+                status: checkNextStatus(props.status, hasNextMove),
+                checkersPosition: checkersPosition,
+                selectedChecker: selectedChecker
             });
         } catch (error) {
             console.log(error);
@@ -53,4 +70,4 @@ const mapStateToProps = ({currentGame} , ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Pole);
+export default connect(mapStateToProps, {selectChecker, setActivePoles})(Pole);

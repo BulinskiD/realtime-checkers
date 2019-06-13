@@ -1,6 +1,6 @@
 export default (selectedChecker, checkersPosition) => {
     const {col, row, color} = selectedChecker;
-    const availablePoles = [];
+    let availablePoles = [];
     let availableRow;
     let nextAvailableRow;
 
@@ -21,6 +21,8 @@ export default (selectedChecker, checkersPosition) => {
         availablePoles.push({col: col-1, row: availableRow});
     else if(checkersPosition.filter(item => item.col === col - 2 && item.row === nextAvailableRow).length === 0)
         availablePoles.push({col: col-2, row: nextAvailableRow});
+
+    availablePoles = availablePoles.filter(item => (item.col >= 0 && item.col <= 7) && (item.row >= 0 && item.row <=7));
 
     return availablePoles;
 }

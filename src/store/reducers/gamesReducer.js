@@ -30,9 +30,10 @@ export default (currentGame = initialState, action) => {
 
         case SET_NEW_STATE:
             return {
+                ...currentGame,
+                ...action.payload.gameState,
                 id: action.payload.id,
-                activePoles: null,
-                ...action.payload.gameState
+                activePoles: null
             };
 
         case SET_ACTIVE_POLES:

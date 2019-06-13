@@ -21,8 +21,8 @@ const Checker = (props) => {
     `;
 
     const SelectedChecker = styled(CheckerItem)`
-         background-color: black;
          outline: 2px solid black;
+         background-color: ${props => props.color === 'black'? 'black' : 'lightgray'}
     `;
 
     const BlackChecker = styled(CheckerItem)`
@@ -32,13 +32,15 @@ const Checker = (props) => {
          }
     `;
 
-    const handleClick = (e) => {
-        props.selectChecker(props.col, props.row);
+    const handleClick = () => {
+        if(props.status === props.color)
+            props.selectChecker(props.col, props.row);
     }
 
     return (
         <React.Fragment>
-            {props.color === 'white' ? <WhiteChecker onClick={handleClick} color={props.status} /> : props.selected ? <SelectedChecker /> : <BlackChecker onClick={handleClick} color={props.status} />}
+            {props.color === 'white' ? props.selected ? <SelectedChecker color={props.color} /> : <WhiteChecker onClick={handleClick} color={props.status} /> :
+                props.selected ? <SelectedChecker color={props.color} /> : <BlackChecker onClick={handleClick} color={props.status} />}
         </React.Fragment>
     );
 }
