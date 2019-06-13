@@ -17,10 +17,24 @@ const CheckerItem = styled.span`
         border-radius: 100%;   
         outline-offset: 6px;
         transition: all .2s;     
+        position: relative;
     `;
 
 export const ColorChecker = styled(CheckerItem)`
         background-color: ${props => props.color === 'white' ? 'lightgray' : 'black'};
+        ${props => (props.isKing) && css`
+            &::after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: block;
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: tomato;
+            }
+        `}
         ${props => (props.nextMove && props.hover) && css`
            &:hover {
             outline: 2px solid ${props => props.color === 'white' ? 'lightgray' : 'black'};
@@ -29,6 +43,19 @@ export const ColorChecker = styled(CheckerItem)`
     `;
 
 export const SelectedChecker = styled(CheckerItem)`
+        ${props => (props.isKing) && css`
+            &::after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: block;
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: tomato;
+            }
+        `}
          outline: 2px solid black;
          background-color: ${props => props.color === 'black'? 'black' : 'lightgray'}
     `;
