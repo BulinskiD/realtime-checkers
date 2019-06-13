@@ -20,7 +20,6 @@ const Board = props => {
             const {availablePoles} = getActivePoles(selectedChecker, checkersPosition, nextMove);
             props.setActivePoles(availablePoles);
         }
-
     }, //eslint-disable-next-line
         [selectedChecker]);
 
@@ -32,17 +31,15 @@ const Board = props => {
 
         return () => gameSubscribe();
 
-    }, //eslint-disable-next-line
+        }, //eslint-disable-next-line
         []);
 
     const renderBoard = () => {
         let rowComp = new Array(8).fill(1);
         let board = new Array(8).fill(1);
-
         board = board.map((item, row) => {
             return rowComp.map((item, col)=> <Pole col={col} row={row} key={`${row}/${col}`} />);
         });
-
         return board;
     }
 

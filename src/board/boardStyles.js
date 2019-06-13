@@ -21,7 +21,6 @@ const CheckerItem = styled.span`
 
 export const ColorChecker = styled(CheckerItem)`
         background-color: ${props => props.color === 'white' ? 'lightgray' : 'black'};
-        
         ${props => (props.nextMove && props.hover) && css`
            &:hover {
             outline: 2px solid ${props => props.color === 'white' ? 'lightgray' : 'black'};

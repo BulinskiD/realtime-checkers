@@ -10,7 +10,7 @@ import moveChecker from '../utils/moveChecker';
 
 const Pole = props => {
 
-    const {selected, col, row, color} = props.pole ? props.pole : {};
+    const {selected, col, row, color, isKing} = props.pole ? props.pole : {};
 
     const handleMove = async () => {
         const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove,
@@ -28,7 +28,7 @@ const Pole = props => {
 
     return (
       <PoleContainer>
-          {props.pole && <Checker selected={selected} col={col} row={row} color={color} status={props.status} />}
+          {props.pole && <Checker isKing={isKing} selected={selected} col={col} row={row} color={color} status={props.status} />}
           {(!props.pole && props.active) && <ActivePlace onClick={handleMove} />}
       </PoleContainer>
     );

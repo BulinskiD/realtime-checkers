@@ -30,17 +30,20 @@ export default (isNextMove, checkersPosition, from, to) => {
         });
     }
 
+    //Check position of checker
     const indexOfChecker = checkersPosition.indexOf(checkersPosition.filter(item => item.col === from.col && item.row === from.row)[0]);
 
     if(hasNextMove) {
         const selected = { col: to.col, row: to.row, color: from.color };
         const {availablePoles, containsDoubleMove} = getActivePoles(selected, checkersPosition, isNextMove);
+
         if (availablePoles.length !== 0 && containsDoubleMove) {
             selectedChecker = selected;
         } else {
             hasNextMove = false;
             checkersPosition[indexOfChecker].selected = false;
         }
+
     } else {
         checkersPosition[indexOfChecker].selected = false;
     }
@@ -48,24 +51,10 @@ export default (isNextMove, checkersPosition, from, to) => {
     checkersPosition[indexOfChecker].col = to.col;
     checkersPosition[indexOfChecker].row = to.row;
 
+    if((to.row === 7 && from.color === 'white') || (to.row === 0 && from.color === 'black')) {
+        checkersPosition[indexOfChecker].isKing = true;
+    }
+
 
     return {checkersPosition, hasNextMove, selectedChecker};
 }
-
-
-// TODO pull helper functions outside the main function
-// const checkToTheLeft = (item, from, to) => {
-//     if((from.col - to.col) === 2) {
-//         hasNextMove = true;
-//         checkersPosition = checkersPosition.filter(item => {
-//             if((from.col - 1 === item.col) && (row === item.row)) {
-//                 return item.color === from.color;
-//             }
-//             return true;
-//         });
-//     }
-// }
-
-// const checkToTheRight = () => {
-//
-// }

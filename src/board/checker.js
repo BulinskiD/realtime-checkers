@@ -13,10 +13,11 @@ const Checker = (props) => {
 
     return (
         <React.Fragment>
-            {props.selected ? <SelectedChecker color={props.color} /> : <ColorChecker onClick={handleClick}
-                                                                                      color={props.color}
-                                                                                      hover={props.color === props.status}
-                                                                                      nextMove={!props.nextMove}/>}
+            {props.selected ? <SelectedChecker isKing={props.isKing} color={props.color} /> : <ColorChecker onClick={handleClick}
+                                                                                                            color={props.color}
+                                                                                                            hover={props.color === props.status}
+                                                                                                            nextMove={!props.nextMove}
+                                                                                                            isKing={props.isKing} />}
         </React.Fragment>
     );
 }
@@ -31,7 +32,8 @@ Checker.propTypes = {
     nextMove: PropTypes.bool,
     color: PropTypes.string,
     status: PropTypes.string,
-    col: PropTypes.number
+    col: PropTypes.number,
+    isKing: PropTypes.bool
 }
 
 export default connect(mapStateToProps, {selectChecker})(Checker);
