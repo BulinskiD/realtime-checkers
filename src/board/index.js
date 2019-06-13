@@ -1,27 +1,16 @@
 import React, {useEffect} from 'react';
-import styled from 'styled-components';
+import { BoardContainer } from './boardStyles';
 import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';
-import Pole from './pole';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
 import { setNewGameState, setActivePoles } from '../store/actions/checkers';
 import { selectGame } from '../store/actions/games';
 import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
+import Pole from './pole';
 
 const Board = props => {
-
-    const BoardContainer = styled.div`
-        margin: 0 auto;
-        height: 90vh;
-        width: 90vh;
-        display: grid;
-        grid-auto-flow: row;
-        grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-        grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-        justify-items: stretch;
-    `;
 
     const {selectedChecker, checkersPosition, nextMove} = props.currentGame;
 
