@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { ColorChecker, SelectedChecker } from "./boardStyles";
 import {selectChecker} from "../store/actions/checkers";
 
@@ -24,6 +25,13 @@ const mapStateToProps = ({currentGame}) => {
     return {
         nextMove: currentGame.nextMove
     }
+}
+
+Checker.propTypes = {
+    nextMove: PropTypes.bool,
+    color: PropTypes.string,
+    status: PropTypes.string,
+    col: PropTypes.number
 }
 
 export default connect(mapStateToProps, {selectChecker})(Checker);

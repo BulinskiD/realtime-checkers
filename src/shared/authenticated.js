@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 
-export default (props) => {
+const Authenticated = (props) => {
     if(props.authenticated)
         return (
             <React.Fragment>
@@ -14,3 +15,10 @@ export default (props) => {
         )
     }
 }
+
+Authenticated.propTypes = {
+    authenticated: PropTypes.bool,
+    display: PropTypes.element
+};
+
+export default Authenticated;

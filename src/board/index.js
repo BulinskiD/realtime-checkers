@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import { BoardContainer } from './boardStyles';
 import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';
@@ -60,6 +61,18 @@ const mapStateToProps = state => {
     return {
         currentGame: state.currentGame
     }
+}
+
+Board.propTypes = {
+    currentGame: PropTypes.shape({
+        id: PropTypes.string,
+        playerIds: PropTypes.object,
+        status: PropTypes.string,
+        nextMove: PropTypes.bool,
+        checkersPosition: PropTypes.array,
+        activePoles: PropTypes.array,
+        selectedChecker: PropTypes.object
+    })
 }
 
 export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles})(Board);

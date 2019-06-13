@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
 import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {BrowserRouter, Route} from "react-router-dom";
 import Authenticated from './shared/authenticated';
 import ListGames from './list-games';
@@ -38,6 +39,12 @@ const mapStateToProps = (state) =>{
         authenticated: state.user.isLoggedIn,
         loading: state.user.initial
     }
+}
+
+App.propTypes = {
+    authenticated: PropTypes.bool,
+    loading: PropTypes.bool,
+    onUserAuthChange: PropTypes.func
 }
 
 export default connect(mapStateToProps, {onUserAuthChange})(App);
