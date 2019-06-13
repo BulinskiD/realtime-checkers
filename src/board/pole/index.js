@@ -1,39 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styled from 'styled-components';
 import Checker from '../checker';
+import { PoleContainer, ActivePlace } from "./PolesStyles";
 import {selectChecker, setActivePoles} from "../../store/actions/checkers";
 import { firestore } from "../../api/firebase";
 import getPole from '../../utils/getPole';
 import moveChecker from '../../utils/moveChecker';
 
 const Pole = props => {
-    const PoleContainer = styled.div`
-        border: solid 1px black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    `;
-
-    const ActivePlace = styled.div`
-        background-color: red;
-        cursor: pointer;
-        width: 100%;
-        height: 100%;
-    `;
-
-    const checkNextStatus  = (status, hasNextMove) => {
-        if(status === 'black' && hasNextMove) {
-            return 'black';
-        } else if (status ==='black' && !hasNextMove) {
-            return 'white';
-        } else if (status === 'white' && hasNextMove) {
-            return 'white';
-        } else if (status === 'white' && !hasNextMove) {
-            return 'black';
-        }
-    }
-
     const handleMove = async () => {
         console.log(props.nextMove);
         const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove, props.checkersPosition, props.selectedChecker,  {col: props.col, row: props.row});
@@ -57,6 +31,14 @@ const Pole = props => {
           {(props.pole && props.active) && <ActivePlace onClick={handleMove} />}
       </PoleContainer>
     );
+}
+
+const checkNextStatus  = (status, hasNextMove) => {
+    if((status === 'black' && hasNextMove) || (status === 'white' && !hasNextMove)) {
+        return 'black';
+    }
+
+    return 'white';
 }
 
 const mapStateToProps = ({currentGame} , ownProps) => {
