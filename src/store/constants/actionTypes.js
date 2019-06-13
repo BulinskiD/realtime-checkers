@@ -1,0 +1,13 @@
+export const START_LOADING = 'START_LOADING';
+export const STOP_LOADING = 'STOP_LOADING';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const SELECT_GAME = 'SELECT_GAME';
+
+export const SELECT_CHECKER = 'SELECT_CHECKER';
+
+export const SET_NEW_STATE = 'SET_NEW_STATE';
+export const SET_ACTIVE_POLES = 'SET_ACTIVE_POLES';
