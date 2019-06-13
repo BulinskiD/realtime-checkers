@@ -40,7 +40,7 @@ const Board = props => {
             props.setNewGameState(data.id, data.data());
         });
 
-        return ()=> gameSubscribe();
+        return () => gameSubscribe();
 
     }, //eslint-disable-next-line
         []);
