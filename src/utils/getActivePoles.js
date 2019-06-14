@@ -19,7 +19,6 @@ export default (selectedChecker, checkersPosition, isNextMove = false) => {
         containsDoubleMove = containsKingsDoubleMove || containsDoubleMove;
         doubleMove = [...doubleMove, ...kingDoubleMove];
         singleMove = [...singleMove, ...kingSingleMove];
-        console.log(containsKingsDoubleMove, kingDoubleMove, kingSingleMove);
     }
 
     if(doubleMove.length > 0) {
