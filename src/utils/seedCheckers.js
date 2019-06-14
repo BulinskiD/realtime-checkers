@@ -14,7 +14,7 @@ export default () => {
             }
 
             if (color)
-                return {col, row, color, selected: false};
+                return {col, row, color, selected: false, isKing: false};
             else
                 return null;
         });

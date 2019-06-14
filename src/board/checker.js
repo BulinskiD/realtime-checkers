@@ -13,11 +13,13 @@ const Checker = (props) => {
 
     return (
         <React.Fragment>
-            {props.selected ? <SelectedChecker isKing={props.isKing} color={props.color} /> : <ColorChecker onClick={handleClick}
-                                                                                                            color={props.color}
-                                                                                                            hover={props.color === props.status}
-                                                                                                            nextMove={!props.nextMove}
-                                                                                                            isKing={props.isKing} />}
+            {props.selected ? <SelectedChecker isKing={props.isKing} color={props.color} /> :
+
+                              <ColorChecker onClick={handleClick}
+                                            color={props.color}
+                                            hover={props.color === props.status}
+                                            nextMove={!props.nextMove}
+                                            isKing={props.isKing} />}
         </React.Fragment>
     );
 }

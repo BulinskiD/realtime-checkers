@@ -34,7 +34,7 @@ export default (isNextMove, checkersPosition, from, to) => {
     const indexOfChecker = checkersPosition.indexOf(checkersPosition.filter(item => item.col === from.col && item.row === from.row)[0]);
 
     if(hasNextMove) {
-        const selected = { col: to.col, row: to.row, color: from.color };
+        const selected = { col: to.col, row: to.row, color: from.color, isKing: from.isKing };
         const {availablePoles, containsDoubleMove} = getActivePoles(selected, checkersPosition, isNextMove);
 
         if (availablePoles.length !== 0 && containsDoubleMove) {
