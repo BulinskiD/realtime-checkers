@@ -18,7 +18,6 @@ export default (currentGame = initialState, action) => {
                 } else {
                     item.selected = false;
                 }
-
                 return item;
             });
 
