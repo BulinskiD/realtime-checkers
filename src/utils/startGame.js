@@ -1,5 +1,6 @@
 import seedCheckers from "./seedCheckers";
 import {firestore} from "../api/firebase";
+import handleError from "./handleError";
 
 export default async (gameState) => {
 
@@ -14,6 +15,6 @@ export default async (gameState) => {
             checkersPosition: board
         });
     } catch (error) {
-        console.log(error);
+        handleError(error);
     }
 }
