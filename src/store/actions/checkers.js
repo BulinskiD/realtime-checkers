@@ -1,4 +1,11 @@
-import {SET_NEW_STATE, SELECT_CHECKER, SET_ACTIVE_POLES} from "../constants/actionTypes";
+import {SET_NEW_STATE, SELECT_CHECKER, SET_ACTIVE_POLES, SELECT_GAME} from "../constants/actionTypes";
+
+export const selectGame = (id) => {
+    return {
+        type: SELECT_GAME,
+        payload: id
+    }
+}
 
 export const selectChecker = (col, row) => {
     return {
