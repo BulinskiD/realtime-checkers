@@ -24,16 +24,16 @@ export const userLogout = () => async dispatch => {
 }
 
 export const onUserAuthChange = () => dispatch => {
-    auth.onAuthStateChanged(async (user)=>{
-       if(user) {
-           dispatch({
-               type: LOGIN_SUCCESS,
-               payload: user
-           });
-       } else {
-           dispatch({
-               type: LOGOUT_SUCCESS
-           })
-       }
+    auth.onAuthStateChanged(user => {
+        if(user) {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: user
+            });
+        } else {
+            dispatch({
+                type: LOGOUT_SUCCESS
+            })
+        }
     });
 }

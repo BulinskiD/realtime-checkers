@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import {loginWithEmailAndPassword, userLogout, onUserAuthChange} from './auth';
 import {auth} from '../../api/firebase';
-import { LOGIN_FAILED, LOGOUT_FAILED, LOGIN_SUCCESS } from '../constants/actionTypes';
+import {LOGIN_FAILED, LOGOUT_FAILED, LOGIN_SUCCESS, LOGOUT_SUCCESS} from '../constants/actionTypes';
 
 const store = configureMockStore([thunk]);
 jest.mock('../../api/firebase');
@@ -81,23 +81,34 @@ describe("UserLogout", () => {
     });
 });
 
+describe("OnUserAuthChange", () => {
 
-//TODO!!
-// describe("OnUserAuthChange", () => {
+    beforeEach(() => {
+        auth.onAuthStateChanged.mockClear();
+    });
 
-//     beforeEach(() => {
-//         auth.onAuthStateChanged.mockClear();
-//     });
+    it('should dispatch LOGIN_SUCCESS when fn called with user != null', async () => {
+        auth.onAuthStateChanged = jest.fn((func) => {
+            func("user");
+        });
+        const mockedStore = store({user: {}});
 
-//     it('should dispatch LOGIN_SUCCESS when user != null', async () => {
-//         auth.onAuthStateChanged = jest.fn();
-//         const mockedStore = store({user: {}});
-//         const prom = Promise.resolve('user');
+        mockedStore.dispatch(await onUserAuthChange());
 
-//         mockedStore.dispatch(await onUserAuthChange());
+        expect(auth.onAuthStateChanged).toHaveBeenCalledTimes(1);
+        expect(mockedStore.getActions()).toEqual([{type: LOGIN_SUCCESS, payload: 'user'}]);
+    });
 
-//         expect(auth.onAuthStateChanged).toHaveBeenCalledWith('test');
-//         expect(mockedStore.getActions()).toEqual([{type: LOGIN_SUCCESS, payload: 'user'}]);
-//     });
-// });
+    it('should dispatch LOGOUT_SUCCESS when fn called with user == null', async () => {
+        auth.onAuthStateChanged = jest.fn((func) => {
+            func(null);
+        });
+        const mockedStore = store({user: {}});
+
+        mockedStore.dispatch(await onUserAuthChange());
+
+        expect(auth.onAuthStateChanged).toHaveBeenCalledTimes(1);
+        expect(mockedStore.getActions()).toEqual([{type: LOGOUT_SUCCESS}]);
+    });
+});
 
