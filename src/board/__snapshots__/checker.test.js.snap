@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checker should render checker with event listener for given props 1`] = `
+<Fragment>
+  <Styled(styled.span)
+    className="color"
+    color="white"
+    hover={true}
+    isKing={false}
+    nextMove={true}
+    onClick={[Function]}
+  />
+</Fragment>
+`;
+
+exports[`Checker should render checker without event listener for given props 1`] = `
+<Fragment>
+  <Styled(styled.span)
+    className="selected"
+    color="white"
+    isKing={false}
+  />
+</Fragment>
+`;

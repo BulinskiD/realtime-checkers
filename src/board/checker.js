@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ColorChecker, SelectedChecker } from "./boardStyles";
 import {selectChecker} from "../store/actions/checkers";
 
-const Checker = (props) => {
+export const Checker = (props) => {
 
     const handleClick = () => {
         if((props.status === props.color) && !props.nextMove)
@@ -13,9 +13,10 @@ const Checker = (props) => {
 
     return (
         <React.Fragment>
-            {props.selected ? <SelectedChecker isKing={props.isKing} color={props.color} /> :
+            {props.selected ? <SelectedChecker className="selected" isKing={props.isKing} color={props.color} /> :
 
-                              <ColorChecker onClick={handleClick}
+                              <ColorChecker className="color"
+                                            onClick={handleClick}
                                             color={props.color}
                                             hover={props.color === props.status}
                                             nextMove={!props.nextMove}
@@ -35,7 +36,10 @@ Checker.propTypes = {
     color: PropTypes.string,
     status: PropTypes.string,
     col: PropTypes.number,
-    isKing: PropTypes.bool
+    row: PropTypes.number,
+    isKing: PropTypes.bool,
+    selected: PropTypes.bool,
+    selectChecker: PropTypes.func
 }
 
 export default connect(mapStateToProps, {selectChecker})(Checker);

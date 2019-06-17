@@ -5,13 +5,12 @@ import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
-import { setNewGameState, setActivePoles } from '../store/actions/checkers';
-import { selectGame } from '../store/actions/games';
+import { setNewGameState, setActivePoles, selectGame } from '../store/actions/checkers';
 import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
 
-const Board = props => {
+export const Board = props => {
 
     const {selectedChecker, checkersPosition, nextMove} = props.currentGame;
 
@@ -69,7 +68,10 @@ Board.propTypes = {
         checkersPosition: PropTypes.array,
         activePoles: PropTypes.array,
         selectedChecker: PropTypes.object
-    })
+    }),
+    selectGame: PropTypes.func,
+    setNewGameState: PropTypes.func,
+    setActivePoles: PropTypes.func
 }
 
 export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles})(Board);

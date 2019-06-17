@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorChecker should add hover pseudo class for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={true}
+  isKing={false}
+  nextMove={true}
+>
+  <span
+    className="sc-bwzfXH sc-htpNat bWyaqP"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render black component for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={false}
+  isKing={false}
+  nextMove={false}
+>
+  <span
+    className="sc-bwzfXH sc-htpNat epEepr"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render component with king markup 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={true}
+  isKing={true}
+  nextMove={true}
+>
+  <span
+    className="sc-bwzfXH sc-htpNat cXuQoQ"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render white component for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  hover={false}
+  isKing={false}
+  nextMove={false}
+>
+  <span
+    className="sc-bwzfXH sc-htpNat eHUpYr"
+    color="white"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render black selectedChecker with king markup for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  isKing={true}
+>
+  <span
+    className="sc-bwzfXH sc-bxivhb huBrTm"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render black selectedChecker without king markup for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  isKing={false}
+>
+  <span
+    className="sc-bwzfXH sc-bxivhb eTFHWs"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render white selectedChecker with king markup for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  isKing={true}
+>
+  <span
+    className="sc-bwzfXH sc-bxivhb eyUjgT"
+    color="white"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render white selectedChecker without king markup for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  isKing={false}
+>
+  <span
+    className="sc-bwzfXH sc-bxivhb dUePGQ"
+    color="white"
+  />
+</Styled(styled.span)>
+`;

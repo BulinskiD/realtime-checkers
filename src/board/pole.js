@@ -7,8 +7,9 @@ import {selectChecker, setActivePoles} from "../store/actions/checkers";
 import { firestore } from "../api/firebase";
 import { getPole, checkNextStatus } from "../utils/utilFunctions";
 import moveChecker from '../utils/moveChecker';
+import handleError from '../utils/handleError';
 
-const Pole = props => {
+export const Pole = props => {
 
     const {selected, col, row, color, isKing} = props.pole ? props.pole : {};
 
@@ -22,14 +23,14 @@ const Pole = props => {
             await firestore.collection("games").doc(props.id)
                         .update({status, checkersPosition, selectedChecker, nextMove: hasNextMove });
         } catch (error) {
-            console.log(error);
+            handleError(error);
         }
     }
 
     return (
       <PoleContainer>
           {props.pole && <Checker isKing={isKing} selected={selected} col={col} row={row} color={color} status={props.status} />}
-          {(!props.pole && props.active) && <ActivePlace onClick={handleMove} />}
+          {(!props.pole && props.active) && <ActivePlace className="active" onClick={handleMove} />}
       </PoleContainer>
     );
 }
@@ -61,7 +62,9 @@ Pole.propTypes = {
     pole: checkersShape,
     active: PropTypes.bool,
     col: PropTypes.number,
-    row: PropTypes.number
+    row: PropTypes.number,
+    selectChecker: PropTypes.func,
+    setActivePoles: PropTypes.func
 }
 
 export default connect(mapStateToProps, {selectChecker, setActivePoles})(Pole);
