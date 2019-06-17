@@ -1,4 +1,4 @@
-export default (selectedChecker, checkersPosition, isNextMove = false) => {
+export default (selectedChecker, checkersPosition, isNextMove = false, from = null) => {
 
     const {col, row, color, isKing} = selectedChecker;
     let availablePoles = [];
@@ -33,6 +33,10 @@ export default (selectedChecker, checkersPosition, isNextMove = false) => {
 
     //Filter items out of range (board 8x8)
     availablePoles = availablePoles.filter(item => (item.col >= 0 && item.col <= 7) && (item.row >= 0 && item.row <= 7));
+
+    //Filter item from
+    if(from)
+        availablePoles = availablePoles.filter(item => !(item.row === from.row && item.col === from.col));
 
     return {availablePoles, containsDoubleMove};
 }

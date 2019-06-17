@@ -53,7 +53,7 @@ describe('Pole', () => {
         component.find('.active').simulate('click');
 
         await prom;
-        expect(update).toBeCalledWith({status:'black', checkersPosition: [], selectedChecker: {}, nextMove: false});
+        expect(update).toBeCalledWith({status:'black', checkersPosition: [], selectedChecker: {}, nextMove: false, from: {}});
     });
 
     it('should call handle error when request fails', async () => {
@@ -71,7 +71,7 @@ describe('Pole', () => {
         const component = shallow(<Pole {...props} />);
 
         component.find('.active').simulate('click');
-        expect(update).toBeCalledWith({status:'black', checkersPosition: [], selectedChecker: {}, nextMove: false});
+        expect(update).toBeCalledWith({status:'black', checkersPosition: [], selectedChecker: {}, nextMove: false, from: {}});
         try {
             await prom;
         } catch(error) {

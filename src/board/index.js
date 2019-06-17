@@ -12,11 +12,11 @@ import Pole from './pole';
 
 export const Board = props => {
 
-    const {selectedChecker, checkersPosition, nextMove} = props.currentGame;
+    const {selectedChecker, checkersPosition, nextMove, from} = props.currentGame;
 
     useEffect(()=>{
         if(selectedChecker){
-            const {availablePoles} = getActivePoles(selectedChecker, checkersPosition, nextMove);
+            const {availablePoles} = getActivePoles(selectedChecker, checkersPosition, nextMove, from);
             props.setActivePoles(availablePoles);
         }
     }, //eslint-disable-next-line
@@ -68,7 +68,8 @@ Board.propTypes = {
         nextMove: PropTypes.bool,
         checkersPosition: PropTypes.array,
         activePoles: PropTypes.array,
-        selectedChecker: PropTypes.object
+        selectedChecker: PropTypes.object,
+        from: PropTypes.object
     }),
     selectGame: PropTypes.func,
     setNewGameState: PropTypes.func,

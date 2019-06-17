@@ -14,14 +14,19 @@ export const Pole = props => {
     const {selected, col, row, color, isKing} = props.pole ? props.pole : {};
 
     const handleMove = async () => {
+        let oldFrom = {};
+        Object.assign(oldFrom, props.selectedChecker);
         const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove,
                                                                              props.checkersPosition,
                                                                              props.selectedChecker,
                                                                           {col: props.col, row: props.row});
         const status = checkNextStatus(props.status, hasNextMove);
+        if(!hasNextMove)
+            oldFrom = {};
+
         try {
             await firestore.collection("games").doc(props.id)
-                        .update({status, checkersPosition, selectedChecker, nextMove: hasNextMove });
+                        .update({status, checkersPosition, selectedChecker, nextMove: hasNextMove, from: oldFrom });
         } catch (error) {
             handleError(error);
         }

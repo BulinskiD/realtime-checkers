@@ -2,7 +2,7 @@ import getActivePoles from "./getActivePoles";
 
 export default (isNextMove, checkersPosition, from, to) => {
 
-    let row = from.color === 'black' ? from.row - 1 : from.row + 1;
+    let row = from.row - to.row > 0 ? from.row - 1 : from.row + 1;
 
     let selectedChecker = null;
 
@@ -33,12 +33,18 @@ export default (isNextMove, checkersPosition, from, to) => {
     //Check position of checker
     const indexOfChecker = checkersPosition.indexOf(checkersPosition.filter(item => item.col === from.col && item.row === from.row)[0]);
 
+    if((to.row === 7 && from.color === 'white') || (to.row === 0 && from.color === 'black')) {
+        checkersPosition[indexOfChecker].isKing = true;
+    }
+
     if(hasNextMove) {
-        const selected = { col: to.col, row: to.row, color: from.color, isKing: from.isKing };
-        const {availablePoles, containsDoubleMove} = getActivePoles(selected, checkersPosition, isNextMove);
+        const selected = { col: to.col, row: to.row, color: from.color, isKing: checkersPosition[indexOfChecker].isKing };
+        let {availablePoles, containsDoubleMove} = getActivePoles(selected, checkersPosition, isNextMove, from);
 
         if (availablePoles.length !== 0 && containsDoubleMove) {
             selectedChecker = selected;
+            if((to.row === 7 && from.color === 'white') || (to.row === 0 && from.color === 'black'))
+                selectedChecker.isKing = true;
         } else {
             hasNextMove = false;
             checkersPosition[indexOfChecker].selected = false;
@@ -50,11 +56,6 @@ export default (isNextMove, checkersPosition, from, to) => {
 
     checkersPosition[indexOfChecker].col = to.col;
     checkersPosition[indexOfChecker].row = to.row;
-
-    if((to.row === 7 && from.color === 'white') || (to.row === 0 && from.color === 'black')) {
-        checkersPosition[indexOfChecker].isKing = true;
-        selectedChecker.isKing = true;
-    }
 
 
     return {checkersPosition, hasNextMove, selectedChecker};

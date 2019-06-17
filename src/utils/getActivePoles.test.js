@@ -102,4 +102,14 @@ describe('GetActivePoles', ()=>{
         expect(availablePoles.length).toBe(1);
         expect(availablePoles).toEqual(expect.arrayContaining(expectedState));
     });
+
+    it('should not display from object on availablePoles', () => {
+        const checkersPosition = [{col: 2, row: 2}, {col: 3, row: 3}, {col: 1, row: 3}, {col: 3, row: 1}, {col: 1, row: 1}, {col: 2, row: 0}, {col: 0, row: 0}];
+        const from = {col: 0, row: 2};
+        const king = {col: 1, row: 1, color: 'white', selected: false, isKing: true};
+
+        const {availablePoles} = getActivePoles(king, checkersPosition, false, from);
+
+        expect(availablePoles).toStrictEqual([]);
+    });
 });
