@@ -78,6 +78,24 @@ describe("MoveChecker", () => {
         expect(getActivePoles).toBeCalledTimes(1);
     });
 
+    it("should return hasNextMove === true, remove white checker from array, and set isKing to true", () => {
+        const isNextMove = false;
+        const oldCheckersPosition = [{col: 2, row: 2, selected: true, color:'black', isKing:false}, {col: 1, row: 1, selected: false, color: 'white', isKing: false}];
+        const expectedState = [{col: 0, color: "black", isKing: true, row: 0, selected: true}];
+        const from = {col: 2, row: 2, selected: false, color: 'black', isKing: false};
+        const to = {col: 0, row: 0};
+
+        getActivePoles.mockReturnValue({availablePoles: [{col:1, row:1, color:'black'}], containsDoubleMove: true});
+
+        expect.assertions(4);
+        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(isNextMove, oldCheckersPosition, from, to);
+
+        expect(checkersPosition).toEqual(expect.arrayContaining(expectedState));
+        expect(hasNextMove).toBeTruthy();
+        expect(selectedChecker).toStrictEqual({col: 0, row: 0, color:'black', isKing: true});
+        expect(getActivePoles).toBeCalledTimes(1);
+    });
+
     it("should return hasNextMove === true, and selectedChecker === from with changed col and row for given input", () => {
         const isNextMove = false;
         const oldCheckersPosition = [{col: 2, row: 2, selected: true, color:'white', isKing:false}, {col: 3, row: 3, selected: false, color: 'white', isKing: false}];
@@ -85,7 +103,7 @@ describe("MoveChecker", () => {
         const from = {col: 2, row: 2, selected: false, color: 'white', isKing: false};
         const to = {col: 4, row: 4};
 
-        getActivePoles.mockReturnValue({availablePoles: [{col:5, row:5, color:'blacl'}], containsDoubleMove: true});
+        getActivePoles.mockReturnValue({availablePoles: [{col:5, row:5, color:'black'}], containsDoubleMove: true});
 
         expect.assertions(4);
         const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(isNextMove, oldCheckersPosition, from, to);

@@ -25,8 +25,8 @@ const selectGame = jest.fn();
 
 const mockStore = configureMockStore();
 
-const data = {currentGame: {status: 'white', selectedChecker: {col: 2, row: 2},
-        checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false}};
+let data;
+getActivePoles.mockReturnValue({availablePoles: {col: 2, row: 2}});
 
 describe('Board', () => {
     beforeEach(() => {
@@ -34,12 +34,14 @@ describe('Board', () => {
         setActivePoles.mockClear();
         selectGame.mockClear();
         unsubscriber.mockClear();
+        data = {currentGame: {status: 'white', selectedChecker: {col: 2, row: 2},
+            checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false}};
     });
 
    it('should render 64 poles and Start game button for given props', () => {
         const selectedChecker = {col: 2, row: 2, color: 'black', selected: false};
         const currentGame = {status: 'not-started', selectedChecker, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false};
-        const props = {...currentGame, setNewGameState, selectGame, setActivePoles};
+        const props = {currentGame, setNewGameState, selectGame, setActivePoles};
         const component = shallow(<Board {...props} />);
         expect(component.find('Button').text()).toBe("Zacznij grę");
         expect(component.find('Connect(Pole)').length).toBe(64);
@@ -49,7 +51,7 @@ describe('Board', () => {
     it("shouldn't render Start game button for given props", () => {
         const selectedChecker = {col: 2, row: 2, color: 'black', selected: false};
         const currentGame = {status: 'white', selectedChecker, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false};
-        const props = {...currentGame, setNewGameState, selectGame, setActivePoles};
+        const props = {currentGame, setNewGameState, selectGame, setActivePoles};
         const component = shallow(<Board {...props} />);
         expect(component.find('Button').exists()).toBe(false);
         expect(component.find('Connect(Pole)').length).toBe(64);
@@ -67,8 +69,7 @@ describe('Board', () => {
 
     it("should call firestore subscribe on component load", () => {
         const store = mockStore(data);
-        const currentGame = data;
-        const props = {...currentGame, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
+        const props = {...data, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
 
         mount(<Provider store={store}><Board {...props} /></Provider>);
 
@@ -78,8 +79,7 @@ describe('Board', () => {
 
     it("should unsubscribe on component unmount", () => {
         const store = mockStore(data);
-        const currentGame = data;
-        const props = {currentGame, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
+        const props = {...data, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
         const component = mount(<Provider store={store}><Board {...props} /></Provider>);
 
         component.unmount();
@@ -88,12 +88,19 @@ describe('Board', () => {
 
     it("should call setActivePoles when selectedChecker changes", () => {
         const store = mockStore(data);
-        const currentGame = data;
-        const props = {...currentGame, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
-        getActivePoles.mockReturnValue({availablePoles: {col: 2, row: 2}});
+        const props = {...data, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
         mount(<Provider store={store}><Board {...props} /></Provider>);
 
         expect(setActivePoles).toBeCalledWith({col: 2, row: 2});
+    });
+
+    it("shouldn't call setActivePoles when selectedChecker is null", () => {
+        const store = mockStore(data);
+        data.currentGame.selectedChecker = null;
+        const props = {...data, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
+        mount(<Provider store={store}><Board {...props} /></Provider>);
+
+        expect(setActivePoles).toBeCalledTimes(0);
     });
 });
 

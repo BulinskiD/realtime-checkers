@@ -34,4 +34,18 @@ describe("ListGames", () => {
         expect(component.find('a').props().href).toBe('/game/11');
         expect(component.find('div.list-group-item').text()).toBe('test');
     });
+
+    it('Should correctly unsubscribe on component unmount', () => {
+        const dataResp = jest.fn();
+        dataResp.mockReturnValue({title: 'test'});
+        const response = {docs: [{id: '11', data: dataResp}]};
+        const unsubscriber = jest.fn();
+        const onSnapshot = jest.fn(func => {func(response); return unsubscriber});
+        firestore.collection.mockReturnValue({onSnapshot});
+        const component = mount(<StaticRouter><ListGames /></StaticRouter>);
+
+        component.unmount();
+
+        expect(unsubscriber).toHaveBeenCalledTimes(1);
+    });
 });

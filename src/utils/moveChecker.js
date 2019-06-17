@@ -53,6 +53,7 @@ export default (isNextMove, checkersPosition, from, to) => {
 
     if((to.row === 7 && from.color === 'white') || (to.row === 0 && from.color === 'black')) {
         checkersPosition[indexOfChecker].isKing = true;
+        selectedChecker.isKing = true;
     }
 
 

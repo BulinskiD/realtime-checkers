@@ -9,7 +9,7 @@ describe("GamesReducer", () => {
    });
 
    it('should return new state with selectedChecker for SELECT_CHECKER action', () => {
-      const checkersPosition = [{col: 2, row: 2, selected:false}];
+      const checkersPosition = [{col: 2, row: 2, selected:false}, {col:3, row: 3, selected: false}];
       initialState.checkersPosition = checkersPosition;
 
       expect(gamesReducer(initialState, {type: SELECT_CHECKER, payload: {col: 2, row: 2}}))
