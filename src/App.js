@@ -12,7 +12,7 @@ import Login from './auth';
 import Board from './board';
 import {onUserAuthChange} from "./store/actions/auth";
 
-const App = (props) => {
+export const App = (props) => {
 
     useEffect(()=>{
         props.onUserAuthChange();

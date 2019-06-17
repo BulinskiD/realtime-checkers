@@ -2,7 +2,8 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import moveChecker from '../utils/moveChecker';
 import {firestore} from '../api/firebase';
-import { Pole } from './pole';
+import ConnectedPole, { Pole } from './pole';
+import configureMockStore from 'redux-mock-store';
 import {selectChecker, setActivePoles} from "../store/actions/checkers";
 import { getPole, checkNextStatus } from "../utils/utilFunctions";
 import handleError from "../utils/handleError";
@@ -11,6 +12,8 @@ jest.mock('../utils/handleError');
 jest.mock('../utils/utilFunctions');
 jest.mock('../api/firebase');
 jest.mock('../utils/moveChecker');
+
+const mockedStore = configureMockStore();
 
 const doc = jest.fn();
 const update = jest.fn();
@@ -74,5 +77,21 @@ describe('Pole', () => {
         } catch(error) {
             expect(handleError).toBeCalledWith('Error');
         }
+    });
+});
+
+describe("MapStateToProps in Pole", () => {
+
+    it('should map state to props correctly', () => {
+        const storeState = {currentGame: {status: 'white', selectedChecker: {}, activePoles: [{col: 2, row: 2}], id: '22',
+                checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false}};
+
+        const props = {id: '22', status: 'white', nextMove: false, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}],
+            pole: {col: 2, row: 2}, active: true, col: 2, row: 2, selectedChecker: {} };
+
+        getPole.mockReturnValue({col: 2, row: 2});
+        const store = mockedStore(storeState);
+        const component = shallow(<ConnectedPole store={store} col={2} row={2} />);
+        expect(component.find('Pole').props()).toEqual(expect.objectContaining({...props}));
     });
 });

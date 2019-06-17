@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Should render correct routes when loading is false 1`] = `
+<BrowserRouter>
+  <Container
+    fluid={false}
+  >
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      path="/game/:id"
+    />
+    <Route
+      component={[Function]}
+      path="/login"
+    />
+  </Container>
+</BrowserRouter>
+`;
+
+exports[`App Should render loading when loading prop is true 1`] = `
+<div>
+  Ladowanie
+</div>
+`;

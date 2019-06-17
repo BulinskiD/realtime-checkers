@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
 import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import {loginWithEmailAndPassword} from "../store/actions/auth";
 
-const Login = (props) => {
+export const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +20,7 @@ const Login = (props) => {
         <Form className="w-25 mt-4" onSubmit={e=>handleLogin(e)}>
             <Form.Label>Email</Form.Label>
             <Form.Control
-                className="mb-4"
+                className="mb-4 email"
                 placeholder="Email"
                 type="email"
                 aria-label="email"
@@ -28,7 +29,7 @@ const Login = (props) => {
             />
             <Form.Label>Hasło</Form.Label>
             <Form.Control
-                className="mb-4"
+                className="mb-4 password"
                 type='password'
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}
@@ -42,5 +43,8 @@ const Login = (props) => {
     );
 }
 
-export default connect(null, {loginWithEmailAndPassword})(Login);
+Login.propTypes = {
+    loginWithEmailAndPassword: PropTypes.func
+}
 
+export default connect(null, {loginWithEmailAndPassword})(Login);
