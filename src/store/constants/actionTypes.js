@@ -6,7 +6,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
 
 export const SELECT_GAME = 'SELECT_GAME';
-
+export const SIGN_UP_TO_GAME = 'SIGN_UP_TO_GAME';
 export const SELECT_CHECKER = 'SELECT_CHECKER';
 
 export const SET_NEW_STATE = 'SET_NEW_STATE';

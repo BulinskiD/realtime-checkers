@@ -1,5 +1,5 @@
-import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED} from '../constants/actionTypes';
-import {auth} from '../../api/firebase';
+import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED, SIGN_UP_TO_GAME} from '../constants/actionTypes';
+import {auth, firestore} from '../../api/firebase';
 
 export const loginWithEmailAndPassword = (email, password, history) => async dispatch => {
     try {
@@ -35,5 +35,16 @@ export const onUserAuthChange = () => dispatch => {
                 type: LOGOUT_SUCCESS
             })
         }
+    });
+}
+
+export const onSelectedGameChange = email => dispatch => {
+    firestore.collection('users').doc(email).onSnapshot(data => {
+       if(data) {
+           dispatch({
+              type: SIGN_UP_TO_GAME,
+              payload: data.data()
+           });
+       }
     });
 }

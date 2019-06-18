@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS} from "../constants/actionTypes";
+import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, SIGN_UP_TO_GAME} from "../constants/actionTypes";
 
 export default (user = {email: null, isLoggedIn: false, initial: true}, action) => {
     switch(action.type) {
@@ -19,6 +19,11 @@ export default (user = {email: null, isLoggedIn: false, initial: true}, action) 
                 email: null,
                 isLoggedIn: false,
                 initial: false
+            };
+        case SIGN_UP_TO_GAME:
+            return {
+              ...user,
+              gameID: action.payload.gameID
             };
         default:
             return user;

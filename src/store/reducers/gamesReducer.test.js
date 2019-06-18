@@ -7,7 +7,7 @@ import {
    SET_NEW_STATE
 } from "../constants/actionTypes";
 
-const initialState = {id: null, playerIds: {}, status: 'not-started', nextMove: false, checkersPosition: [], activePoles: null};
+const initialState = {id: null, players: {}, status: 'not-started', nextMove: false, checkersPosition: [], activePoles: null};
 
 describe("GamesReducer", () => {
    it('should set id from action payload on SELECT_GAME action', () => {
