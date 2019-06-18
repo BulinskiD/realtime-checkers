@@ -1,4 +1,4 @@
-import {SET_NEW_STATE, SELECT_CHECKER, SET_ACTIVE_POLES, SELECT_GAME} from "../constants/actionTypes";
+import {SET_NEW_STATE, SELECT_CHECKER, SET_ACTIVE_POLES, SELECT_GAME, CLEAR_CURRENT_GAME} from "../constants/actionTypes";
 
 export const selectGame = (id) => {
     return {
@@ -24,5 +24,10 @@ export const setActivePoles = (activePoles) => {
     return {
         type: SET_ACTIVE_POLES,
         payload: activePoles
+    }
+}
+export const clearCurrentGame = () => {
+    return {
+        type: CLEAR_CURRENT_GAME
     }
 }

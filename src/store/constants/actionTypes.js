@@ -11,6 +11,7 @@ export const SELECT_CHECKER = 'SELECT_CHECKER';
 
 export const SET_NEW_STATE = 'SET_NEW_STATE';
 export const SET_ACTIVE_POLES = 'SET_ACTIVE_POLES';
+export const CLEAR_CURRENT_GAME = 'CLEAR_CURRENT_GAME';
 
 export const WHITE_WINNER = 'WHITE_WINNER';
 export const BLACK_WINNER = 'BLACK_WINNER';

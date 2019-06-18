@@ -1,5 +1,5 @@
-import {selectGame, selectChecker, setActivePoles, setNewGameState} from "./checkers";
-import {SELECT_CHECKER, SELECT_GAME, SET_ACTIVE_POLES, SET_NEW_STATE} from "../constants/actionTypes";
+import {selectGame, selectChecker, setActivePoles, setNewGameState, clearCurrentGame} from "./checkers";
+import {SELECT_CHECKER, SELECT_GAME, SET_ACTIVE_POLES, SET_NEW_STATE, CLEAR_CURRENT_GAME} from "../constants/actionTypes";
 
 describe("SelectGame", () => {
    it('should pass id as a payload', () => {
@@ -24,3 +24,10 @@ describe("SetNewGameState", () => {
         expect(setNewGameState("2", 'test')).toStrictEqual({type: SET_NEW_STATE, payload: {id: "2", gameState:'test'}});
     });
 });
+
+describe("ClearCurrentGame", () => {
+    it('should return CLEAR_CURRENT_GAME action', () => {
+        expect(clearCurrentGame()).toStrictEqual({type: CLEAR_CURRENT_GAME});
+    });
+});
+

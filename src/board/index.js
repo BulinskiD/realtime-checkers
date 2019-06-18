@@ -5,7 +5,7 @@ import Logout from '../auth/logout';
 import Button from 'react-bootstrap/Button';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
-import { setNewGameState, setActivePoles, selectGame } from '../store/actions/checkers';
+import { setNewGameState, setActivePoles, selectGame, clearCurrentGame } from '../store/actions/checkers';
 import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
@@ -36,7 +36,10 @@ export const Board = props => {
             props.setNewGameState(data.id, data.data());
         });
 
-        return () => gameSubscribe();
+        return () => {
+            props.clearCurrentGame();
+            gameSubscribe();
+        }
 
         }, //eslint-disable-next-line
         []);
@@ -84,7 +87,8 @@ Board.propTypes = {
     }),
     selectGame: PropTypes.func,
     setNewGameState: PropTypes.func,
-    setActivePoles: PropTypes.func
+    setActivePoles: PropTypes.func,
+    clearCurrentGame: PropTypes.func
 }
 
-export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles})(Board);
+export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles, clearCurrentGame})(Board);

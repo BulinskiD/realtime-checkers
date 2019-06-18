@@ -79,11 +79,13 @@ describe('Board', () => {
 
     it("should unsubscribe on component unmount", () => {
         const store = mockStore(data);
-        const props = {...data, setNewGameState, selectGame, setActivePoles, match: {params: {id: '22'}}};
+        const clearCurrentGame = jest.fn();
+        const props = {...data, setNewGameState, selectGame, setActivePoles, clearCurrentGame, match: {params: {id: '22'}}};
         const component = mount(<Provider store={store}><Board {...props} /></Provider>);
 
         component.unmount();
         expect(unsubscriber).toHaveBeenCalledTimes(1);
+        expect(clearCurrentGame).toHaveBeenCalledTimes(1);
     });
 
     it("should call setActivePoles when selectedChecker changes", () => {

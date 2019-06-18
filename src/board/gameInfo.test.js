@@ -1,7 +1,7 @@
 import React from 'react';
 import {act} from 'react-dom/test-utils';
 import GameInfo from './gameInfo';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 
 describe("GameInfo", () => {
 
@@ -19,10 +19,11 @@ describe("GameInfo", () => {
     });
 
     it('should render modal on game end', () => {
-        const component = shallow(<GameInfo message={"Wygrały białe"} isEnded={true} />);
+        const component = mount(<GameInfo message={"Wygrały białe"} isEnded={true} />);
         expect(component.find('InfoModal').props().show).toBe(true);
         act(() => {
             component.find('InfoModal').props().onClose();
+            component.setProps();
         });
         expect(component.find('InfoModal').props().show).toBe(false);
     });

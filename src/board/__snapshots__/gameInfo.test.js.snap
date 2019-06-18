@@ -1,26 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GameInfo should match snapshot for given props 1`] = `
-<div>
-  Grają białe
-</div>
-`;
-
-exports[`GameInfo should render modal on game end 1`] = `
-<Portal
-  containerInfo={
-    <div
-      id="root"
-    />
-  }
->
+<Fragment>
   <InfoModal
     buttonText="Ok"
     onClose={[Function]}
-    show={true}
+    show={false}
+    title="Gra zakończona"
+  >
+    Grają białe
+  </InfoModal>
+  <div>
+    Grają białe
+  </div>
+</Fragment>
+`;
+
+exports[`GameInfo should render modal on game end 1`] = `
+<Fragment>
+  <InfoModal
+    buttonText="Ok"
+    onClose={[Function]}
+    show={false}
     title="Gra zakończona"
   >
     Wygrały białe
   </InfoModal>
-</Portal>
+  <div>
+    Wygrały białe
+  </div>
+</Fragment>
 `;

@@ -1,5 +1,11 @@
 import gamesReducer from './gamesReducer';
-import {SELECT_CHECKER, SELECT_GAME, SET_ACTIVE_POLES, SET_NEW_STATE} from "../constants/actionTypes";
+import {
+   CLEAR_CURRENT_GAME,
+   SELECT_CHECKER,
+   SELECT_GAME,
+   SET_ACTIVE_POLES,
+   SET_NEW_STATE
+} from "../constants/actionTypes";
 
 const initialState = {id: null, playerIds: {}, status: 'not-started', nextMove: false, checkersPosition: [], activePoles: null};
 
@@ -28,6 +34,11 @@ describe("GamesReducer", () => {
    it('should return new state for SET_ACTIVE_POLES', () => {
       const action = {type: SET_ACTIVE_POLES, payload: {col: 2, row: 2}};
       expect(gamesReducer(initialState, action)).toStrictEqual({...initialState, activePoles: action.payload});
+   });
+
+   it('should return initialState for CLEAR_CURRENT_GAME action', () => {
+      const action = {type: CLEAR_CURRENT_GAME};
+      expect(gamesReducer(initialState, action)).toStrictEqual({...initialState, checkersPosition: []});
    });
 
    it('should return initial state for other action', () => {
