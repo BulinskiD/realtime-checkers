@@ -1,4 +1,5 @@
 import React from 'react';
+import {act} from 'react-dom/test-utils';
 import GameInfo from './gameInfo';
 import {shallow} from 'enzyme';
 
@@ -15,6 +16,17 @@ describe("GameInfo", () => {
 
     it('should render modal on game end', () => {
         expect(shallow(<GameInfo message={"Wygrały białe"} isEnded={true} />)).toMatchSnapshot();
+    });
+
+    it('should render modal on game end', () => {
+        const component = shallow(<GameInfo message={"Wygrały białe"} isEnded={true} />);
+        expect(component.find('InfoModal').props().show).toBe(true);
+
+        act(() => {
+            component.find('InfoModal').props().onClose();
+        });
+
+        expect(component.find('InfoModal').props().show).toBe(false);
     });
 
 });

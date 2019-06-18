@@ -11,6 +11,7 @@ import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
 import GameInfo from './gameInfo';
 import {getMessage} from "../utils/utilFunctions";
+import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
 
 export const Board = props => {
 
@@ -53,7 +54,10 @@ export const Board = props => {
         <React.Fragment>
             <GameInfo message={message.text} isEnded={message.isEnded} />
             <Logout />
-            {props.currentGame.status === 'not-started' && <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
+
+            {(status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
+            <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
+
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>

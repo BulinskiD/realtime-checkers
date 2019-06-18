@@ -10,7 +10,8 @@ const GameInfo = props => {
     const [endMessage, setEndMessage] = useState(isEnded);
 
     if(isEnded) {
-        return ReactDOM.createPortal(<InfoModal show={endMessage} onClose={() => setEndMessage(false)} title="Gra zakończona" buttonText="Ok">{message}</InfoModal>, document.getElementById("root"));
+        return ReactDOM.createPortal(<InfoModal show={endMessage} onClose={() => setEndMessage(false)} title="Gra zakończona" buttonText="Ok">{message}</InfoModal>,
+                                    document.getElementById("root"));
     }
     return <div>{message}</div>;
 }
