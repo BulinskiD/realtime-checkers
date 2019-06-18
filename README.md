@@ -6,6 +6,18 @@ Purpose of this project is to create realtime, online checkers with React, Redux
 
 ## Development:
 
+### comming up:
+
+- Online multiplayer game mode
+- Ability to register new users
+
+### v-0.0.2- Release 18.06.2019:
+
+- Added king to the game
+- Added unit tests for project
+- Added game info component without styling 
+- Added end of game detection
+
 ### v-0.0.1- Release 13.06.2019:
 
 - Basic authorization with fireabse auth (without ability to register for now)
