@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoModal should render correctly with given props 1`] = `
+<Bootstrap(Modal)
+  onHide={[MockFunction]}
+>
+  <ModalHeader
+    closeButton={false}
+    closeLabel="Close"
+  >
+    <ModalTitle>
+      Test
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody>
+    <div
+      className="text-center"
+    >
+      Error
+    </div>
+  </ModalBody>
+  <ModalFooter>
+    <Button
+      active={false}
+      disabled={false}
+      onClick={[MockFunction]}
+      type="button"
+      variant="danger"
+    >
+      Button
+    </Button>
+  </ModalFooter>
+</Bootstrap(Modal)>
+`;

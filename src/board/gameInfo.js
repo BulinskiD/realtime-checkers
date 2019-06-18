@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 const GameInfo = props => {
 
-    return <div>{props.message}</div>;
+    const {message, isEnded} = props;
+
+    return <div>{message}</div>;
 }
 
 GameInfo.propTypes = {

@@ -92,4 +92,10 @@ describe("getMessage", () => {
 
         expect(getMessage(status)).toStrictEqual(messageExpected);
     });
+    it("should return correct message for default status", () => {
+        const messageExpected = {text: "", isEnded: false};
+        const status = 'test';
+
+        expect(getMessage(status)).toStrictEqual(messageExpected);
+    });
 });
