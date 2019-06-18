@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import InfoModal from './modal';
 import {shallow} from "enzyme";
 

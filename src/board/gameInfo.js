@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import InfoModal from '../shared/modal';
 
 const GameInfo = props => {
 
     const {message, isEnded} = props;
+    const [endMessage, setEndMessage] = useState(false);
 
-    const [endMessage, setEndMessage] = useState(isEnded);
+    useEffect(() => {
+        setEndMessage(isEnded);
+    }, [isEnded])
 
-    if(isEnded) {
-        return ReactDOM.createPortal(<InfoModal show={endMessage} onClose={() => setEndMessage(false)} title="Gra zakończona" buttonText="Ok">{message}</InfoModal>,
-                                    document.getElementById("root"));
-    }
-    return <div>{message}</div>;
+
+        return <React.Fragment>
+                   <InfoModal show={endMessage} onClose={() => setEndMessage(false)} title="Gra zakończona" buttonText="Ok">{message}</InfoModal>
+                   <div>{message}</div>
+                </React.Fragment>
 }
 
 GameInfo.propTypes = {

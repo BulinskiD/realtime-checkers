@@ -21,11 +21,9 @@ describe("GameInfo", () => {
     it('should render modal on game end', () => {
         const component = shallow(<GameInfo message={"Wygrały białe"} isEnded={true} />);
         expect(component.find('InfoModal').props().show).toBe(true);
-
         act(() => {
             component.find('InfoModal').props().onClose();
         });
-
         expect(component.find('InfoModal').props().show).toBe(false);
     });
 

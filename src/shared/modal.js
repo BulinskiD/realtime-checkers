@@ -26,7 +26,8 @@ InfoModal.propTypes = {
     onClose: PropTypes.func,
     children: PropTypes.string,
     title: PropTypes.string,
-    buttonText: PropTypes.string
+    buttonText: PropTypes.string,
+    show: PropTypes.bool
 }
 
 
