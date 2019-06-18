@@ -22,7 +22,7 @@ const InfoModal =  (props) => {
     );
 }
 
-Modal.propTypes = {
+InfoModal.propTypes = {
     onClose: PropTypes.func,
     children: PropTypes.string,
     title: PropTypes.string,

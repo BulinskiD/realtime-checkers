@@ -5,3 +5,22 @@ exports[`GameInfo should match snapshot for given props 1`] = `
   Grają białe
 </div>
 `;
+
+exports[`GameInfo should render modal on game end 1`] = `
+<Portal
+  containerInfo={
+    <div
+      id="root"
+    />
+  }
+>
+  <InfoModal
+    buttonText="Ok"
+    onClose={[Function]}
+    show={true}
+    title="Gra zakończona"
+  >
+    Wygrały białe
+  </InfoModal>
+</Portal>
+`;
