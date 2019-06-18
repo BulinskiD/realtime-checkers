@@ -4,9 +4,9 @@ import moveChecker from '../utils/moveChecker';
 import {firestore} from '../api/firebase';
 import ConnectedPole, { Pole } from './pole';
 import configureMockStore from 'redux-mock-store';
-import {selectChecker, setActivePoles} from "../store/actions/checkers";
-import { getPole, checkNextStatus } from "../utils/utilFunctions";
+import { getPole, checkNextStatus, checkIfWinner } from "../utils/utilFunctions";
 import handleError from "../utils/handleError";
+import {BLACK_WINNER} from "../store/constants/actionTypes";
 
 jest.mock('../utils/handleError');
 jest.mock('../utils/utilFunctions');
@@ -14,7 +14,7 @@ jest.mock('../api/firebase');
 jest.mock('../utils/moveChecker');
 
 const mockedStore = configureMockStore();
-
+checkIfWinner.mockReturnValue(null);
 const doc = jest.fn();
 const update = jest.fn();
 firestore.collection = jest.fn();
@@ -54,6 +54,25 @@ describe('Pole', () => {
 
         await prom;
         expect(update).toBeCalledWith({status:'black', checkersPosition: [], selectedChecker: {}, nextMove: false, from: {}});
+    });
+
+    it('should set status BLACK_WINNER for given input', async () => {
+        const selectChecker = jest.fn();
+        const setActivePoles = jest.fn();
+        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
+            selectChecker, setActivePoles};
+        moveChecker.mockReturnValue({checkersPosition: [], hasNextMove: false, selectedChecker: {}});
+        checkNextStatus.mockReturnValue('black');
+        const prom = Promise.resolve('OK');
+        update.mockReturnValue(prom);
+        checkIfWinner.mockReturnValue(BLACK_WINNER);
+
+        const component = shallow(<Pole {...props} />);
+
+        component.find('.active').simulate('click');
+
+        await prom;
+        expect(update).toBeCalledWith({checkersPosition: [], selectedChecker: {}, status: BLACK_WINNER,nextMove: false, from: {}});
     });
 
     it('should call handle error when request fails', async () => {

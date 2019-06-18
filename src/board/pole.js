@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { PoleContainer, ActivePlace } from "./boardStyles";
 import {selectChecker, setActivePoles} from "../store/actions/checkers";
 import { firestore } from "../api/firebase";
-import { getPole, checkNextStatus } from "../utils/utilFunctions";
+import { getPole, checkNextStatus, checkIfWinner } from "../utils/utilFunctions";
 import moveChecker from '../utils/moveChecker';
 import handleError from '../utils/handleError';
 
@@ -15,14 +15,18 @@ export const Pole = props => {
 
     const handleMove = async () => {
         let oldFrom = {};
+        // Save selectedChecker in oldForm
         Object.assign(oldFrom, props.selectedChecker);
-        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove,
-                                                                             props.checkersPosition,
-                                                                             props.selectedChecker,
-                                                                          {col: props.col, row: props.row});
-        const status = checkNextStatus(props.status, hasNextMove);
+
+        const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove, props.checkersPosition, props.selectedChecker, {col: props.col, row: props.row});
+        let status = checkNextStatus(props.status, hasNextMove);
+        // If its last move of color, save old from as empty object
         if(!hasNextMove)
             oldFrom = {};
+
+        const winner = checkIfWinner(checkersPosition, props.status);
+        if(winner)
+            status = winner;
 
         try {
             await firestore.collection("games").doc(props.id)

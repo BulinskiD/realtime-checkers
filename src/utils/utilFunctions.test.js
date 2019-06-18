@@ -1,4 +1,5 @@
-import {getPole, checkNextStatus} from './utilFunctions';
+import {getPole, checkNextStatus, checkIfWinner} from './utilFunctions';
+import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
 
 describe("GetPole", () => {
 
@@ -36,4 +37,28 @@ describe("CheckNextStatus", () => {
         expect(newStatus).toBe('white');
     });
 
+});
+
+describe("Check if winner", () => {
+
+    it("should return 'white' for given input", () => {
+        const checkersPosition = [{col: 1, row: 1, color: 'white'}];
+        const status = 'white';
+
+        expect(checkIfWinner(checkersPosition, status)).toBe(WHITE_WINNER);
+    });
+
+    it("should return 'black' for given input", () => {
+        const checkersPosition = [{col: 1, row: 1, color: 'black'}];
+        const status = 'black';
+
+        expect(checkIfWinner(checkersPosition, status)).toBe(BLACK_WINNER);
+    });
+
+    it("should return null for given input", () => {
+        const checkersPosition = [{col: 1, row: 1, color: 'black'}, {col:2, row: 2, color: 'white'}];
+        const status = 'black';
+
+        expect(checkIfWinner(checkersPosition, status)).toBe(null);
+    });
 });

@@ -1,3 +1,5 @@
+import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
+
 export const getPole = (col, row, position) => {
     let pole;
     if(position) {
@@ -16,4 +18,11 @@ export const checkNextStatus  = (status, hasNextMove) => {
         return 'black';
     }
     return 'white';
+}
+
+export const checkIfWinner = (checkersPosition, status) => {
+        const winner = status === 'black' ? BLACK_WINNER : WHITE_WINNER;
+        const color = status === 'black' ? 'white' : 'black';
+        const coloredCheckers = checkersPosition.filter(item => item.color === color);
+        return coloredCheckers.length === 0 ? winner : null;
 }
