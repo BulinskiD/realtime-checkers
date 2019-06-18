@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { BoardContainer } from './boardStyles';
 import Logout from '../auth/logout';
@@ -9,10 +9,13 @@ import { setNewGameState, setActivePoles, selectGame } from '../store/actions/ch
 import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
+import GameInfo from './gameInfo';
+import {getMessage} from "../utils/utilFunctions";
 
 export const Board = props => {
 
-    const {selectedChecker, checkersPosition, nextMove, from} = props.currentGame;
+    const {selectedChecker, checkersPosition, nextMove, from, status} = props.currentGame;
+    const [message, setMessage] = useState({text: '', isEnded: false});
 
     useEffect(()=>{
         if(selectedChecker){
@@ -21,6 +24,10 @@ export const Board = props => {
         }
     }, //eslint-disable-next-line
         [selectedChecker]);
+
+    useEffect(()=>{
+        setMessage(getMessage(status));
+    }, [status]);
 
     useEffect(()=>{
         props.selectGame(props.match.params.id);
@@ -44,9 +51,9 @@ export const Board = props => {
 
     return (
         <React.Fragment>
+            <GameInfo message={message.text} isEnded={message.isEnded} />
             <Logout />
-            {props.currentGame.status === 'not-started' &&
-                                <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
+            {props.currentGame.status === 'not-started' && <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>

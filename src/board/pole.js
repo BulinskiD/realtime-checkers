@@ -20,6 +20,7 @@ export const Pole = props => {
 
         const {checkersPosition, hasNextMove, selectedChecker} = moveChecker(props.nextMove, props.checkersPosition, props.selectedChecker, {col: props.col, row: props.row});
         let status = checkNextStatus(props.status, hasNextMove);
+
         // If its last move of color, save old from as empty object
         if(!hasNextMove)
             oldFrom = {};

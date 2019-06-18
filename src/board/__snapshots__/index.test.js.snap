@@ -2,6 +2,10 @@
 
 exports[`Board should render 64 poles and Start game button for given props 1`] = `
 <Fragment>
+  <GameInfo
+    isEnded={false}
+    message=""
+  />
   <Connect(Logout) />
   <Button
     active={false}
@@ -339,6 +343,10 @@ exports[`Board should render 64 poles and Start game button for given props 1`] 
 
 exports[`Board shouldn't render Start game button for given props 1`] = `
 <Fragment>
+  <GameInfo
+    isEnded={false}
+    message=""
+  />
   <Connect(Logout) />
   <styled.div>
     <Connect(Pole)

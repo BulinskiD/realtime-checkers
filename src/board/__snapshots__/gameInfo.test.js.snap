@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameInfo should match snapshot for given props 1`] = `
+<div>
+  Grają białe
+</div>
+`;

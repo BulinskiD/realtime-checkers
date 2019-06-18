@@ -1,4 +1,4 @@
-import {getPole, checkNextStatus, checkIfWinner} from './utilFunctions';
+import {getPole, checkNextStatus, checkIfWinner, getMessage} from './utilFunctions';
 import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
 
 describe("GetPole", () => {
@@ -39,7 +39,7 @@ describe("CheckNextStatus", () => {
 
 });
 
-describe("Check if winner", () => {
+describe("CheckIfWinner", () => {
 
     it("should return 'white' for given input", () => {
         const checkersPosition = [{col: 1, row: 1, color: 'white'}];
@@ -60,5 +60,36 @@ describe("Check if winner", () => {
         const status = 'black';
 
         expect(checkIfWinner(checkersPosition, status)).toBe(null);
+    });
+});
+
+describe("getMessage", () => {
+
+    it("should return correct message for white status", () => {
+        const messageExpected = {text: "Grają białe", isEnded: false};
+        const status = 'white';
+
+        expect(getMessage(status)).toStrictEqual(messageExpected);
+    });
+
+    it("should return correct message for black status", () => {
+        const messageExpected = {text: "Grają czarne", isEnded: false};
+        const status = 'black';
+
+        expect(getMessage(status)).toStrictEqual(messageExpected);
+    });
+
+    it("should return correct message for white-winner status", () => {
+        const messageExpected = {text: "Wygrały białe", isEnded: true};
+        const status = WHITE_WINNER;
+
+        expect(getMessage(status)).toStrictEqual(messageExpected);
+    });
+
+    it("should return correct message for white status", () => {
+        const messageExpected = {text: "Wygrały czarne", isEnded: true};
+        const status = BLACK_WINNER;
+
+        expect(getMessage(status)).toStrictEqual(messageExpected);
     });
 });

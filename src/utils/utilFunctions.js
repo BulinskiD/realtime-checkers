@@ -12,7 +12,6 @@ export const getPole = (col, row, position) => {
     return null;
 }
 
-
 export const checkNextStatus  = (status, hasNextMove) => {
     if((status === 'black' && hasNextMove) || (status === 'white' && !hasNextMove)) {
         return 'black';
@@ -25,4 +24,25 @@ export const checkIfWinner = (checkersPosition, status) => {
         const color = status === 'black' ? 'white' : 'black';
         const coloredCheckers = checkersPosition.filter(item => item.color === color);
         return coloredCheckers.length === 0 ? winner : null;
+}
+
+export const getMessage = status => {
+    let message;
+    switch(status) {
+        case 'black':
+            message = {text: "Grają czarne", isEnded: false};
+            break;
+        case 'white':
+            message = {text: "Grają białe", isEnded: false};
+            break;
+        case WHITE_WINNER:
+            message = {text: "Wygrały białe", isEnded: true};
+            break;
+        case BLACK_WINNER:
+            message = {text: "Wygrały czarne", isEnded: true};
+            break;
+        default:
+            message = {text: '', isEnded: false};
+    }
+    return message;
 }
