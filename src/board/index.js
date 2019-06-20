@@ -67,6 +67,7 @@ export const Board = props => {
 const mapStateToProps = state => {
     return {
         currentGame: state.currentGame,
+        isParticipant: state.currentGame.players.filter(({email}) => email === state.user.email).length === 1
     }
 }
 
@@ -75,7 +76,8 @@ Board.propTypes = {
     selectGame: PropTypes.func,
     setNewGameState: PropTypes.func,
     setActivePoles: PropTypes.func,
-    clearCurrentGame: PropTypes.func
+    clearCurrentGame: PropTypes.func,
+    isParticipant: PropTypes.bool
 }
 
 export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles, clearCurrentGame})(Board);

@@ -10,9 +10,9 @@ jest.mock('../utils/startGame');
 jest.mock('../utils/signUpToGame');
 let data;
 beforeEach(()=> {
-    const currentGame = {currentGame: {status: 'white', selectedChecker: {col: 2, row: 2},
+    const currentGame = {currentGame: {status: 'not-started', players: [], selectedChecker: {col: 2, row: 2},
         checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false}};
-    data = {...currentGame, user: "test", isParticipant:false, gameAvailable: true};
+    data = {...currentGame, user: "test", canActivateGame: false, gameAvailable: true};
 });
 
 describe("PlayersManager", () => {
@@ -29,7 +29,8 @@ describe("PlayersManager", () => {
     });
 
     it('Should display start_game button for given props', () => {
-        data.isParticipant = true;
+        data.canActivateGame = true;
+        data.gameAvailable = false;
         data.currentGame.status = 'not-started';
         const component = shallow(<PlayersManager {...data} />);
         expect(component.find('Button').text()).toBe("Zacznij grę");
@@ -37,11 +38,12 @@ describe("PlayersManager", () => {
     });
 
     it('Should invoke start_game function on button clicked', () => {
-        data.isParticipant = true;
+        data.canActivateGame = true;
+        data.gameAvailable = false;
         data.currentGame.status = 'not-started';
         const component = shallow(<PlayersManager {...data} />);
         component.find('Button').simulate('click');
-        expect(startGame).toHaveBeenCalledWith(data.currentGame);
+        expect(startGame).toHaveBeenCalledWith(data.currentGame, "test");
     });
 });
 
@@ -52,7 +54,7 @@ describe("mapStateToProps", () => {
        const mockedStore = store({...data});
        const component = shallow(<ConnectedPlayersManager store={mockedStore} gameID={'22'} />);
        expect(component.find('PlayersManager').props().currentGame).toStrictEqual({...data.currentGame});
-       expect(component.find('PlayersManager').props().isParticipant).toBe(false);
+       expect(component.find('PlayersManager').props().canActivateGame).toBe(false);
        expect(component.find('PlayersManager').props().gameAvailable).toBe(true);
    });
 
@@ -61,17 +63,17 @@ describe("mapStateToProps", () => {
         const mockedStore = store({...data});
         const component = shallow(<ConnectedPlayersManager store={mockedStore} gameID={'22'} />);
         expect(component.find('PlayersManager').props().currentGame).toStrictEqual({...data.currentGame});
-        expect(component.find('PlayersManager').props().isParticipant).toBe(false);
+        expect(component.find('PlayersManager').props().canActivateGame).toBe(false);
         expect(component.find('PlayersManager').props().gameAvailable).toBe(false);
     });
 
     it('Should map state to props correctly with isParticipant == false && gameAvailable === false', () => {
-        data.currentGame.players = ['test', 'test'];
+        data.currentGame.players = [{email: 'test', started: false}, {email: 'test2', started: false}];
         data.user = {email: 'test'};
         const mockedStore = store({...data});
         const component = shallow(<ConnectedPlayersManager store={mockedStore} gameID={'22'} />);
         expect(component.find('PlayersManager').props().currentGame).toStrictEqual({...data.currentGame});
-        expect(component.find('PlayersManager').props().isParticipant).toBe(false);
+        expect(component.find('PlayersManager').props().canActivateGame).toBe(true);
         expect(component.find('PlayersManager').props().gameAvailable).toBe(false);
     });
 });

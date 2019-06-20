@@ -12,9 +12,12 @@ export const PlayersManager = (props) => {
 
     return(
         <React.Fragment>
-            {props.isParticipant && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
-                <Button className='start-game' onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
-            {!props.isParticipant && props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
+            {props.canActivateGame && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
+                <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
+            {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
+            {players.map(item => {
+               return <div>{item.email}</div>
+            })}
         </React.Fragment>
     );
 };
@@ -22,18 +25,19 @@ export const PlayersManager = (props) => {
 PlayersManager.propTypes = {
      currentGame: currentGameType,
      user: PropTypes.string,
-     isParticipant: PropTypes.bool,
      gameAvailable: PropTypes.bool,
+     canActivateGame: PropTypes.bool,
      gameID: PropTypes.string
 }
 
 
 const mapStateToProps = (state) => {
+    const {players} = state.currentGame;
   return {
       currentGame: state.currentGame,
       user: state.user.email,
-      isParticipant: (state.currentGame.players.filter(item => item === state.user.email).length === 1),
-      gameAvailable: state.currentGame.players.length !== 2
+      canActivateGame: players.length === 2 && players.filter(item => item.email === state.user.email && !item.started).length === 1,
+      gameAvailable: (players.length !== 2) && (players.filter(({email}) => email === state.user.email).length === 0)
   }
 };
 

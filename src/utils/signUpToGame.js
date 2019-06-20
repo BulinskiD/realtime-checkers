@@ -2,7 +2,8 @@ import {firestore} from "../api/firebase";
 import handleError from "./handleError";
 
 export default async (email, gameID, players) => {
-        players.push(email);
+        const color = players.length === 0 ? 'white': 'black';
+        players.push({email, started: false, color});
     try {
         await firestore.collection('games').doc(gameID).update({
             players: players

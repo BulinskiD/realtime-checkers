@@ -21,7 +21,7 @@ firestore.collection.doc.set = set;
 
 seedCheckers.mockReturnValue(mockedBoard);
 
-const gameState = {selectedChecker: {}, activePoles: {}, test: 'test'};
+const gameState = {selectedChecker: {}, activePoles: {}, players: []};
 
 describe("StartGame", ()=>{
 
@@ -35,9 +35,9 @@ describe("StartGame", ()=>{
             const prom = Promise.reject("error");
             set.mockReturnValue(prom);
             expect.assertions(3);
-            await startGame(gameState);
+            await startGame(gameState, 'dawid');
             expect(seedCheckers).toBeCalledTimes(1);
-            expect(set).toBeCalledWith({test: 'test', status: 'white', checkersPosition: mockedBoard});
+            expect(set).toBeCalledWith({players: [], status: 'white', checkersPosition: mockedBoard});
             await prom;
         } catch(error) {
             expect(handleError).toBeCalledWith('error');
@@ -50,7 +50,7 @@ describe("StartGame", ()=>{
             expect.assertions(2);
             await startGame(gameState);
             expect(seedCheckers).toBeCalledTimes(1);
-            expect(set).toBeCalledWith({test: 'test', status: 'white', checkersPosition: mockedBoard});
+            expect(set).toBeCalledWith({players: [], status: 'not-started', checkersPosition: mockedBoard});
             await prom;
     });
 });
