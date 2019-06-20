@@ -2,16 +2,15 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { BoardContainer } from './boardStyles';
 import Logout from '../auth/logout';
-import Button from 'react-bootstrap/Button';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
 import { setNewGameState, setActivePoles, selectGame, clearCurrentGame } from '../store/actions/checkers';
-import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
 import GameInfo from './gameInfo';
 import {getMessage} from "../utils/utilFunctions";
-import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
+import PlayersManager from './playersManager';
+import {currentGameType} from "../propTypes";
 
 export const Board = props => {
 
@@ -57,10 +56,7 @@ export const Board = props => {
         <React.Fragment>
             <GameInfo message={message.text} isEnded={message.isEnded} />
             <Logout />
-
-            {(status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
-            <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
-
+            <PlayersManager gameID={props.match.params.id} />
             <BoardContainer>
                 {renderBoard()}
             </BoardContainer>
@@ -70,21 +66,12 @@ export const Board = props => {
 
 const mapStateToProps = state => {
     return {
-        currentGame: state.currentGame
+        currentGame: state.currentGame,
     }
 }
 
 Board.propTypes = {
-    currentGame: PropTypes.shape({
-        id: PropTypes.string,
-        playerIds: PropTypes.object,
-        status: PropTypes.string,
-        nextMove: PropTypes.bool,
-        checkersPosition: PropTypes.array,
-        activePoles: PropTypes.array,
-        selectedChecker: PropTypes.object,
-        from: PropTypes.object
-    }),
+    currentGame: currentGameType,
     selectGame: PropTypes.func,
     setNewGameState: PropTypes.func,
     setActivePoles: PropTypes.func,

@@ -1,6 +1,6 @@
 import {SELECT_GAME, SELECT_CHECKER, SET_NEW_STATE, SET_ACTIVE_POLES, CLEAR_CURRENT_GAME} from "../constants/actionTypes";
 
-const initialState = {id: null, players: {}, status: 'not-started', nextMove: false, checkersPosition: [], activePoles: null};
+const initialState = {id: null, players: [], status: 'not-started', nextMove: false, checkersPosition: [], activePoles: null};
 
 export default (currentGame = initialState, action) => {
     switch(action.type) {

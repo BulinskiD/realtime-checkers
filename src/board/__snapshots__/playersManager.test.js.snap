@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayersManager Should display sign_up button for given props 1`] = `
+<Fragment>
+  <Button
+    active={false}
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Dołącz do gry
+  </Button>
+</Fragment>
+`;
+
+exports[`PlayersManager Should display start_game button for given props 1`] = `
+<Fragment>
+  <Button
+    active={false}
+    className="start-game"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Zacznij grę
+  </Button>
+</Fragment>
+`;
