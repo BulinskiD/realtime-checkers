@@ -45,11 +45,18 @@ describe("PlayersManager", () => {
         component.find('Button').simulate('click');
         expect(startGame).toHaveBeenCalledWith(data.currentGame, "test");
     });
+
+    it('Should display list of players', () => {
+        data.currentGame.players=[{email: 'test', started: true}, {email: "test2", started: true}];
+        const component = shallow(<PlayersManager {...data} />);
+        expect(component.find('div').length).toBe(2);
+        expect(component).toMatchSnapshot();
+    })
 });
 
 describe("mapStateToProps", () => {
     const store = configureMockStore();
-   it('Should map state to props correctly with isParticipant == false && gameAvailable === true', () => {
+   it('Should map state to props correctly with canActivateGame == false && gameAvailable === true', () => {
        data.currentGame.players = [];
        const mockedStore = store({...data});
        const component = shallow(<ConnectedPlayersManager store={mockedStore} gameID={'22'} />);
@@ -58,8 +65,9 @@ describe("mapStateToProps", () => {
        expect(component.find('PlayersManager').props().gameAvailable).toBe(true);
    });
 
-    it('Should map state to props correctly with isParticipant == false && gameAvailable === false', () => {
-        data.currentGame.players = ['test', 'test'];
+    it('Should map state to props correctly with canActivateGame == false && gameAvailable === false', () => {
+        data.currentGame.players = [{email: 'test', started: true}];
+        data.user = {email: "test"};
         const mockedStore = store({...data});
         const component = shallow(<ConnectedPlayersManager store={mockedStore} gameID={'22'} />);
         expect(component.find('PlayersManager').props().currentGame).toStrictEqual({...data.currentGame});
@@ -67,7 +75,7 @@ describe("mapStateToProps", () => {
         expect(component.find('PlayersManager').props().gameAvailable).toBe(false);
     });
 
-    it('Should map state to props correctly with isParticipant == false && gameAvailable === false', () => {
+    it('Should map state to props correctly with canActivateGame == true && gameAvailable === false', () => {
         data.currentGame.players = [{email: 'test', started: false}, {email: 'test2', started: false}];
         data.user = {email: 'test'};
         const mockedStore = store({...data});

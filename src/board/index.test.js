@@ -92,11 +92,13 @@ describe('MapStateToProps', () => {
    it("should correctly map state to props", () => {
 
        const store = mockStore({currentGame: {status: 'white', selectedChecker: {},
-               checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], players: [], nextMove: false}});
+               checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}],
+               players: [{email: 'test', color: 'white'}], nextMove: false}, user: {email: 'test'}});
 
        const board = shallow(<ConnectedBoard store={store} {...{match: {param: {id: 2}}}} />);
 
-       expect(board.find('Board').props().currentGame).toStrictEqual({status: 'white', players: [], selectedChecker: {},
+       expect(board.find('Board').props().currentGame).toStrictEqual({status: 'white', players: [{email: 'test', color: 'white'}], selectedChecker: {},
           checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false});
+       expect(board.find('Board').props().isActiveTurn).toBe(true);
    });
 });
