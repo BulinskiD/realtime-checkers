@@ -127,5 +127,15 @@ describe('OnSelectedGameChange', () => {
         expect(mockedStore.getActions()).toEqual([{type: SIGN_UP_TO_GAME, payload: {gameID: 'test'}}]);
     });
 
+    it('should not dispatch SIGN_UP_TO_GAME when new data is null', () => {
+        const mockedStore = store({user: {}});
+        const onSnapshot = jest.fn(func => func(null));
+        doc.mockReturnValue({onSnapshot});
+        mockedStore.dispatch(onSelectedGameChange('test'));
+
+        expect(onSnapshot).toHaveBeenCalledTimes(1);
+        expect(mockedStore.getActions()).toEqual([]);
+    });
+
 });
 
