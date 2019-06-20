@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 
 const store = configureMockStore();
 const selectChecker = jest.fn();
-const props = {nextMove: false, color: 'white', status: 'white', col: 1, row: 1, isKing: false, selected: true, selectChecker};
+const props = {nextMove: false, color: 'white', isActiveTurn: true, status: 'white', col: 1, row: 1, isKing: false, selected: true, selectChecker};
 
 
 describe('Checker', () => {

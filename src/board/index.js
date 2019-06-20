@@ -47,7 +47,7 @@ export const Board = props => {
         let rowComp = new Array(8).fill(1);
         let board = new Array(8).fill(1);
         board = board.map((item, row) => {
-            return rowComp.map((item, col)=> <Pole col={col} row={row} key={`${row}/${col}`} />);
+            return rowComp.map((item, col)=> <Pole isActiveTurn={props.isActiveTurn} col={col} row={row} key={`${row}/${col}`} />);
         });
         return board;
     }
@@ -67,7 +67,7 @@ export const Board = props => {
 const mapStateToProps = state => {
     return {
         currentGame: state.currentGame,
-        isParticipant: state.currentGame.players.filter(({email}) => email === state.user.email).length === 1
+        isActiveTurn: state.currentGame.players.filter(({email, color}) => (email === state.user.email) && (color === state.currentGame.status)).length === 1
     }
 }
 

@@ -39,8 +39,8 @@ export const Pole = props => {
 
     return (
       <PoleContainer>
-          {props.pole && <Checker isKing={isKing} selected={selected} col={col} row={row} color={color} status={props.status} />}
-          {(!props.pole && props.active) && <ActivePlace className="active" onClick={handleMove} />}
+          {props.pole && <Checker isKing={isKing} isActiveTurn={props.isActiveTurn} selected={selected} col={col} row={row} color={color} status={props.status} />}
+          {(!props.pole && props.active) && <ActivePlace className="active" onClick={() => props.isActiveTurn && handleMove()} />}
       </PoleContainer>
     );
 }
@@ -73,6 +73,7 @@ Pole.propTypes = {
     active: PropTypes.bool,
     col: PropTypes.number,
     row: PropTypes.number,
+    isActiveTurn: PropTypes.bool,
     selectChecker: PropTypes.func,
     setActivePoles: PropTypes.func
 }
