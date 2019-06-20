@@ -13,7 +13,7 @@ import PlayersManager from './playersManager';
 import {currentGameType} from "../propTypes";
 
 export const Board = props => {
-
+    const {isActiveTurn} = props;
     const {selectedChecker, checkersPosition, nextMove, from, status} = props.currentGame;
     const [message, setMessage] = useState({text: '', isEnded: false});
 
@@ -47,7 +47,7 @@ export const Board = props => {
         let rowComp = new Array(8).fill(1);
         let board = new Array(8).fill(1);
         board = board.map((item, row) => {
-            return rowComp.map((item, col)=> <Pole isActiveTurn={props.isActiveTurn} col={col} row={row} key={`${row}/${col}`} />);
+            return rowComp.map((item, col)=> <Pole isActiveTurn={isActiveTurn} col={col} row={row} key={`${row}/${col}`} />);
         });
         return board;
     }

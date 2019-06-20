@@ -16,7 +16,7 @@ export const PlayersManager = (props) => {
                 <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
             {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
             {players.map(item => {
-               return <div>{item.email}</div>
+               return <div key={item.email}>{item.email}</div>
             })}
         </React.Fragment>
     );
