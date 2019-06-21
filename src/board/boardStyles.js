@@ -8,7 +8,6 @@ export const FlexContainer = styled.div`
 export const PlayersManagerContainer = styled.div`
         display: flex;
         flex-direction: column;
-    
 `;
 
 export const PlayerHolder = styled.div`
@@ -18,16 +17,15 @@ export const PlayerHolder = styled.div`
         padding-top: 10%;
         padding-bottom: 10%;
         background-color: rgba(0, 0, 0, .05);
-        border-radius: 5%;
         border: 1px solid lightgray;
         box-shadow: 5px 5px 10px 0px rgba(0,0,0,.15);
 `;
 
 export const PlayerItem = styled.span`
         padding: 5%;
-        background-color: #e2e283;
+        background-color: rgba(89, 147, 242, .4);
         color: white;
-        border-radius: 5%;
+        border: 2px rgb(1, 37, 96, .5) solid;
         &:not(:first-child) {
           margin-top: 5%;
         }
