@@ -1,26 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import InfoModal from '../shared/modal';
+import {getMessage} from "../utils/utilFunctions";
 
 const GameInfo = props => {
 
-    const {message, isEnded} = props;
-    const [endMessage, setEndMessage] = useState(false);
+    const {status} = props;
+    const [message, setMessage] = useState({text: '', isEnded: false});
 
-    useEffect(() => {
-        setEndMessage(isEnded);
-    }, [isEnded])
-
+    useEffect(()=>{
+        setMessage(getMessage(status));
+    }, [status]);
 
         return <React.Fragment>
-                   <InfoModal show={endMessage} onClose={() => setEndMessage(false)} title="Gra zakończona" buttonText="Ok">{message}</InfoModal>
-                   <div>{message}</div>
+                   <InfoModal show={message.isEnded} onClose={() => setMessage({...message, isEnded: false})} title="Gra zakończona" buttonText="Ok">{message.text}</InfoModal>
+                   <div>{message.text}</div>
                 </React.Fragment>
 }
 
 GameInfo.propTypes = {
-    message: PropTypes.string,
-    isEnded: PropTypes.bool
+    status: PropTypes.string
 }
 
 export default GameInfo;

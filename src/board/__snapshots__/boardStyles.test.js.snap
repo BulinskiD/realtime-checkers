@@ -8,7 +8,7 @@ exports[`ColorChecker should add hover pseudo class for given props 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-bwzfXH sc-htpNat bWyaqP"
+    className="sc-EHOje sc-bZQynM dDqasE"
     color="black"
   />
 </Styled(styled.span)>
@@ -22,7 +22,7 @@ exports[`ColorChecker should render black component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-bwzfXH sc-htpNat epEepr"
+    className="sc-EHOje sc-bZQynM icgyJq"
     color="black"
   />
 </Styled(styled.span)>
@@ -36,7 +36,7 @@ exports[`ColorChecker should render component with king markup 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-bwzfXH sc-htpNat cXuQoQ"
+    className="sc-EHOje sc-bZQynM dxEluG"
     color="black"
   />
 </Styled(styled.span)>
@@ -50,7 +50,7 @@ exports[`ColorChecker should render white component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-bwzfXH sc-htpNat eHUpYr"
+    className="sc-EHOje sc-bZQynM bqujZz"
     color="white"
   />
 </Styled(styled.span)>
@@ -62,7 +62,7 @@ exports[`SelectedChecker should render black selectedChecker with king markup fo
   isKing={true}
 >
   <span
-    className="sc-bwzfXH sc-bxivhb huBrTm"
+    className="sc-EHOje sc-gzVnrw hZxNqY"
     color="black"
   />
 </Styled(styled.span)>
@@ -74,7 +74,7 @@ exports[`SelectedChecker should render black selectedChecker without king markup
   isKing={false}
 >
   <span
-    className="sc-bwzfXH sc-bxivhb eTFHWs"
+    className="sc-EHOje sc-gzVnrw FjWnG"
     color="black"
   />
 </Styled(styled.span)>
@@ -86,7 +86,7 @@ exports[`SelectedChecker should render white selectedChecker with king markup fo
   isKing={true}
 >
   <span
-    className="sc-bwzfXH sc-bxivhb eyUjgT"
+    className="sc-EHOje sc-gzVnrw eaNrOX"
     color="white"
   />
 </Styled(styled.span)>
@@ -98,7 +98,7 @@ exports[`SelectedChecker should render white selectedChecker without king markup
   isKing={false}
 >
   <span
-    className="sc-bwzfXH sc-bxivhb dUePGQ"
+    className="sc-EHOje sc-gzVnrw ijfari"
     color="white"
   />
 </Styled(styled.span)>

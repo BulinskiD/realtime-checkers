@@ -49,7 +49,6 @@ describe("PlayersManager", () => {
     it('Should display list of players', () => {
         data.currentGame.players=[{email: 'test', started: true}, {email: "test2", started: true}];
         const component = shallow(<PlayersManager {...data} />);
-        expect(component.find('div').length).toBe(2);
         expect(component).toMatchSnapshot();
     })
 });

@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PlayersManager Should display list of players 1`] = `
-<Fragment>
+<styled.div>
+  <GameInfo
+    status="not-started"
+  />
   <Button
     active={false}
     disabled={false}
@@ -11,21 +14,29 @@ exports[`PlayersManager Should display list of players 1`] = `
   >
     Dołącz do gry
   </Button>
-  <div
-    key="test"
-  >
-    test
-  </div>
-  <div
-    key="test2"
-  >
-    test2
-  </div>
-</Fragment>
+  <strong>
+    Aktywni gracze
+  </strong>
+  <styled.div>
+    <styled.span
+      key="test"
+    >
+      test
+    </styled.span>
+    <styled.span
+      key="test2"
+    >
+      test2
+    </styled.span>
+  </styled.div>
+</styled.div>
 `;
 
 exports[`PlayersManager Should display sign_up button for given props 1`] = `
-<Fragment>
+<styled.div>
+  <GameInfo
+    status="not-started"
+  />
   <Button
     active={false}
     disabled={false}
@@ -35,11 +46,18 @@ exports[`PlayersManager Should display sign_up button for given props 1`] = `
   >
     Dołącz do gry
   </Button>
-</Fragment>
+  <strong>
+    Aktywni gracze
+  </strong>
+  <styled.div />
+</styled.div>
 `;
 
 exports[`PlayersManager Should display start_game button for given props 1`] = `
-<Fragment>
+<styled.div>
+  <GameInfo
+    status="not-started"
+  />
   <Button
     active={false}
     className="start-game"
@@ -50,5 +68,9 @@ exports[`PlayersManager Should display start_game button for given props 1`] = `
   >
     Zacznij grę
   </Button>
-</Fragment>
+  <strong>
+    Aktywni gracze
+  </strong>
+  <styled.div />
+</styled.div>
 `;

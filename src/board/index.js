@@ -1,21 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { BoardContainer } from './boardStyles';
+import { BoardContainer, FlexContainer } from './boardStyles';
 import Logout from '../auth/logout';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
 import { setNewGameState, setActivePoles, selectGame, clearCurrentGame } from '../store/actions/checkers';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
-import GameInfo from './gameInfo';
-import {getMessage} from "../utils/utilFunctions";
 import PlayersManager from './playersManager';
 import {currentGameType} from "../propTypes";
 
 export const Board = props => {
     const {isActiveTurn} = props;
-    const {selectedChecker, checkersPosition, nextMove, from, status} = props.currentGame;
-    const [message, setMessage] = useState({text: '', isEnded: false});
+    const {selectedChecker, checkersPosition, nextMove, from} = props.currentGame;
 
     useEffect(()=>{
         if(selectedChecker){
@@ -24,10 +21,6 @@ export const Board = props => {
         }
     }, //eslint-disable-next-line
         [selectedChecker]);
-
-    useEffect(()=>{
-        setMessage(getMessage(status));
-    }, [status]);
 
     useEffect(()=>{
         props.selectGame(props.match.params.id);
@@ -54,12 +47,13 @@ export const Board = props => {
 
     return (
         <React.Fragment>
-            <GameInfo message={message.text} isEnded={message.isEnded} />
-            <Logout />
-            <PlayersManager gameID={props.match.params.id} />
-            <BoardContainer>
-                {renderBoard()}
-            </BoardContainer>
+        <Logout />
+            <FlexContainer>
+                <PlayersManager gameID={props.match.params.id} />
+                <BoardContainer>
+                    {renderBoard()}
+                </BoardContainer>
+            </FlexContainer>
         </React.Fragment>
     );
 }

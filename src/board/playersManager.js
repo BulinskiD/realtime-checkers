@@ -3,22 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
 import Button from "react-bootstrap/Button";
+import {PlayersManagerContainer, PlayerHolder, PlayerItem} from "./boardStyles";
 import startGame from "../utils/startGame";
 import signUpToGame from "../utils/signUpToGame";
+import GameInfo from './gameInfo';
 import {currentGameType} from "../propTypes";
 
 export const PlayersManager = (props) => {
     const {status, players} = props.currentGame;
 
     return(
-        <React.Fragment>
+        <PlayersManagerContainer>
+            <GameInfo status={status} />
             {props.canActivateGame && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
                 <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
             {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
+
+            <strong>Aktywni gracze</strong>
+            <PlayerHolder>
             {players.map(item => {
-               return <div key={item.email}>{item.email}</div>
+               return <PlayerItem key={item.email}>{item.email}</PlayerItem>
             })}
-        </React.Fragment>
+            </PlayerHolder>
+        </PlayersManagerContainer>
     );
 };
 

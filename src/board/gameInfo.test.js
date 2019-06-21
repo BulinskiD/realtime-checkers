@@ -3,6 +3,7 @@ import {act} from 'react-dom/test-utils';
 import GameInfo from './gameInfo';
 import {shallow, mount} from 'enzyme';
 
+//TODO Mock getStatus function!!
 describe("GameInfo", () => {
 
     const modalRoot = global.document.createElement('div');
@@ -11,15 +12,15 @@ describe("GameInfo", () => {
     body.appendChild(modalRoot);
 
     it('should match snapshot for given props', () => {
-        expect(shallow(<GameInfo message={"Grają białe"} isEnded={false} />)).toMatchSnapshot();
+        expect(shallow(<GameInfo status={'white'} />)).toMatchSnapshot();
     });
 
     it('should render modal on game end', () => {
-        expect(shallow(<GameInfo message={"Wygrały białe"} isEnded={true} />)).toMatchSnapshot();
+        expect(shallow(<GameInfo status={'black'} />)).toMatchSnapshot();
     });
 
     it('should render modal on game end', () => {
-        const component = mount(<GameInfo message={"Wygrały białe"} isEnded={true} />);
+        const component = mount(<GameInfo status={"WHITE_WINNER"} />);
         expect(component.find('InfoModal').props().show).toBe(true);
         act(() => {
             component.find('InfoModal').props().onClose();
