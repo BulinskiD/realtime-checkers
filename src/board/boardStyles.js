@@ -23,11 +23,25 @@ export const PlayerHolder = styled.div`
 
 export const PlayerItem = styled.span`
         padding: 5%;
-        background-color: rgba(89, 147, 242, .4);
+        background-color: ${props => props.active ? 'rgba(89, 147, 242, 1)' : 'rgba(89, 147, 242, .4)'};
         color: white;
+        position: relative;
         border: 2px rgb(1, 37, 96, .5) solid;
         &:not(:first-child) {
           margin-top: 5%;
+        }
+        
+        &::after {
+            position: absolute;
+           left: -14px;
+           top: 50%;
+           transform: translateY(-50%);
+           z-index: 5;
+           display: block;
+           content: ' ';
+           width: 10px;
+           height: 10px;
+           background-color: ${props => props.color};
         }
 `;
 

@@ -14,7 +14,6 @@ export const PlayersManager = (props) => {
 
     return(
         <PlayersManagerContainer>
-            <GameInfo status={status} />
             {props.canActivateGame && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
                 <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
             {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
@@ -22,9 +21,10 @@ export const PlayersManager = (props) => {
             <strong>Aktywni gracze</strong>
             <PlayerHolder>
             {players.map(item => {
-               return <PlayerItem key={item.email}>{item.email}</PlayerItem>
+               return <PlayerItem active={item.color===props.currentGame.status} color={item.color} key={item.email}>{item.email}</PlayerItem>
             })}
             </PlayerHolder>
+            <GameInfo status={status} />
         </PlayersManagerContainer>
     );
 };

@@ -56,6 +56,30 @@ exports[`ColorChecker should render white component for given props 1`] = `
 </Styled(styled.span)>
 `;
 
+exports[`PlayerItem should render darker blue color for active player 1`] = `
+<styled.span
+  active={true}
+  color="black"
+>
+  <span
+    className="sc-bxivhb bofmPG"
+    color="black"
+  />
+</styled.span>
+`;
+
+exports[`PlayerItem should render dimmer blue color for inactive player 1`] = `
+<styled.span
+  active={false}
+  color="white"
+>
+  <span
+    className="sc-bxivhb cpOEVC"
+    color="white"
+  />
+</styled.span>
+`;
+
 exports[`SelectedChecker should render black selectedChecker with king markup for given props 1`] = `
 <Styled(styled.span)
   color="black"
