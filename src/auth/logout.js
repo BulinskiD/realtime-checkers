@@ -9,5 +9,4 @@ export const Logout = (props) => {
     );
 }
 
-
 export default connect(null, {userLogout})(Logout);

@@ -14,16 +14,15 @@ export const PlayersManager = (props) => {
 
     return(
         <PlayersManagerContainer>
-            {props.canActivateGame && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
-                <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
-            {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
-
             <strong>Aktywni gracze</strong>
             <PlayerHolder>
             {players.map(item => {
                return <PlayerItem active={item.color===props.currentGame.status} color={item.color} key={item.email}>{item.email}</PlayerItem>
             })}
             </PlayerHolder>
+            {props.canActivateGame && (status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
+            <Button className='start-game' onClick={()=>startGame(props.currentGame, props.user)} variant='primary'>Zacznij grę</Button>}
+            {props.gameAvailable && <Button onClick={()=>signUpToGame(props.user, props.gameID, players)} variant='primary'>Dołącz do gry</Button>}
             <GameInfo status={status} />
         </PlayersManagerContainer>
     );

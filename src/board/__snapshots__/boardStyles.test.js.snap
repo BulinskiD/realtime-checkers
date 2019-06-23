@@ -8,7 +8,7 @@ exports[`ColorChecker should add hover pseudo class for given props 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-EHOje sc-bZQynM dDqasE"
+    className="sc-EHOje sc-bZQynM scnHI"
     color="black"
   />
 </Styled(styled.span)>
@@ -22,7 +22,7 @@ exports[`ColorChecker should render black component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-EHOje sc-bZQynM icgyJq"
+    className="sc-EHOje sc-bZQynM loNHh"
     color="black"
   />
 </Styled(styled.span)>
@@ -36,7 +36,7 @@ exports[`ColorChecker should render component with king markup 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-EHOje sc-bZQynM dxEluG"
+    className="sc-EHOje sc-bZQynM fbsBej"
     color="black"
   />
 </Styled(styled.span)>
@@ -50,7 +50,7 @@ exports[`ColorChecker should render white component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-EHOje sc-bZQynM bqujZz"
+    className="sc-EHOje sc-bZQynM emNiHF"
     color="white"
   />
 </Styled(styled.span)>
@@ -62,7 +62,7 @@ exports[`PlayerItem should render darker blue color for active player 1`] = `
   color="black"
 >
   <span
-    className="sc-bxivhb bofmPG"
+    className="sc-bxivhb bWQaIf"
     color="black"
   />
 </styled.span>
@@ -74,7 +74,7 @@ exports[`PlayerItem should render dimmer blue color for inactive player 1`] = `
   color="white"
 >
   <span
-    className="sc-bxivhb cpOEVC"
+    className="sc-bxivhb beUtrj"
     color="white"
   />
 </styled.span>

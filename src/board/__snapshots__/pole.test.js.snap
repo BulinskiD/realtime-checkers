@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Pole should render active pole for given props 1`] = `
-<styled.div>
+<styled.div
+  col={1}
+  row={0}
+>
   <styled.div
     className="active"
     onClick={[Function]}
@@ -10,7 +13,10 @@ exports[`Pole should render active pole for given props 1`] = `
 `;
 
 exports[`Pole should render black checker for given props 1`] = `
-<styled.div>
+<styled.div
+  col={1}
+  row={0}
+>
   <Connect(Checker)
     color="black"
     isActiveTurn={true}

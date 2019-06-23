@@ -23,7 +23,7 @@ export const PlayerHolder = styled.div`
 
 export const PlayerItem = styled.span`
         padding: 5%;
-        background-color: ${props => props.active ? 'rgba(89, 147, 242, 1)' : 'rgba(89, 147, 242, .4)'};
+        background-color: ${props => props.active ? "#cc3300" : "rgba(204, 51, 0, .4)"};
         color: white;
         position: relative;
         border: 2px rgb(1, 37, 96, .5) solid;
@@ -65,7 +65,7 @@ const CheckerItem = styled.span`
     `;
 
 export const ColorChecker = styled(CheckerItem)`
-        background-color: ${props => props.color === 'white' ? 'lightgray' : 'black'};
+        background-image: ${props => props.color === 'white' ? 'radial-gradient(lightgray, gray)' : 'radial-gradient(#333, black)' };
         ${props => (props.isKing) && css`
             &::after {
                 position: absolute;
@@ -109,6 +109,8 @@ export const PoleContainer = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: ${props => ((props.col % 2 === 0) && (props.row % 2 === 0)) || ((props.col % 2 === 1) && (props.row % 2 === 1)) ?
+                            '#993300' : '#ffffcc'};
     `;
 
 export const ActivePlace = styled.div`
