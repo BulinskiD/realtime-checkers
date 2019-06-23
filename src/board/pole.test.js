@@ -24,13 +24,13 @@ doc.mockReturnValue({update});
 
 describe('Pole', () => {
     it('should render black checker for given props', () => {
-        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: {color: 'black'}, active: false, col: 1, row: 0 }
+        const props = {id: '2', status: 'white', nextMove: true, isActiveTurn: true, checkersPosition: [], pole: {color: 'black'}, active: false, col: 1, row: 0 }
         const component = shallow(<Pole {...props} />);
         expect(component).toMatchSnapshot();
     });
 
     it('should render active pole for given props', () => {
-        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0 }
+        const props = {id: '2', status: 'white', isActiveTurn: true, nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0 }
         const component = shallow(<Pole {...props} />);
 
         expect(component.find('Connect(Checker)').exists()).toBeFalsy();
@@ -41,7 +41,7 @@ describe('Pole', () => {
     it('should handle move properly', async () => {
         const selectChecker = jest.fn();
         const setActivePoles = jest.fn();
-        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
+        const props = {id: '2', status: 'white', isActiveTurn: true, nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
             selectChecker, setActivePoles};
         moveChecker.mockReturnValue({checkersPosition: [], hasNextMove: false, selectedChecker: {}});
         checkNextStatus.mockReturnValue('black');
@@ -59,7 +59,7 @@ describe('Pole', () => {
     it('should set status BLACK_WINNER for given input', async () => {
         const selectChecker = jest.fn();
         const setActivePoles = jest.fn();
-        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
+        const props = {id: '2', status: 'white', isActiveTurn:true, nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
             selectChecker, setActivePoles};
         moveChecker.mockReturnValue({checkersPosition: [], hasNextMove: false, selectedChecker: {}});
         checkNextStatus.mockReturnValue('black');
@@ -80,7 +80,7 @@ describe('Pole', () => {
 
         const selectChecker = jest.fn();
         const setActivePoles = jest.fn();
-        const props = {id: '2', status: 'white', nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
+        const props = {id: '2', status: 'white', isActiveTurn: true, nextMove: true, checkersPosition: [], pole: null, active: true, col: 1, row: 0,
             selectChecker, setActivePoles};
         moveChecker.mockReturnValue({checkersPosition: [], hasNextMove: false, selectedChecker: {}});
         checkNextStatus.mockReturnValue('black');

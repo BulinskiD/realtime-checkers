@@ -39,9 +39,12 @@ describe("App", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('Should call onUserAuthChange on load', () => {
+    it('Should call onUserAuthChange and onSelectedGameChange on load', () => {
+        props.onSelectedGameChange = jest.fn();
+        props.user = "email";
         mount(<App {...props} />);
-        expect(onUserAuthChange).toBeCalledTimes(1);
+        expect(onUserAuthChange).toHaveBeenCalledTimes(1);
+        expect(props.onSelectedGameChange).toHaveBeenCalledWith('email');
     });
 });
 

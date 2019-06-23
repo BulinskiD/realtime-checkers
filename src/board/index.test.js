@@ -2,11 +2,12 @@ import React from 'react';
 import ConnectedBoard, { Board } from './index';
 import configureMockStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
-import startGame from '../utils/startGame';
 import {Provider} from 'react-redux';
 import {firestore} from "../api/firebase";
 import getActivePoles from '../utils/getActivePoles';
+import PlayersManager from './playersManager';
 
+jest.mock('./playersManager');
 jest.mock('../utils/getActivePoles');
 jest.mock('../api/firebase');
 const item = {id: '22', data: ()=> data};
@@ -41,31 +42,11 @@ describe('Board', () => {
    it('should render 64 poles and Start game button for given props', () => {
         const selectedChecker = {col: 2, row: 2, color: 'black', selected: false};
         const currentGame = {status: 'not-started', selectedChecker, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false};
-        const props = {currentGame, setNewGameState, selectGame, setActivePoles};
+        const props = {currentGame, setNewGameState, selectGame, setActivePoles, match: {params: {id: 2}}};
         const component = shallow(<Board {...props} />);
-        expect(component.find('Button').text()).toBe("Zacznij grę");
         expect(component.find('Connect(Pole)').length).toBe(64);
         expect(component).toMatchSnapshot();
    });
-
-    it("shouldn't render Start game button for given props", () => {
-        const selectedChecker = {col: 2, row: 2, color: 'black', selected: false};
-        const currentGame = {status: 'white', selectedChecker, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false};
-        const props = {currentGame, setNewGameState, selectGame, setActivePoles};
-        const component = shallow(<Board {...props} />);
-        expect(component.find('Button').exists()).toBe(false);
-        expect(component.find('Connect(Pole)').length).toBe(64);
-        expect(component).toMatchSnapshot();
-    });
-
-    it("should call startGame on click on button", () => {
-        const currentGame = {status: 'not-started', selectedChecker: {}, checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false};
-        const props = {currentGame, setNewGameState, selectGame, setActivePoles};
-        const component = shallow(<Board {...props} />);
-        component.find('Button').simulate('click');
-
-        expect(startGame).toBeCalledWith(currentGame);
-    });
 
     it("should call firestore subscribe on component load", () => {
         const store = mockStore(data);
@@ -111,11 +92,13 @@ describe('MapStateToProps', () => {
    it("should correctly map state to props", () => {
 
        const store = mockStore({currentGame: {status: 'white', selectedChecker: {},
-               checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false}});
+               checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}],
+               players: [{email: 'test', color: 'white'}], nextMove: false}, user: {email: 'test'}});
 
-       const board = shallow(<ConnectedBoard store={store} />);
+       const board = shallow(<ConnectedBoard store={store} {...{match: {param: {id: 2}}}} />);
 
-       expect(board.find('Board').props().currentGame).toStrictEqual({status: 'white', selectedChecker: {},
+       expect(board.find('Board').props().currentGame).toStrictEqual({status: 'white', players: [{email: 'test', color: 'white'}], selectedChecker: {},
           checkersPosition: [{col: 2, row: 2, color: 'black', selected: false}], nextMove: false});
+       expect(board.find('Board').props().isActiveTurn).toBe(true);
    });
 });

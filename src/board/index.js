@@ -1,22 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { BoardContainer } from './boardStyles';
+import { BoardContainer, FlexContainer } from './boardStyles';
 import Logout from '../auth/logout';
-import Button from 'react-bootstrap/Button';
 import {firestore} from "../api/firebase";
 import { connect } from 'react-redux';
 import { setNewGameState, setActivePoles, selectGame, clearCurrentGame } from '../store/actions/checkers';
-import startGame from '../utils/startGame';
 import getActivePoles from '../utils/getActivePoles';
 import Pole from './pole';
-import GameInfo from './gameInfo';
-import {getMessage} from "../utils/utilFunctions";
-import {BLACK_WINNER, WHITE_WINNER} from "../store/constants/actionTypes";
+import PlayersManager from './playersManager';
+import {currentGameType} from "../propTypes";
 
 export const Board = props => {
-
-    const {selectedChecker, checkersPosition, nextMove, from, status} = props.currentGame;
-    const [message, setMessage] = useState({text: '', isEnded: false});
+    const {isActiveTurn} = props;
+    const {selectedChecker, checkersPosition, nextMove, from} = props.currentGame;
 
     useEffect(()=>{
         if(selectedChecker){
@@ -25,10 +21,6 @@ export const Board = props => {
         }
     }, //eslint-disable-next-line
         [selectedChecker]);
-
-    useEffect(()=>{
-        setMessage(getMessage(status));
-    }, [status]);
 
     useEffect(()=>{
         props.selectGame(props.match.params.id);
@@ -48,47 +40,38 @@ export const Board = props => {
         let rowComp = new Array(8).fill(1);
         let board = new Array(8).fill(1);
         board = board.map((item, row) => {
-            return rowComp.map((item, col)=> <Pole col={col} row={row} key={`${row}/${col}`} />);
+            return rowComp.map((item, col)=> <Pole isActiveTurn={isActiveTurn} col={col} row={row} key={`${row}/${col}`} />);
         });
         return board;
     }
 
     return (
         <React.Fragment>
-            <GameInfo message={message.text} isEnded={message.isEnded} />
-            <Logout />
-
-            {(status === 'not-started' || status === WHITE_WINNER || status === BLACK_WINNER) &&
-            <Button onClick={()=>startGame(props.currentGame)} variant='primary'>Zacznij grę</Button>}
-
-            <BoardContainer>
-                {renderBoard()}
-            </BoardContainer>
+        <Logout />
+            <FlexContainer>
+                <PlayersManager gameID={props.match.params.id} />
+                <BoardContainer>
+                    {renderBoard()}
+                </BoardContainer>
+            </FlexContainer>
         </React.Fragment>
     );
 }
 
 const mapStateToProps = state => {
     return {
-        currentGame: state.currentGame
+        currentGame: state.currentGame,
+        isActiveTurn: state.currentGame.players.filter(({email, color}) => (email === state.user.email) && (color === state.currentGame.status)).length === 1
     }
 }
 
 Board.propTypes = {
-    currentGame: PropTypes.shape({
-        id: PropTypes.string,
-        playerIds: PropTypes.object,
-        status: PropTypes.string,
-        nextMove: PropTypes.bool,
-        checkersPosition: PropTypes.array,
-        activePoles: PropTypes.array,
-        selectedChecker: PropTypes.object,
-        from: PropTypes.object
-    }),
+    currentGame: currentGameType,
     selectGame: PropTypes.func,
     setNewGameState: PropTypes.func,
     setActivePoles: PropTypes.func,
-    clearCurrentGame: PropTypes.func
+    clearCurrentGame: PropTypes.func,
+    isParticipant: PropTypes.bool
 }
 
 export default connect(mapStateToProps, {selectGame, setNewGameState, setActivePoles, clearCurrentGame})(Board);

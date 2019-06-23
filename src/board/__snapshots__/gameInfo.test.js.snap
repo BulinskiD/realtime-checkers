@@ -7,12 +7,8 @@ exports[`GameInfo should match snapshot for given props 1`] = `
     onClose={[Function]}
     show={false}
     title="Gra zakończona"
-  >
-    Grają białe
-  </InfoModal>
-  <div>
-    Grają białe
-  </div>
+  />
+  <div />
 </Fragment>
 `;
 
@@ -23,11 +19,7 @@ exports[`GameInfo should render modal on game end 1`] = `
     onClose={[Function]}
     show={false}
     title="Gra zakończona"
-  >
-    Wygrały białe
-  </InfoModal>
-  <div>
-    Wygrały białe
-  </div>
+  />
+  <div />
 </Fragment>
 `;

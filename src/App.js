@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Login from './auth';
 
 import Board from './board';
-import {onUserAuthChange} from "./store/actions/auth";
+import {onUserAuthChange, onSelectedGameChange} from "./store/actions/auth";
 
 export const App = (props) => {
 
@@ -18,6 +18,12 @@ export const App = (props) => {
         props.onUserAuthChange();
     }, //eslint-disable-next-line
         []);
+
+    useEffect( () => {
+        if(props.user)
+            props.onSelectedGameChange(props.user);
+    },//eslint-disable-next-line
+        [props.user])
 
     if(props.loading)
         //Here will be loader
@@ -36,6 +42,7 @@ export const App = (props) => {
 
 const mapStateToProps = (state) =>{
     return {
+        user: state.user.email,
         authenticated: state.user.isLoggedIn,
         loading: state.user.initial
     }
@@ -47,4 +54,4 @@ App.propTypes = {
     onUserAuthChange: PropTypes.func
 }
 
-export default connect(mapStateToProps, {onUserAuthChange})(App);
+export default connect(mapStateToProps, {onUserAuthChange, onSelectedGameChange})(App);

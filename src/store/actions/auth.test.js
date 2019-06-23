@@ -1,11 +1,17 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import {loginWithEmailAndPassword, userLogout, onUserAuthChange} from './auth';
-import {auth} from '../../api/firebase';
-import {LOGIN_FAILED, LOGOUT_FAILED, LOGIN_SUCCESS, LOGOUT_SUCCESS} from '../constants/actionTypes';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { getErrorMessage } from "../../utils/utilFunctions";
+import {loginWithEmailAndPassword, userLogout, onUserAuthChange, onSelectedGameChange} from './auth';
+import {auth, firestore} from '../../api/firebase';
+import {LOGIN_FAILED, LOGOUT_FAILED, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGN_UP_TO_GAME} from '../constants/actionTypes';
 
+
+jest.mock('../../utils/utilFunctions');
 const store = configureMockStore([thunk]);
 jest.mock('../../api/firebase');
+firestore.collection = jest.fn();
+const doc = jest.fn();
+firestore.collection.mockReturnValue({doc});
 
 describe("LoginWithEmailAndPassword", () => {
     auth.signInWithEmailAndPassword = jest.fn();
@@ -28,6 +34,7 @@ describe("LoginWithEmailAndPassword", () => {
     });
 
     it('should dispatch LOGIN_FAILED when there is an error', async () => {
+        getErrorMessage.mockReturnValue("Error");
         const mockedStore = store({user: {}});
         expect.assertions(3);
         history.push = jest.fn();
@@ -40,7 +47,7 @@ describe("LoginWithEmailAndPassword", () => {
             await prom;
         } catch(error) {
             expect(history.push).toHaveBeenCalledTimes(0);
-            expect(mockedStore.getActions()).toEqual([{type: LOGIN_FAILED, payload: "Error"}]);
+            expect(mockedStore.getActions()).toEqual([{type: LOGIN_FAILED, payload: {message: "Error"}}]);
         }
     });
 
@@ -110,5 +117,29 @@ describe("OnUserAuthChange", () => {
         expect(auth.onAuthStateChanged).toHaveBeenCalledTimes(1);
         expect(mockedStore.getActions()).toEqual([{type: LOGOUT_SUCCESS}]);
     });
+});
+
+describe('OnSelectedGameChange', () => {
+
+    it('should dispatch SIGN_UP_TO_GAME when new data is available', () => {
+        const mockedStore = store({user: {}});
+        const onSnapshot = jest.fn(func => func({data: ()=> ({gameID: 'test'})}));
+        doc.mockReturnValue({onSnapshot});
+        mockedStore.dispatch(onSelectedGameChange('test'));
+
+        expect(onSnapshot).toHaveBeenCalledTimes(1);
+        expect(mockedStore.getActions()).toEqual([{type: SIGN_UP_TO_GAME, payload: {gameID: 'test'}}]);
+    });
+
+    it('should not dispatch SIGN_UP_TO_GAME when new data is null', () => {
+        const mockedStore = store({user: {}});
+        const onSnapshot = jest.fn(func => func(null));
+        doc.mockReturnValue({onSnapshot});
+        mockedStore.dispatch(onSelectedGameChange('test'));
+
+        expect(onSnapshot).toHaveBeenCalledTimes(1);
+        expect(mockedStore.getActions()).toEqual([]);
+    });
+
 });
 

@@ -1,7 +1,51 @@
 import styled, {css} from "styled-components";
 
+export const FlexContainer = styled.div`
+        display: flex;
+        justify-content: space-between;
+`;
+
+export const PlayersManagerContainer = styled.div`
+        display: flex;
+        flex-direction: column;
+`;
+
+export const PlayerHolder = styled.div`
+        display: flex;
+        flex-direction: column;
+        padding: 5%;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        background-color: rgba(0, 0, 0, .05);
+        border: 1px solid lightgray;
+        box-shadow: 5px 5px 10px 0px rgba(0,0,0,.15);
+`;
+
+export const PlayerItem = styled.span`
+        padding: 5%;
+        background-color: ${props => props.active ? 'rgba(89, 147, 242, 1)' : 'rgba(89, 147, 242, .4)'};
+        color: white;
+        position: relative;
+        border: 2px rgb(1, 37, 96, .5) solid;
+        &:not(:first-child) {
+          margin-top: 5%;
+        }
+        
+        &::after {
+            position: absolute;
+           left: -14px;
+           top: 50%;
+           transform: translateY(-50%);
+           z-index: 5;
+           display: block;
+           content: ' ';
+           width: 10px;
+           height: 10px;
+           background-color: ${props => props.color};
+        }
+`;
+
 export const BoardContainer = styled.div`
-        margin: 0 auto;
         height: 90vh;
         width: 90vh;
         display: grid;

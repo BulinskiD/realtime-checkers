@@ -16,9 +16,9 @@ export const Checker = (props) => {
             {props.selected ? <SelectedChecker className="selected" isKing={props.isKing} color={props.color} /> :
 
                               <ColorChecker className="color"
-                                            onClick={handleClick}
+                                            onClick={() => props.isActiveTurn && handleClick()}
                                             color={props.color}
-                                            hover={props.color === props.status}
+                                            hover={props.isActiveTurn && props.color === props.status}
                                             nextMove={!props.nextMove}
                                             isKing={props.isKing} />}
         </React.Fragment>
@@ -37,6 +37,7 @@ Checker.propTypes = {
     status: PropTypes.string,
     col: PropTypes.number,
     row: PropTypes.number,
+    isActiveTurn: PropTypes.bool,
     isKing: PropTypes.bool,
     selected: PropTypes.bool,
     selectChecker: PropTypes.func
