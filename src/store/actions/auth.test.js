@@ -1,9 +1,12 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { getErrorMessage } from "../../utils/utilFunctions";
 import {loginWithEmailAndPassword, userLogout, onUserAuthChange, onSelectedGameChange} from './auth';
 import {auth, firestore} from '../../api/firebase';
 import {LOGIN_FAILED, LOGOUT_FAILED, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGN_UP_TO_GAME} from '../constants/actionTypes';
 
+
+jest.mock('../../utils/utilFunctions');
 const store = configureMockStore([thunk]);
 jest.mock('../../api/firebase');
 firestore.collection = jest.fn();
@@ -31,6 +34,7 @@ describe("LoginWithEmailAndPassword", () => {
     });
 
     it('should dispatch LOGIN_FAILED when there is an error', async () => {
+        getErrorMessage.mockReturnValue("Error");
         const mockedStore = store({user: {}});
         expect.assertions(3);
         history.push = jest.fn();
@@ -43,7 +47,7 @@ describe("LoginWithEmailAndPassword", () => {
             await prom;
         } catch(error) {
             expect(history.push).toHaveBeenCalledTimes(0);
-            expect(mockedStore.getActions()).toEqual([{type: LOGIN_FAILED, payload: "Error"}]);
+            expect(mockedStore.getActions()).toEqual([{type: LOGIN_FAILED, payload: {message: "Error"}}]);
         }
     });
 

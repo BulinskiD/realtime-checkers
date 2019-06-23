@@ -1,14 +1,16 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_SUCCESS, LOGOUT_FAILED, SIGN_UP_TO_GAME} from '../constants/actionTypes';
 import {auth, firestore} from '../../api/firebase';
+import {getErrorMessage} from "../../utils/utilFunctions";
 
 export const loginWithEmailAndPassword = (email, password, history) => async dispatch => {
     try {
         await auth.signInWithEmailAndPassword(email, password);
         history.push('/');
     } catch(error) {
+        const message = getErrorMessage(error);
         dispatch({
            type: LOGIN_FAILED,
-           payload: error
+           payload: {message}
         });
     }
 }

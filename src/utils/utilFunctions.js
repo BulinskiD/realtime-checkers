@@ -46,3 +46,16 @@ export const getMessage = status => {
     }
     return message;
 }
+
+export const getErrorMessage = error => {
+    switch(error.code) {
+        case 'auth/wrong-password':
+            return 'Błędne hasło!';
+        case 'auth/invalid-email':
+            return 'Niepoprawny adres email!';
+        case 'auth/user-not-found':
+            return 'Brak użytkownika w bazie!'
+        default:
+            return 'Nie udało się zalogować!';
+    }
+}
