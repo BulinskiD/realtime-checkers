@@ -58,6 +58,8 @@ export const getErrorMessage = error => {
       return "Niepoprawny adres email!";
     case "auth/user-not-found":
       return "Brak użytkownika w bazie!";
+    case "user/exists":
+      return "Ten email jest już zajęty!";
     default:
       return "Nie udało się zalogować!";
   }

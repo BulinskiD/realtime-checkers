@@ -11,23 +11,43 @@ import { getErrorMessage } from "../../utils/utilFunctions";
 
 export const createUserWithEmailAndPassword = (
   email,
-  password
+  password,
+  setLoading
 ) => async dispatch => {
   try {
-    await auth.createUserWithEmailAndPassword(email, password);
+    const resp = await firestore
+      .collection("users")
+      .doc(email)
+      .get();
+    if (!resp.exists) {
+      // Automatically logged in when succeed, no need to dispatch any action beacause of subscription in onUserAuthChange action
+      await firestore
+        .collection("users")
+        .doc(email)
+        .set({ gameID: null });
+      await auth.createUserWithEmailAndPassword(email, password);
+    } else {
+      const error = new Error();
+      error.code = "user/exists";
+      throw error;
+    }
+    setLoading(false);
   } catch (error) {
     const message = getErrorMessage(error);
     dispatch({ type: REGISTER_FAILED, payload: { message } });
+    setLoading(false);
   }
 };
 
 export const loginWithEmailAndPassword = (
   email,
   password,
-  history
+  history,
+  setLoading
 ) => async dispatch => {
   try {
     await auth.signInWithEmailAndPassword(email, password);
+    setLoading(false);
     history.push("/");
   } catch (error) {
     const message = getErrorMessage(error);
@@ -35,6 +55,7 @@ export const loginWithEmailAndPassword = (
       type: LOGIN_FAILED,
       payload: { message }
     });
+    setLoading(false);
   }
 };
 

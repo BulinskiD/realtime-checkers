@@ -18,7 +18,8 @@ export default (
         initial: false,
         error: null
       };
-    case LOGIN_FAILED || REGISTER_FAILED:
+    case REGISTER_FAILED:
+    case LOGIN_FAILED:
       return {
         email: null,
         isLoggedIn: false,
