@@ -6,7 +6,8 @@ import Button from "react-bootstrap/Button";
 import {
   PlayersManagerContainer,
   PlayerHolder,
-  PlayerItem
+  PlayerItem,
+  PlayerHolderTitle
 } from "./boardStyles";
 import startGame from "../utils/startGame";
 import signUpToGame from "../utils/signUpToGame";
@@ -18,7 +19,7 @@ export const PlayersManager = props => {
 
   return (
     <PlayersManagerContainer>
-      <strong>Aktywni gracze</strong>
+      <PlayerHolderTitle>Aktywni gracze</PlayerHolderTitle>
       <PlayerHolder>
         {players.map(item => {
           return (

@@ -10,10 +10,17 @@ export const PlayersManagerContainer = styled.div`
   flex-direction: column;
 `;
 
+export const PlayerHolderTitle = styled.h4`
+  font-size: 1.4em;
+  font-weight: 300;
+`;
+
 export const PlayerHolder = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10% 5% 10% 0;
+  padding: 5%;
+  padding-top: 10%;
+  padding-bottom: 10%;
   background-color: rgba(0, 0, 0, 0.05);
   border: 1px solid lightgray;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.15);
@@ -45,8 +52,8 @@ export const PlayerItem = styled.span`
 `;
 
 export const BoardContainer = styled.div`
-  height: 90vh;
-  width: 90vh;
+  height: 80vh;
+  width: 80vh;
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
@@ -95,6 +102,10 @@ export const ColorChecker = styled(CheckerItem)`
 `;
 
 export const SelectedChecker = styled(CheckerItem)`
+  outline: 2px solid
+    ${props => (props.color === "black" ? "black" : "lightgray")};
+  background-color: ${props =>
+    props.color === "black" ? "black" : "lightgray"};
   ${props =>
     props.isKing &&
     css`
@@ -110,9 +121,6 @@ export const SelectedChecker = styled(CheckerItem)`
         background: tomato;
       }
     `}
-  outline: 2px solid black;
-  background-color: ${props =>
-    props.color === "black" ? "black" : "lightgray"};
 `;
 
 export const PoleContainer = styled.div`

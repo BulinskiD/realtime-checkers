@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { BoardContainer, FlexContainer } from "./boardStyles";
-import Logout from "../auth/logout";
 import { firestore } from "../api/firebase";
 import { connect } from "react-redux";
 import {
@@ -74,13 +73,10 @@ export const Board = props => {
   };
 
   return (
-    <React.Fragment>
-      <Logout />
-      <FlexContainer>
-        <PlayersManager gameID={props.match.params.id} />
-        <BoardContainer>{renderBoard()}</BoardContainer>
-      </FlexContainer>
-    </React.Fragment>
+    <FlexContainer>
+      <PlayersManager gameID={props.match.params.id} />
+      <BoardContainer>{renderBoard()}</BoardContainer>
+    </FlexContainer>
   );
 };
 

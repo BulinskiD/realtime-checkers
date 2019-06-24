@@ -6,8 +6,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Authenticated from "./shared/authenticated";
 import ListGames from "./list-games";
 import { connect } from "react-redux";
-import Container from "react-bootstrap/Container";
 import Login from "./auth";
+import { AppContainer } from "./appStyles";
 
 import Board from "./board";
 import { onUserAuthChange, onSelectedGameChange } from "./store/actions/auth";
@@ -33,7 +33,7 @@ export const App = props => {
 
   return (
     <BrowserRouter>
-      <Container>
+      <AppContainer>
         <Route
           path="/"
           exact
@@ -57,7 +57,7 @@ export const App = props => {
           path="/login"
           component={propsFromRoute => <Login {...propsFromRoute} />}
         />
-      </Container>
+      </AppContainer>
     </BrowserRouter>
   );
 };
