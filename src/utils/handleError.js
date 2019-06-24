@@ -1,4 +1,2 @@
 //TODO
-export default () => {
-
-}
+export default () => {};
