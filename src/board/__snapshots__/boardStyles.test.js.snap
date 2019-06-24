@@ -8,7 +8,7 @@ exports[`ColorChecker should add hover pseudo class for given props 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-EHOje sc-bZQynM scnHI"
+    className="sc-EHOje sc-bZQynM kqXkkz"
     color="black"
   />
 </Styled(styled.span)>
@@ -22,7 +22,7 @@ exports[`ColorChecker should render black component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-EHOje sc-bZQynM loNHh"
+    className="sc-EHOje sc-bZQynM bWCycq"
     color="black"
   />
 </Styled(styled.span)>
@@ -36,7 +36,7 @@ exports[`ColorChecker should render component with king markup 1`] = `
   nextMove={true}
 >
   <span
-    className="sc-EHOje sc-bZQynM fbsBej"
+    className="sc-EHOje sc-bZQynM jxatWb"
     color="black"
   />
 </Styled(styled.span)>
@@ -50,7 +50,7 @@ exports[`ColorChecker should render white component for given props 1`] = `
   nextMove={false}
 >
   <span
-    className="sc-EHOje sc-bZQynM emNiHF"
+    className="sc-EHOje sc-bZQynM GyDiX"
     color="white"
   />
 </Styled(styled.span)>
@@ -62,7 +62,7 @@ exports[`PlayerItem should render darker blue color for active player 1`] = `
   color="black"
 >
   <span
-    className="sc-bxivhb bWQaIf"
+    className="sc-bxivhb gFEUqD"
     color="black"
   />
 </styled.span>
@@ -74,7 +74,7 @@ exports[`PlayerItem should render dimmer blue color for inactive player 1`] = `
   color="white"
 >
   <span
-    className="sc-bxivhb beUtrj"
+    className="sc-bxivhb bWMQot"
     color="white"
   />
 </styled.span>
@@ -86,7 +86,7 @@ exports[`SelectedChecker should render black selectedChecker with king markup fo
   isKing={true}
 >
   <span
-    className="sc-EHOje sc-gzVnrw hZxNqY"
+    className="sc-EHOje sc-gzVnrw jQQcLS"
     color="black"
   />
 </Styled(styled.span)>
@@ -98,7 +98,7 @@ exports[`SelectedChecker should render black selectedChecker without king markup
   isKing={false}
 >
   <span
-    className="sc-EHOje sc-gzVnrw FjWnG"
+    className="sc-EHOje sc-gzVnrw buauLl"
     color="black"
   />
 </Styled(styled.span)>
@@ -110,7 +110,7 @@ exports[`SelectedChecker should render white selectedChecker with king markup fo
   isKing={true}
 >
   <span
-    className="sc-EHOje sc-gzVnrw eaNrOX"
+    className="sc-EHOje sc-gzVnrw cANMAy"
     color="white"
   />
 </Styled(styled.span)>
@@ -122,7 +122,7 @@ exports[`SelectedChecker should render white selectedChecker without king markup
   isKing={false}
 >
   <span
-    className="sc-EHOje sc-gzVnrw ijfari"
+    className="sc-EHOje sc-gzVnrw gTWeLk"
     color="white"
   />
 </Styled(styled.span)>
