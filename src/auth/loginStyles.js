@@ -30,7 +30,7 @@ export const LoginFormElement = styled(Form)`
   border-radius: 1%;
   background-color: #fafafa;
   box-shadow: 5px 7px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s;
+  transition: all 0.5s;
 
   &:hover {
     transform: scale(1.04);

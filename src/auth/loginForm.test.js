@@ -48,7 +48,8 @@ describe("Login", () => {
     expect(loginWithEmailAndPassword).toHaveBeenCalledWith(
       "email",
       "password",
-      history
+      history,
+      expect.any(Function)
     );
   });
 });

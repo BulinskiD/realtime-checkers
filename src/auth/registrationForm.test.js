@@ -64,7 +64,8 @@ describe("RegistrationForm", () => {
     expect(preventDefault).toHaveBeenCalledTimes(1);
     expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(
       "email",
-      "password"
+      "password",
+      expect.any(Function)
     );
   });
 
@@ -117,7 +118,7 @@ describe("RegistrationForm", () => {
 
     expect(preventDefault).toHaveBeenCalledTimes(1);
     expect(createUserWithEmailAndPassword).toHaveBeenCalledTimes(0);
-    expect(registrationForm.find("span").text()).toBe(
+    expect(registrationForm.find("div").text()).toBe(
       "Podane hasła różnią się od siebie!"
     );
   });

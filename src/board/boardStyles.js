@@ -8,6 +8,7 @@ export const FlexContainer = styled.div`
 export const PlayersManagerContainer = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 25%;
 `;
 
 export const PlayerHolderTitle = styled.h4`

@@ -26,12 +26,12 @@ export const createUserWithEmailAndPassword = (
         .doc(email)
         .set({ gameID: null });
       await auth.createUserWithEmailAndPassword(email, password);
+      setLoading(false);
     } else {
       const error = new Error();
       error.code = "user/exists";
       throw error;
     }
-    setLoading(false);
   } catch (error) {
     const message = getErrorMessage(error);
     dispatch({ type: REGISTER_FAILED, payload: { message } });

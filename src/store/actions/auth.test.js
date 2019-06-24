@@ -40,7 +40,7 @@ describe("LoginWithEmailAndPassword", () => {
     auth.signInWithEmailAndPassword.mockReturnValue(prom);
 
     mockedStore.dispatch(
-      await loginWithEmailAndPassword("test", "test", history)
+      await loginWithEmailAndPassword("test", "test", history, () => {})
     );
     expect(auth.signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
     await prom;
@@ -169,25 +169,68 @@ describe("createUserWithEmailAndPassword", () => {
   it("should call createUserWithEmailAndPassword and dispatch no action when successful", async () => {
     const prom = Promise.resolve("OK");
     auth.createUserWithEmailAndPassword.mockReturnValue(prom);
+    const get = jest.fn();
+    const set = jest.fn();
+    set.mockReturnValue(Promise.resolve());
+    doc.mockReturnValue({ get, set });
+    const available = Promise.resolve({ exists: false });
+    get.mockReturnValue(available);
     const mockedStore = store({ user: {} });
     mockedStore.dispatch(
-      await createUserWithEmailAndPassword("dawidbulinski132@wp.pl", "testtest")
+      await createUserWithEmailAndPassword(
+        "dawidbulinski132@wp.pl",
+        "testtest",
+        () => {}
+      )
     );
 
+    await available;
     await prom;
     expect(mockedStore.getActions()).toEqual([]);
   });
 
-  it("should call createUserWithEmailAndPassword and dispatch REGISTER_FAILED when failed", async () => {
+  it("should call createUserWithEmailAndPassword and dispatch REGISTER_FAILED when document exists", async () => {
     getErrorMessage.mockReturnValue("Error");
     const prom = Promise.reject("Error");
     auth.createUserWithEmailAndPassword.mockReturnValue(prom);
+    const get = jest.fn();
+    const set = jest.fn();
+    set.mockReturnValue(Promise.resolve());
+    doc.mockReturnValue({ get, set });
+    const available = Promise.resolve({ exists: true });
+    get.mockReturnValue(available);
     const mockedStore = store({ user: {} });
     mockedStore.dispatch(
-      await createUserWithEmailAndPassword("dawidbulinski132@wp.pl", "testtest")
+      await createUserWithEmailAndPassword("test", "test", () => {})
     );
 
     try {
+      await available;
+      await prom;
+    } catch (error) {
+      expect(mockedStore.getActions()).toEqual([
+        { type: REGISTER_FAILED, payload: { message: "Error" } }
+      ]);
+    }
+  });
+
+  it("should call createUserWithEmailAndPassword and dispatch REGISTER_FAILED when request fails", async () => {
+    getErrorMessage.mockReturnValue("Error");
+    const prom = Promise.reject();
+    auth.createUserWithEmailAndPassword.mockReturnValue(prom);
+    const get = jest.fn();
+    const set = jest.fn();
+    set.mockReturnValue(prom);
+    doc.mockReturnValue({ get, set });
+    const available = Promise.resolve({ exists: false });
+    get.mockReturnValue(available);
+    const mockedStore = store({ user: {} });
+    mockedStore.dispatch(
+      await createUserWithEmailAndPassword("test", "test", () => {})
+    );
+
+    try {
+      await available;
       await prom;
     } catch (error) {
       expect(mockedStore.getActions()).toEqual([

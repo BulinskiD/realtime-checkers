@@ -120,6 +120,11 @@ describe("getErrorMessage", () => {
     expect(getErrorMessage(error)).toBe("Brak użytkownika w bazie!");
   });
 
+  it("should return correct message for user/exists", () => {
+    error.code = "user/exists";
+    expect(getErrorMessage(error)).toBe("Ten email jest już zajęty!");
+  });
+
   it("should return correct message for the rest of codes", () => {
     error.code = "anything";
     expect(getErrorMessage(error)).toBe("Nie udało się zalogować!");
