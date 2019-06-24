@@ -3,10 +3,23 @@ import {
   LOGIN_FAILED,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
-  SIGN_UP_TO_GAME
+  SIGN_UP_TO_GAME,
+  REGISTER_FAILED
 } from "../constants/actionTypes";
 import { auth, firestore } from "../../api/firebase";
 import { getErrorMessage } from "../../utils/utilFunctions";
+
+export const createUserWithEmailAndPassword = (
+  email,
+  password
+) => async dispatch => {
+  try {
+    await auth.createUserWithEmailAndPassword(email, password);
+  } catch (error) {
+    const message = getErrorMessage(error);
+    dispatch({ type: REGISTER_FAILED, payload: { message } });
+  }
+};
 
 export const loginWithEmailAndPassword = (
   email,

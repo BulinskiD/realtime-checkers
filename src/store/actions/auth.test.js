@@ -5,7 +5,8 @@ import {
   loginWithEmailAndPassword,
   userLogout,
   onUserAuthChange,
-  onSelectedGameChange
+  onSelectedGameChange,
+  createUserWithEmailAndPassword
 } from "./auth";
 import { auth, firestore } from "../../api/firebase";
 import {
@@ -13,7 +14,8 @@ import {
   LOGOUT_FAILED,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
-  SIGN_UP_TO_GAME
+  SIGN_UP_TO_GAME,
+  REGISTER_FAILED
 } from "../constants/actionTypes";
 
 jest.mock("../../utils/utilFunctions");
@@ -158,5 +160,39 @@ describe("OnSelectedGameChange", () => {
 
     expect(onSnapshot).toHaveBeenCalledTimes(1);
     expect(mockedStore.getActions()).toEqual([]);
+  });
+});
+
+describe("createUserWithEmailAndPassword", () => {
+  auth.createUserWithEmailAndPassword = jest.fn();
+
+  it("should call createUserWithEmailAndPassword and dispatch no action when successful", async () => {
+    const prom = Promise.resolve("OK");
+    auth.createUserWithEmailAndPassword.mockReturnValue(prom);
+    const mockedStore = store({ user: {} });
+    mockedStore.dispatch(
+      await createUserWithEmailAndPassword("dawidbulinski132@wp.pl", "testtest")
+    );
+
+    await prom;
+    expect(mockedStore.getActions()).toEqual([]);
+  });
+
+  it("should call createUserWithEmailAndPassword and dispatch REGISTER_FAILED when failed", async () => {
+    getErrorMessage.mockReturnValue("Error");
+    const prom = Promise.reject("Error");
+    auth.createUserWithEmailAndPassword.mockReturnValue(prom);
+    const mockedStore = store({ user: {} });
+    mockedStore.dispatch(
+      await createUserWithEmailAndPassword("dawidbulinski132@wp.pl", "testtest")
+    );
+
+    try {
+      await prom;
+    } catch (error) {
+      expect(mockedStore.getActions()).toEqual([
+        { type: REGISTER_FAILED, payload: { message: "Error" } }
+      ]);
+    }
   });
 });

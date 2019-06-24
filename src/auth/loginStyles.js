@@ -23,7 +23,7 @@ export const BackgroundContainer = styled.div`
   z-index: 0;
 `;
 
-export const LoginForm = styled(Form)`
+export const LoginFormElement = styled(Form)`
   width: 30%;
   padding: 3%;
   border: solid 1px #ddd;

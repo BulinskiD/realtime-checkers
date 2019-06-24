@@ -2,7 +2,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT_SUCCESS,
-  SIGN_UP_TO_GAME
+  SIGN_UP_TO_GAME,
+  REGISTER_FAILED
 } from "../constants/actionTypes";
 
 export default (
@@ -17,7 +18,7 @@ export default (
         initial: false,
         error: null
       };
-    case LOGIN_FAILED:
+    case LOGIN_FAILED || REGISTER_FAILED:
       return {
         email: null,
         isLoggedIn: false,
