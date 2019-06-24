@@ -51,20 +51,4 @@ describe("Login", () => {
       history
     );
   });
-
-  it("should call history.push when email is set", () => {
-    const push = jest.fn();
-    history.push = push;
-    mount(
-      <StaticRouter>
-        <LoginForm
-          match={{ path: "/login" }}
-          user={{ email: "ss" }}
-          loginWithEmailAndPassword={loginWithEmailAndPassword}
-          history={history}
-        />
-      </StaticRouter>
-    );
-    expect(push).toHaveBeenCalledWith("/");
-  });
 });

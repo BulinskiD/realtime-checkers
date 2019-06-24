@@ -15,13 +15,6 @@ const Login = props => {
     props.loginWithEmailAndPassword(email, password, props.history);
   };
 
-  useEffect(
-    () => {
-      props.user.email && props.history.push("/");
-    }, //eslint-disable-next-line
-    [props.user.email]
-  );
-
   return (
     <LoginFormElement onSubmit={e => handleLogin(e)}>
       <AlertBox message={props.user.error} />

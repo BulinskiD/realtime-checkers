@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,6 +12,13 @@ import {
 } from "../store/actions/auth";
 
 export const Auth = props => {
+  useEffect(
+    () => {
+      props.user.email && props.history.push("/");
+    }, //eslint-disable-next-line
+    [props.user.email]
+  );
+
   return (
     <LoginContainer>
       {ReactDOM.createPortal(
