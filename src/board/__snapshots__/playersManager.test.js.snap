@@ -2,15 +2,6 @@
 
 exports[`PlayersManager Should display list of players 1`] = `
 <styled.div>
-  <Button
-    active={false}
-    disabled={false}
-    onClick={[Function]}
-    type="button"
-    variant="primary"
-  >
-    Dołącz do gry
-  </Button>
   <strong>
     Aktywni gracze
   </strong>
@@ -28,14 +19,6 @@ exports[`PlayersManager Should display list of players 1`] = `
       test2
     </styled.span>
   </styled.div>
-  <GameInfo
-    status="not-started"
-  />
-</styled.div>
-`;
-
-exports[`PlayersManager Should display sign_up button for given props 1`] = `
-<styled.div>
   <Button
     active={false}
     disabled={false}
@@ -45,10 +28,27 @@ exports[`PlayersManager Should display sign_up button for given props 1`] = `
   >
     Dołącz do gry
   </Button>
+  <GameInfo
+    status="not-started"
+  />
+</styled.div>
+`;
+
+exports[`PlayersManager Should display sign_up button for given props 1`] = `
+<styled.div>
   <strong>
     Aktywni gracze
   </strong>
   <styled.div />
+  <Button
+    active={false}
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Dołącz do gry
+  </Button>
   <GameInfo
     status="not-started"
   />
@@ -57,6 +57,10 @@ exports[`PlayersManager Should display sign_up button for given props 1`] = `
 
 exports[`PlayersManager Should display start_game button for given props 1`] = `
 <styled.div>
+  <strong>
+    Aktywni gracze
+  </strong>
+  <styled.div />
   <Button
     active={false}
     className="start-game"
@@ -67,10 +71,6 @@ exports[`PlayersManager Should display start_game button for given props 1`] = `
   >
     Zacznij grę
   </Button>
-  <strong>
-    Aktywni gracze
-  </strong>
-  <styled.div />
   <GameInfo
     status="not-started"
   />
