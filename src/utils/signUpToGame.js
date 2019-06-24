@@ -3,7 +3,7 @@ import handleError from "./handleError";
 
 export default async (email, gameID, players) => {
   const color = players.length === 0 ? "white" : "black";
-  players.push({ email, started: false, color });
+  players.push({ email, started: false, color, active: true });
   try {
     await firestore
       .collection("games")

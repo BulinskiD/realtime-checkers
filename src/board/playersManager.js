@@ -77,7 +77,8 @@ const mapStateToProps = state => {
         .length === 1,
     gameAvailable:
       players.length !== 2 &&
-      players.filter(({ email }) => email === state.user.email).length === 0
+      players.filter(({ email }) => email === state.user.email).length === 0 &&
+      !state.user.gameID
   };
 };
 

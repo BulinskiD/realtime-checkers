@@ -26,7 +26,6 @@ export const createUserWithEmailAndPassword = (
         .doc(email)
         .set({ gameID: null });
       await auth.createUserWithEmailAndPassword(email, password);
-      setLoading(false);
     } else {
       const error = new Error();
       error.code = "user/exists";
@@ -47,7 +46,6 @@ export const loginWithEmailAndPassword = (
 ) => async dispatch => {
   try {
     await auth.signInWithEmailAndPassword(email, password);
-    setLoading(false);
     history.push("/");
   } catch (error) {
     const message = getErrorMessage(error);
