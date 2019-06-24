@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should display correct header for given input 1`] = `
+<Styled(Bootstrap(undefined))
+  className="mb-4"
+  expand="lg"
+>
+  <withRouter(LinkContainer)
+    to="/"
+  >
+    <NavbarBrand>
+      <styled.img
+        alt="logo"
+        className="img-fluid"
+        src="/images/logo.svg"
+      />
+    </NavbarBrand>
+  </withRouter(LinkContainer)>
+  <NavbarToggle
+    aria-controls="basic-navbar-nav"
+    label="Toggle navigation"
+  />
+  <NavbarCollapse
+    id="basic-navbar-nav"
+  >
+    <Styled(Nav)>
+      <withRouter(LinkContainer)
+        to="/"
+      >
+        <Styled(NavLink)>
+          Aktywne gry
+        </Styled(NavLink)>
+      </withRouter(LinkContainer)>
+      <Styled(NavDropdown)
+        id="basic-nav-dropdown"
+        title="test"
+      >
+        <DropdownItem
+          as={[Function]}
+          disabled={false}
+        >
+          Profil
+        </DropdownItem>
+        <DropdownItem
+          as={[Function]}
+          disabled={false}
+        >
+          Statystyki
+        </DropdownItem>
+        <DropdownDivider
+          role="separator"
+        />
+        <DropdownItem
+          as={[Function]}
+          disabled={false}
+          onClick={[MockFunction]}
+        >
+          Wyloguj
+        </DropdownItem>
+      </Styled(NavDropdown)>
+    </Styled(Nav)>
+  </NavbarCollapse>
+</Styled(Bootstrap(undefined))>
+`;

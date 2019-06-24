@@ -2,9 +2,9 @@
 
 exports[`PlayersManager Should display list of players 1`] = `
 <styled.div>
-  <strong>
+  <styled.h4>
     Aktywni gracze
-  </strong>
+  </styled.h4>
   <styled.div>
     <styled.span
       active={false}
@@ -36,9 +36,9 @@ exports[`PlayersManager Should display list of players 1`] = `
 
 exports[`PlayersManager Should display sign_up button for given props 1`] = `
 <styled.div>
-  <strong>
+  <styled.h4>
     Aktywni gracze
-  </strong>
+  </styled.h4>
   <styled.div />
   <Button
     active={false}
@@ -57,9 +57,9 @@ exports[`PlayersManager Should display sign_up button for given props 1`] = `
 
 exports[`PlayersManager Should display start_game button for given props 1`] = `
 <styled.div>
-  <strong>
+  <styled.h4>
     Aktywni gracze
-  </strong>
+  </styled.h4>
   <styled.div />
   <Button
     active={false}

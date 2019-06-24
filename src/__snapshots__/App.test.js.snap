@@ -2,9 +2,7 @@
 
 exports[`App Should render correct routes when loading is false 1`] = `
 <BrowserRouter>
-  <Container
-    fluid={false}
-  >
+  <Styled(Container)>
     <Route
       component={[Function]}
       exact={true}
@@ -18,7 +16,7 @@ exports[`App Should render correct routes when loading is false 1`] = `
       component={[Function]}
       path="/login"
     />
-  </Container>
+  </Styled(Container)>
 </BrowserRouter>
 `;
 

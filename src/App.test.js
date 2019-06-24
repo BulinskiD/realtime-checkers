@@ -4,12 +4,14 @@ import Login from "./auth";
 import configureMockedStore from "redux-mock-store";
 import Authenticated from "./shared/authenticated";
 import ListGames from "./list-games";
+import Header from "./shared/header";
 import Board from "./board";
 import { shallow, mount } from "enzyme";
 
 const onUserAuthChange = jest.fn();
 let props;
 const mockedStore = configureMockedStore();
+jest.mock("./shared/header");
 
 describe("App", () => {
   beforeEach(() => {

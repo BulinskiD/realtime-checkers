@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
 import {
@@ -26,7 +27,7 @@ export const Header = props => {
           <LinkContainer to="/">
             <NavLink>Aktywne gry</NavLink>
           </LinkContainer>
-          <DropdownLink title={props.user.email} id="basic-nav-dropdown">
+          <DropdownLink title={props.user} id="basic-nav-dropdown">
             <NavDropdown.Item>Profil</NavDropdown.Item>
             <NavDropdown.Item>Statystyki</NavDropdown.Item>
             <NavDropdown.Divider />
@@ -40,9 +41,14 @@ export const Header = props => {
   );
 };
 
+Header.propTypes = {
+  user: PropTypes.string,
+  userLogout: PropTypes.func
+};
+
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user.email
   };
 };
 
