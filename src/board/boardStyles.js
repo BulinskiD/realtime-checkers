@@ -10,6 +10,11 @@ export const PlayersManagerContainer = styled.div`
   flex-direction: column;
 `;
 
+export const PlayerHolderTitle = styled.h4`
+  font-size: 1.4em;
+  font-weight: 300;
+`;
+
 export const PlayerHolder = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,6 +102,10 @@ export const ColorChecker = styled(CheckerItem)`
 `;
 
 export const SelectedChecker = styled(CheckerItem)`
+  outline: 2px solid
+    ${props => (props.color === "black" ? "black" : "lightgray")};
+  background-color: ${props =>
+    props.color === "black" ? "black" : "lightgray"};
   ${props =>
     props.isKing &&
     css`
@@ -112,9 +121,6 @@ export const SelectedChecker = styled(CheckerItem)`
         background: tomato;
       }
     `}
-  outline: 2px solid black;
-  background-color: ${props =>
-    props.color === "black" ? "black" : "lightgray"};
 `;
 
 export const PoleContainer = styled.div`
