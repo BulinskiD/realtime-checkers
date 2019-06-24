@@ -47,8 +47,8 @@ export const PlayerItem = styled.span`
 `;
 
 export const BoardContainer = styled.div`
-  height: 90vh;
-  width: 90vh;
+  height: 80vh;
+  width: 80vh;
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
