@@ -1,57 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListGames Should match snapshot for given props 1`] = `
-Array [
-  <h4
-    className="my-3"
+<Bootstrap(Row)>
+  <div
+    className="row"
   >
-    Dostępne gry: 
-  </h4>,
-  <hr />,
-  <ForwardRef
-    className="d-flex justify-content-center"
-  >
-    <Bootstrap(ListGroup)
-      className="d-flex justify-content-center"
-      onSelect={[Function]}
+    <Col
+      xs={8}
     >
-      <ContextTransform(AbstractNav)
-        as="div"
-        className="d-flex justify-content-center list-group"
-        onSelect={[Function]}
+      <div
+        className="col-8"
       >
-        <div
-          className="d-flex justify-content-center list-group"
-          onKeyDown={[Function]}
+        <h4
+          className="my-3"
         >
-          <a
-            href="/game/11"
-            onClick={[Function]}
+          Dostępne gry: 
+        </h4>
+        <hr />
+        <ForwardRef
+          className="d-flex justify-content-center"
+        >
+          <Bootstrap(ListGroup)
+            className="d-flex justify-content-center"
+            onSelect={[Function]}
           >
-            <Bootstrap(ListGroupItem)
-              className="text-center"
+            <ContextTransform(AbstractNav)
+              as="div"
+              className="d-flex justify-content-center list-group"
+              onSelect={[Function]}
             >
-              <ForwardRef
-                as="div"
-                className="text-center list-group-item"
-                disabled={false}
-                eventKey={null}
-                onClick={[Function]}
+              <div
+                className="d-flex justify-content-center list-group"
+                onKeyDown={[Function]}
               >
-                <div
-                  className="text-center list-group-item"
-                  data-rb-event-key={null}
-                  disabled={false}
+                <a
+                  href="/game/11"
                   onClick={[Function]}
                 >
-                  test
-                </div>
-              </ForwardRef>
-            </Bootstrap(ListGroupItem)>
-          </a>
-        </div>
-      </ContextTransform(AbstractNav)>
-    </Bootstrap(ListGroup)>
-  </ForwardRef>,
-]
+                  <Bootstrap(ListGroupItem)
+                    className="text-center"
+                  >
+                    <ForwardRef
+                      as="div"
+                      className="text-center list-group-item"
+                      disabled={false}
+                      eventKey={null}
+                      onClick={[Function]}
+                    >
+                      <div
+                        className="text-center list-group-item"
+                        data-rb-event-key={null}
+                        disabled={false}
+                        onClick={[Function]}
+                      >
+                        test
+                      </div>
+                    </ForwardRef>
+                  </Bootstrap(ListGroupItem)>
+                </a>
+              </div>
+            </ContextTransform(AbstractNav)>
+          </Bootstrap(ListGroup)>
+        </ForwardRef>
+      </div>
+    </Col>
+    <Col
+      xs={4}
+    >
+      <div
+        className="col-4"
+      >
+        <Connect(NewGame) />
+      </div>
+    </Col>
+  </div>
+</Bootstrap(Row)>
 `;

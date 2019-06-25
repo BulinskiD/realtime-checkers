@@ -68,30 +68,38 @@ export const userLogout = () => async dispatch => {
 };
 
 export const onUserAuthChange = () => dispatch => {
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: user
-      });
-    } else {
-      dispatch({
-        type: LOGOUT_SUCCESS
-      });
-    }
-  });
-};
-
-export const onSelectedGameChange = email => dispatch => {
-  firestore
-    .collection("users")
-    .doc(email)
-    .onSnapshot(data => {
-      if (data) {
+  try {
+    auth.onAuthStateChanged(user => {
+      if (user) {
         dispatch({
-          type: SIGN_UP_TO_GAME,
-          payload: data.data()
+          type: LOGIN_SUCCESS,
+          payload: user
+        });
+      } else {
+        dispatch({
+          type: LOGOUT_SUCCESS
         });
       }
     });
+  } catch (error) {
+    //TODO error handling
+  }
+};
+
+export const onSelectedGameChange = email => dispatch => {
+  try {
+    firestore
+      .collection("users")
+      .doc(email)
+      .onSnapshot(data => {
+        if (data) {
+          dispatch({
+            type: SIGN_UP_TO_GAME,
+            payload: data.data()
+          });
+        }
+      });
+  } catch (error) {
+    //TODO Error handling
+  }
 };

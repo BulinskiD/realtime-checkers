@@ -13,6 +13,7 @@ import getActivePoles from "../utils/getActivePoles";
 import Pole from "./pole";
 import PlayersManager from "./playersManager";
 import { currentGameType } from "../propTypes";
+import handleError from "../utils/handleError";
 
 export const Board = props => {
   const { isActiveTurn } = props;
@@ -41,12 +42,17 @@ export const Board = props => {
   useEffect(
     () => {
       props.selectGame(props.match.params.id);
-      const gameSubscribe = firestore
-        .collection("games")
-        .doc(props.match.params.id)
-        .onSnapshot(data => {
-          props.setNewGameState(data.id, data.data());
-        });
+      let gameSubscribe = () => {};
+      try {
+        gameSubscribe = firestore
+          .collection("games")
+          .doc(props.match.params.id)
+          .onSnapshot(data => {
+            props.setNewGameState(data.id, data.data());
+          });
+      } catch (error) {
+        handleError(error);
+      }
 
       return () => {
         props.clearCurrentGame();
