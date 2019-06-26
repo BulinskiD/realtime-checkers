@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { BoardContainer, FlexContainer } from "./boardStyles";
 import updatePlayersActiveState from "../utils/updatePlayersActiveState";
+import endGameAfterTimeout from "../utils/endGameAfterTimeout";
 import { firestore } from "../api/firebase";
 import { connect } from "react-redux";
 import {
@@ -15,6 +16,7 @@ import Pole from "./pole";
 import PlayersManager from "./playersManager";
 import { currentGameType } from "../propTypes";
 import handleError from "../utils/handleError";
+import { BLACK_WINNER, WHITE_WINNER } from "../store/constants/actionTypes";
 
 export const Board = props => {
   const { isActiveTurn } = props;
@@ -23,8 +25,35 @@ export const Board = props => {
     checkersPosition,
     nextMove,
     players,
-    from
+    status,
+    from,
+    updated
   } = props.currentGame;
+  const [timeSinceMove, setTimeSinceMove] = useState(null);
+
+  useEffect(
+    () => {
+      let inter;
+      if (status === "black" || status === "white") {
+        inter = setInterval(() => {
+          const time = Math.ceil((Date.now() - updated) / 1000);
+          if (updated) setTimeSinceMove(time);
+          endGameAfterTimeout(
+            time,
+            status,
+            players,
+            props.match.params.id,
+            inter
+          );
+        }, 1000);
+      } else setTimeSinceMove("ended");
+
+      return () => {
+        clearInterval(inter);
+      };
+    }, //eslint-disable-next-line
+    [updated, players, status]
+  );
 
   useEffect(
     () => {
@@ -102,6 +131,7 @@ export const Board = props => {
 
   return (
     <FlexContainer>
+      <div className="time">{timeSinceMove}</div>
       <PlayersManager gameID={props.match.params.id} />
       <BoardContainer>{renderBoard()}</BoardContainer>
     </FlexContainer>

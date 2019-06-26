@@ -26,7 +26,8 @@ export default async (gameState, user) => {
           gameState.players.filter(item => item.started === true).length === 2
             ? "white"
             : "not-started",
-        checkersPosition: board
+        checkersPosition: board,
+        updated: Date.now()
       });
   } catch (error) {
     handleError(error);

@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 import ConnectedBoard, { Board } from "./index";
 import configureMockStore from "redux-mock-store";
 import { shallow, mount } from "enzyme";
@@ -7,7 +8,10 @@ import { firestore } from "../api/firebase";
 import getActivePoles from "../utils/getActivePoles";
 import PlayersManager from "./playersManager";
 import updatePlayersActiveState from "../utils/updatePlayersActiveState";
+import endGameAfterTimeout from "../utils/endGameAfterTimeout";
+import { BLACK_WINNER } from "../store/constants/actionTypes";
 
+jest.mock("../utils/endGameAfterTimeout");
 jest.mock("../utils/updatePlayersActiveState");
 jest.mock("./playersManager");
 jest.mock("../utils/getActivePoles");
@@ -39,12 +43,15 @@ describe("Board", () => {
     setActivePoles.mockClear();
     selectGame.mockClear();
     unsubscriber.mockClear();
+    endGameAfterTimeout.mockClear();
     data = {
       currentGame: {
         status: "white",
         selectedChecker: { col: 2, row: 2 },
         checkersPosition: [{ col: 2, row: 2, color: "black", selected: false }],
-        nextMove: false
+        nextMove: false,
+        players: [{ test: test }, { test: test }],
+        updated: 100
       },
       user: { email: "test" },
       setNewGameState,
@@ -109,6 +116,50 @@ describe("Board", () => {
     );
 
     expect(setActivePoles).toBeCalledWith({ col: 2, row: 2 });
+  });
+
+  it("should call endGameAfterTimeout when updated changes", () => {
+    Math.ceil = jest.fn().mockReturnValue(300);
+    const store = mockStore({ ...data });
+    jest.useFakeTimers();
+    const props = {
+      ...data
+    };
+
+    act(() => {
+      mount(
+        <Provider store={store}>
+          <Board {...props} />
+        </Provider>
+      );
+      jest.runOnlyPendingTimers();
+    });
+
+    expect(endGameAfterTimeout).toBeCalledWith(
+      300,
+      "white",
+      data.currentGame.players,
+      "22",
+      2 //TODO Check why timer ref equals 2
+    );
+  });
+
+  it("should call setTimeSinceMove with ended when game is ended", () => {
+    data.currentGame.status = BLACK_WINNER;
+    const store = mockStore({ ...data });
+    const props = {
+      ...data
+    };
+
+    let component = {};
+    act(() => {
+      component = mount(
+        <Provider store={store}>
+          <Board {...props} />
+        </Provider>
+      );
+    });
+    expect(component.find(".time").text()).toBe("ended");
   });
 
   it("shouldn't call setActivePoles when selectedChecker is null", () => {

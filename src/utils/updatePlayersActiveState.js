@@ -1,20 +1,21 @@
 import { firestore } from "../api/firebase";
 
 export default async (players, email, gameID, isMounting) => {
-  let isAPlayer = false;
+  let isChange = false;
   const newPlayers = players.map(item => {
-    if (item.email === email) {
+    if (item.email === email && item.active !== isMounting) {
       item.active = isMounting;
-      isAPlayer = true;
+      isChange = true;
     }
     return item;
   });
 
-  if (isAPlayer)
+  if (isChange)
     await firestore
       .collection("games")
       .doc(gameID)
       .update({
-        players: newPlayers
+        players: newPlayers,
+        updated: Date.now()
       });
 };

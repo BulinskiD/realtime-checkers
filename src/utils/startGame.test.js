@@ -13,6 +13,9 @@ const mockedBoard = { test: "test" };
 let set = jest.fn();
 doc.mockReturnValue({ set });
 
+Date.now = jest.fn();
+Date.now.mockReturnValue(123);
+
 firestore.collection = jest.fn();
 firestore.collection.mockReturnValue({ doc });
 firestore.collection.doc = doc;
@@ -39,7 +42,8 @@ describe("StartGame", () => {
       expect(set).toBeCalledWith({
         players: [],
         status: "white",
-        checkersPosition: mockedBoard
+        checkersPosition: mockedBoard,
+        updated: 123
       });
       await prom;
     } catch (error) {
@@ -56,7 +60,8 @@ describe("StartGame", () => {
     expect(set).toBeCalledWith({
       players: [],
       status: "not-started",
-      checkersPosition: mockedBoard
+      checkersPosition: mockedBoard,
+      updated: 123
     });
     await prom;
   });
@@ -71,7 +76,8 @@ describe("StartGame", () => {
     expect(set).toBeCalledWith({
       players: [{ email: "test", started: true }],
       status: "not-started",
-      checkersPosition: mockedBoard
+      checkersPosition: mockedBoard,
+      updated: 123
     });
     await prom;
   });
@@ -92,7 +98,8 @@ describe("StartGame", () => {
         { email: "test2", started: true }
       ],
       status: "white",
-      checkersPosition: mockedBoard
+      checkersPosition: mockedBoard,
+      updated: 123
     });
     await prom;
   });

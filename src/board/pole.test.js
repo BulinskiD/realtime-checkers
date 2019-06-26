@@ -17,6 +17,9 @@ jest.mock("../utils/utilFunctions");
 jest.mock("../api/firebase");
 jest.mock("../utils/moveChecker");
 
+Date.now = jest.fn();
+Date.now.mockReturnValue(123);
+
 const mockedStore = configureMockStore();
 checkIfWinner.mockReturnValue(null);
 const doc = jest.fn();
@@ -96,7 +99,8 @@ describe("Pole", () => {
       checkersPosition: [],
       selectedChecker: {},
       nextMove: false,
-      from: {}
+      from: {},
+      updated: 123
     });
   });
 
@@ -136,7 +140,8 @@ describe("Pole", () => {
       selectedChecker: {},
       status: BLACK_WINNER,
       nextMove: false,
-      from: {}
+      from: {},
+      updated: 123
     });
   });
 
@@ -175,7 +180,8 @@ describe("Pole", () => {
       checkersPosition: [],
       selectedChecker: {},
       nextMove: false,
-      from: {}
+      from: {},
+      updated: 123
     });
     try {
       await prom;

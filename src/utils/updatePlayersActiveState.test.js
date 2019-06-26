@@ -32,6 +32,8 @@ describe("UpdatePlayersActiveState", () => {
   });
 
   it("should call firestore with modified array when email is in players array", () => {
+    Date.now = jest.fn();
+    Date.now.mockReturnValue(123);
     data.email = "test";
     updatePlayersActiveState(
       data.players,
@@ -42,7 +44,8 @@ describe("UpdatePlayersActiveState", () => {
 
     expect(firestore.collection).toHaveBeenCalledTimes(1);
     expect(update).toHaveBeenCalledWith({
-      players: [{ email: "test", active: false }]
+      players: [{ email: "test", active: false }],
+      updated: 123
     });
   });
 });

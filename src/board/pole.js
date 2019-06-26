@@ -44,7 +44,8 @@ export const Pole = props => {
           checkersPosition,
           selectedChecker,
           nextMove: hasNextMove,
-          from: oldFrom
+          from: oldFrom,
+          updated: Date.now()
         });
     } catch (error) {
       handleError(error);

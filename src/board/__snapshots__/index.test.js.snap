@@ -2,6 +2,9 @@
 
 exports[`Board should render 64 poles and Start game button for given props 1`] = `
 <styled.div>
+  <div
+    className="time"
+  />
   <Connect(PlayersManager)
     gameID="22"
   />
