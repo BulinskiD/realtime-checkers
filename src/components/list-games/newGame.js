@@ -20,7 +20,9 @@ export const NewGame = props => {
       props.selectGame(resp.id);
       await signUpToGame(props.user.email, resp.id, []);
       props.history.push("/game/" + resp.id);
-    } catch (error) {}
+    } catch (error) {
+      //Handle error here
+    }
     setTitle("");
   };
 

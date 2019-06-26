@@ -142,3 +142,13 @@ export const ActivePlace = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export const TimeIndicator = styled.div`
+  background-image: linear-gradient(
+    to right,
+    rgba(204, 51, 0, 0.4),
+    rgba(204, 51, 0, 1)
+  );
+  height: 3vh;
+  width: ${props => props.percentage}px;
+`;

@@ -15,7 +15,7 @@ import { poleType } from "../../propTypes";
 
 export const Pole = props => {
   const { selected, col, row, color, isKing } = props.pole ? props.pole : {};
-  const { currentGame } = props.currentGame;
+  const { currentGame } = props;
 
   const handleMove = async () => {
     let oldFrom = {};

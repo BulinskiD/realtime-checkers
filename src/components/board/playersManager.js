@@ -2,12 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { BLACK_WINNER, WHITE_WINNER } from "../../store/constants/actionTypes";
+import leaveGame from "../../utils/leaveGame";
 import Button from "react-bootstrap/Button";
 import {
   PlayersManagerContainer,
   PlayerHolder,
   PlayerItem,
-  PlayerHolderTitle
+  PlayerHolderTitle,
+  TimeIndicator
 } from "../../styles/boardStyles";
 import startGame from "../../utils/startGame";
 import signUpToGame from "../../utils/signUpToGame";
@@ -45,6 +47,17 @@ export const PlayersManager = props => {
             Zacznij grę
           </Button>
         )}
+      {props.canLeaveGame && (
+        <Button
+          className="leave-game"
+          onClick={() =>
+            leaveGame(props.currentGame, props.user, props.history)
+          }
+          variant="warning"
+        >
+          Opuść grę!
+        </Button>
+      )}
       {props.gameAvailable && (
         <Button
           onClick={() => signUpToGame(props.user, props.gameID, players)}
@@ -54,6 +67,13 @@ export const PlayersManager = props => {
         </Button>
       )}
       <GameInfo status={status} />
+      {status === "black" ||
+        (status === "white" && (
+          <React.Fragment>
+            <div>Czas do końca ruchu</div>
+            <TimeIndicator percentage={props.percentage} />
+          </React.Fragment>
+        ))}
     </PlayersManagerContainer>
   );
 };
@@ -68,7 +88,7 @@ PlayersManager.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { players } = state.currentGame;
+  const { players, status } = state.currentGame;
   return {
     currentGame: state.currentGame,
     user: state.user.email,
@@ -76,6 +96,10 @@ const mapStateToProps = state => {
       players.length === 2 &&
       players.filter(item => item.email === state.user.email && !item.started)
         .length === 1,
+    canLeaveGame:
+      players.filter(item => item.email === state.user.email).length === 1 &&
+      status !== "black" &&
+      status !== "white",
     gameAvailable:
       players.length !== 2 &&
       players.filter(({ email }) => email === state.user.email).length === 0 &&

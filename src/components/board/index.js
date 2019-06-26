@@ -36,7 +36,7 @@ export const Board = props => {
       if (status === "black" || status === "white") {
         inter = setInterval(() => {
           const time = Math.ceil((Date.now() - updated) / 1000);
-          if (updated) setTimeSinceMove(180 - time);
+          if (updated) setTimeSinceMove(time);
           endGameAfterTimeout(
             time,
             status,
@@ -79,8 +79,10 @@ export const Board = props => {
           .collection("games")
           .doc(props.match.params.id)
           .onSnapshot(data => {
-            props.setNewGameState(data.id, data.data());
-            currentPlayers = data.data().players;
+            if (data.data()) {
+              props.setNewGameState(data.id, data.data());
+              currentPlayers = data.data().players;
+            }
           });
       } catch (error) {
         handleError(error);
@@ -130,8 +132,12 @@ export const Board = props => {
 
   return (
     <FlexContainer>
-      <div className="time">Pozostało {timeSinceMove} s</div>
-      <PlayersManager gameID={props.match.params.id} />
+      <PlayersManager
+        gameID={props.match.params.id}
+        timeSinceMove={timeSinceMove}
+        percentage={(timeSinceMove / 180) * 100}
+        history={props.history}
+      />
       <BoardContainer>{renderBoard()}</BoardContainer>
     </FlexContainer>
   );

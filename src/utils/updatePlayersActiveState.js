@@ -11,11 +11,19 @@ export default async (players, email, gameID, isMounting) => {
   });
 
   if (isChange)
-    await firestore
-      .collection("games")
-      .doc(gameID)
-      .update({
-        players: newPlayers,
-        updated: Date.now()
-      });
+    try {
+      await firestore
+        .collection("games")
+        .doc(gameID)
+        .update({
+          players: newPlayers,
+          updated: Date.now()
+        });
+    } catch (error) {
+      if (error.code !== "not-found") {
+        //Handle error here
+        console.log(error);
+      }
+      //not-found is emitted when deleting game on leaving last player
+    }
 };
