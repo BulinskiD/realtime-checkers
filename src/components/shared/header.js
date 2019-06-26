@@ -11,7 +11,7 @@ import {
   Logo
 } from "./headerStyles";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { userLogout } from "../store/actions/auth";
+import { userLogout } from "../../store/actions/auth";
 
 export const Header = props => {
   return (

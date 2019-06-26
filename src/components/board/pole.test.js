@@ -1,21 +1,21 @@
 import React from "react";
 import { shallow } from "enzyme";
-import moveChecker from "../utils/moveChecker";
-import { firestore } from "../api/firebase";
+import moveChecker from "../../utils/moveChecker";
+import { firestore } from "../../api/firebase";
 import ConnectedPole, { Pole } from "./pole";
 import configureMockStore from "redux-mock-store";
 import {
   getPole,
   checkNextStatus,
   checkIfWinner
-} from "../utils/utilFunctions";
-import handleError from "../utils/handleError";
-import { BLACK_WINNER } from "../store/constants/actionTypes";
+} from "../../utils/utilFunctions";
+import handleError from "../../utils/handleError";
+import { BLACK_WINNER } from "../../store/constants/actionTypes";
 
-jest.mock("../utils/handleError");
-jest.mock("../utils/utilFunctions");
-jest.mock("../api/firebase");
-jest.mock("../utils/moveChecker");
+jest.mock("../../utils/handleError");
+jest.mock("../../utils/utilFunctions");
+jest.mock("../../api/firebase");
+jest.mock("../../utils/moveChecker");
 
 Date.now = jest.fn();
 Date.now.mockReturnValue(123);

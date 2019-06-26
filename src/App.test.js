@@ -1,20 +1,20 @@
 import React from "react";
 import ConnectedApp, { App } from "./App";
-import Login from "./auth";
+import Login from "./components/auth";
 import configureMockedStore from "redux-mock-store";
-import Authenticated from "./shared/authenticated";
-import ListGames from "./list-games";
-import NewGame from "./list-games/newGame";
-import Header from "./shared/header";
-import Board from "./board";
+import Authenticated from "./components/shared/authenticated";
+import ListGames from "./components/list-games";
+import NewGame from "./components/list-games/newGame";
+import Header from "./components/shared/header";
+import Board from "./components/board";
 import { shallow, mount } from "enzyme";
 
-jest.mock("./list-games");
+jest.mock("./components/list-games");
 ListGames.mockReturnValue("");
 const onUserAuthChange = jest.fn();
 let props;
 const mockedStore = configureMockedStore();
-jest.mock("./shared/header");
+jest.mock("./components/shared/header");
 
 describe("App", () => {
   beforeEach(() => {

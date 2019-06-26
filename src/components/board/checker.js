@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { ColorChecker, SelectedChecker } from "./boardStyles";
-import { selectChecker } from "../store/actions/checkers";
+import { selectChecker } from "../../store/actions/checkers";
 
 export const Checker = props => {
   const handleClick = () => {

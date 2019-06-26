@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { NewGameForm } from "./gamesStyles";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { firestore } from "../api/firebase";
+import { firestore } from "../../api/firebase";
 import { connect } from "react-redux";
-import { selectGame } from "../store/actions/checkers";
-import signUpToGame from "../utils/signUpToGame";
+import { selectGame } from "../../store/actions/checkers";
+import signUpToGame from "../../utils/signUpToGame";
 
 export const NewGame = props => {
   const [show, setShow] = useState(false);

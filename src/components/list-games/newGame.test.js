@@ -2,12 +2,12 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import ConnectedNewGame, { NewGame } from "./newGame";
 import configureMockStore from "redux-mock-store";
-import signUpToGame from "../utils/signUpToGame";
-import { firestore } from "../api/firebase";
+import signUpToGame from "../../utils/signUpToGame";
+import { firestore } from "../../api/firebase";
 import { shallow } from "enzyme";
 
-jest.mock("../utils/signUpToGame");
-jest.mock("../api/firebase");
+jest.mock("../../utils/signUpToGame");
+jest.mock("../../api/firebase");
 firestore.collection = jest.fn();
 const add = jest.fn();
 firestore.collection.mockReturnValue({ add });

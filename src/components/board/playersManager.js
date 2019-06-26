@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { BLACK_WINNER, WHITE_WINNER } from "../store/constants/actionTypes";
+import { BLACK_WINNER, WHITE_WINNER } from "../../store/constants/actionTypes";
 import Button from "react-bootstrap/Button";
 import {
   PlayersManagerContainer,
@@ -9,10 +9,10 @@ import {
   PlayerItem,
   PlayerHolderTitle
 } from "./boardStyles";
-import startGame from "../utils/startGame";
-import signUpToGame from "../utils/signUpToGame";
+import startGame from "../../utils/startGame";
+import signUpToGame from "../../utils/signUpToGame";
 import GameInfo from "./gameInfo";
-import { currentGameType } from "../propTypes";
+import { currentGameType } from "../../propTypes";
 
 export const PlayersManager = props => {
   const { status, players } = props.currentGame;

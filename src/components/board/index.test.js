@@ -4,18 +4,18 @@ import ConnectedBoard, { Board } from "./index";
 import configureMockStore from "redux-mock-store";
 import { shallow, mount } from "enzyme";
 import { Provider } from "react-redux";
-import { firestore } from "../api/firebase";
-import getActivePoles from "../utils/getActivePoles";
+import { firestore } from "../../api/firebase";
+import getActivePoles from "../../utils/getActivePoles";
 import PlayersManager from "./playersManager";
-import updatePlayersActiveState from "../utils/updatePlayersActiveState";
-import endGameAfterTimeout from "../utils/endGameAfterTimeout";
-import { BLACK_WINNER } from "../store/constants/actionTypes";
+import updatePlayersActiveState from "../../utils/updatePlayersActiveState";
+import endGameAfterTimeout from "../../utils/endGameAfterTimeout";
+import { BLACK_WINNER } from "../../store/constants/actionTypes";
 
-jest.mock("../utils/endGameAfterTimeout");
-jest.mock("../utils/updatePlayersActiveState");
+jest.mock("../../utils/endGameAfterTimeout");
+jest.mock("../../utils/updatePlayersActiveState");
 jest.mock("./playersManager");
-jest.mock("../utils/getActivePoles");
-jest.mock("../api/firebase");
+jest.mock("../../utils/getActivePoles");
+jest.mock("../../api/firebase");
 const item = { id: "22", data: () => data };
 const unsubscriber = jest.fn();
 const onSnapshot = jest.fn(func => {
@@ -27,7 +27,7 @@ firestore.collection = jest.fn();
 firestore.collection.mockReturnValue({ doc });
 doc.mockReturnValue({ onSnapshot });
 
-jest.mock("../utils/startGame");
+jest.mock("../../utils/startGame");
 const setNewGameState = jest.fn();
 const setActivePoles = jest.fn();
 const selectGame = jest.fn();

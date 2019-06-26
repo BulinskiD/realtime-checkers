@@ -3,13 +3,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter, Route } from "react-router-dom";
-import Authenticated from "./shared/authenticated";
-import ListGames from "./list-games";
+import Authenticated from "./components/shared/authenticated";
+import ListGames from "./components/list-games";
 import { connect } from "react-redux";
-import Login from "./auth";
+import Login from "./components/auth";
 import { AppContainer } from "./appStyles";
 
-import Board from "./board";
+import Board from "./components/board";
 import { onUserAuthChange, onSelectedGameChange } from "./store/actions/auth";
 
 export const App = props => {

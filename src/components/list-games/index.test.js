@@ -1,12 +1,12 @@
 import React from "react";
-import { firestore } from "../api/firebase";
+import { firestore } from "../../api/firebase";
 import { StaticRouter } from "react-router-dom";
 import ListGames from "./index";
 import NewGame from "./newGame";
 import { mount, shallow } from "enzyme";
 
 jest.mock("./newGame");
-jest.mock("../api/firebase");
+jest.mock("../../api/firebase");
 
 firestore.collection = jest.fn();
 

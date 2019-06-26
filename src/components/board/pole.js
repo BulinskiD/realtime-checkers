@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import Checker from "./checker";
 import PropTypes from "prop-types";
 import { PoleContainer, ActivePlace } from "./boardStyles";
-import { selectChecker, setActivePoles } from "../store/actions/checkers";
-import { firestore } from "../api/firebase";
+import { selectChecker, setActivePoles } from "../../store/actions/checkers";
+import { firestore } from "../../api/firebase";
 import {
   getPole,
   checkNextStatus,
   checkIfWinner
-} from "../utils/utilFunctions";
-import moveChecker from "../utils/moveChecker";
-import handleError from "../utils/handleError";
+} from "../../utils/utilFunctions";
+import moveChecker from "../../utils/moveChecker";
+import handleError from "../../utils/handleError";
 
 export const Pole = props => {
   const { selected, col, row, color, isKing } = props.pole ? props.pole : {};

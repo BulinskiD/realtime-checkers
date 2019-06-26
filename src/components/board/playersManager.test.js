@@ -2,11 +2,11 @@ import React from "react";
 import configureMockStore from "redux-mock-store";
 import ConnectedPlayersManager, { PlayersManager } from "./playersManager";
 import { shallow } from "enzyme";
-import startGame from "../utils/startGame";
-import signUpToGame from "../utils/signUpToGame";
+import startGame from "../../utils/startGame";
+import signUpToGame from "../../utils/signUpToGame";
 
-jest.mock("../utils/startGame");
-jest.mock("../utils/signUpToGame");
+jest.mock("../../utils/startGame");
+jest.mock("../../utils/signUpToGame");
 let data;
 beforeEach(() => {
   const currentGame = {

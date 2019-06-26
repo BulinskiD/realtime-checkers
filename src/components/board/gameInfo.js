@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import InfoModal from "../shared/modal";
-import { getMessage } from "../utils/utilFunctions";
+import { getMessage } from "../../utils/utilFunctions";
 
 const GameInfo = props => {
   const { status } = props;

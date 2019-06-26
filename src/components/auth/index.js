@@ -9,7 +9,7 @@ import { LoginContainer, BackgroundContainer } from "./loginStyles";
 import {
   loginWithEmailAndPassword,
   createUserWithEmailAndPassword
-} from "../store/actions/auth";
+} from "../../store/actions/auth";
 
 export const Auth = props => {
   useEffect(
