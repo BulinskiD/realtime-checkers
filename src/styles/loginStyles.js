@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Form from "react-bootstrap/Form";
-import media from "../../mediaQueries";
+import media from "./mediaQueries";
 
 export const LoginContainer = styled.div`
   position: relative;

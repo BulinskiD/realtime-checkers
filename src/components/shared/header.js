@@ -9,7 +9,7 @@ import {
   NavLink,
   DropdownLink,
   Logo
-} from "./headerStyles";
+} from "../../styles/headerStyles";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { userLogout } from "../../store/actions/auth";
 

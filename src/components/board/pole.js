@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Checker from "./checker";
 import PropTypes from "prop-types";
-import { PoleContainer, ActivePlace } from "./boardStyles";
+import { PoleContainer, ActivePlace } from "../../styles/boardStyles";
 import { selectChecker, setActivePoles } from "../../store/actions/checkers";
 import { firestore } from "../../api/firebase";
 import {

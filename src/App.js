@@ -7,7 +7,7 @@ import Authenticated from "./components/shared/authenticated";
 import ListGames from "./components/list-games";
 import { connect } from "react-redux";
 import Login from "./components/auth";
-import { AppContainer } from "./appStyles";
+import { AppContainer } from "./styles/appStyles";
 
 import Board from "./components/board";
 import { onUserAuthChange, onSelectedGameChange } from "./store/actions/auth";

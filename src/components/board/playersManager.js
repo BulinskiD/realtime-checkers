@@ -8,7 +8,7 @@ import {
   PlayerHolder,
   PlayerItem,
   PlayerHolderTitle
-} from "./boardStyles";
+} from "../../styles/boardStyles";
 import startGame from "../../utils/startGame";
 import signUpToGame from "../../utils/signUpToGame";
 import GameInfo from "./gameInfo";

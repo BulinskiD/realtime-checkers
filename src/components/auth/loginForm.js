@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { LoginFormElement } from "./loginStyles";
+import { LoginFormElement } from "../../styles/loginStyles";
 import AlertBox from "../shared/alertBox";
 import Spinner from "react-bootstrap/Spinner";
 

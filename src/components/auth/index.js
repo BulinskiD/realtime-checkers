@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RegistrationForm from "./registrationForm";
 import Login from "./loginForm";
-import { LoginContainer, BackgroundContainer } from "./loginStyles";
+import { LoginContainer, BackgroundContainer } from "../../styles/loginStyles";
 import {
   loginWithEmailAndPassword,
   createUserWithEmailAndPassword

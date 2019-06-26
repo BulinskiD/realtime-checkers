@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import PropTypes from "prop-types";
-import { LoginFormElement } from "./loginStyles";
+import { LoginFormElement } from "../../styles/loginStyles";
 
 const RegistrationForm = props => {
   const [loading, setLoading] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { BoardContainer, FlexContainer } from "./boardStyles";
+import { BoardContainer, FlexContainer } from "../../styles/boardStyles";
 import updatePlayersActiveState from "../../utils/updatePlayersActiveState";
 import endGameAfterTimeout from "../../utils/endGameAfterTimeout";
 import { firestore } from "../../api/firebase";
@@ -16,7 +16,6 @@ import Pole from "./pole";
 import PlayersManager from "./playersManager";
 import { currentGameType } from "../../propTypes";
 import handleError from "../../utils/handleError";
-import { BLACK_WINNER, WHITE_WINNER } from "../../store/constants/actionTypes";
 
 export const Board = props => {
   const { isActiveTurn } = props;
