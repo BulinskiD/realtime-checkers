@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewGame should display newGameForm when gameID is null 1`] = `
+<Fragment>
+  <h4
+    className="my-3"
+  >
+    Nowa gra:
+    <Button
+      active={false}
+      className="float-right"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+      variant="dark"
+    >
+      +
+    </Button>
+  </h4>
+  <hr />
+  <Styled(Form)
+    onSubmit={[Function]}
+    show={0}
+  >
+    <FormLabel
+      column={false}
+      srOnly={false}
+    >
+      Nazwa
+    </FormLabel>
+    <FormControl
+      aria-label="title"
+      className="mb-4 title"
+      onChange={[Function]}
+      placeholder="Nazwa"
+      type="text"
+      value=""
+    />
+    <Button
+      active={false}
+      className="float-right"
+      disabled={false}
+      type="submit"
+      variant="dark"
+    >
+      Dodaj!
+    </Button>
+  </Styled(Form)>
+</Fragment>
+`;
+
+exports[`NewGame should show whole form after click on button 1`] = `
+<Fragment>
+  <h4
+    className="my-3"
+  >
+    Nowa gra:
+    <Button
+      active={false}
+      className="float-right"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+      variant="dark"
+    >
+      -
+    </Button>
+  </h4>
+  <hr />
+  <Styled(Form)
+    onSubmit={[Function]}
+    show={1}
+  >
+    <FormLabel
+      column={false}
+      srOnly={false}
+    >
+      Nazwa
+    </FormLabel>
+    <FormControl
+      aria-label="title"
+      className="mb-4 title"
+      onChange={[Function]}
+      placeholder="Nazwa"
+      type="text"
+      value=""
+    />
+    <Button
+      active={false}
+      className="float-right"
+      disabled={false}
+      type="submit"
+      variant="dark"
+    >
+      Dodaj!
+    </Button>
+  </Styled(Form)>
+</Fragment>
+`;

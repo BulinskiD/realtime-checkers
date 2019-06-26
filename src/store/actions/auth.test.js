@@ -40,7 +40,7 @@ describe("LoginWithEmailAndPassword", () => {
     auth.signInWithEmailAndPassword.mockReturnValue(prom);
 
     mockedStore.dispatch(
-      await loginWithEmailAndPassword("test", "test", history, () => {})
+      await loginWithEmailAndPassword("test", "test", history)
     );
     expect(auth.signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
     await prom;
@@ -57,7 +57,7 @@ describe("LoginWithEmailAndPassword", () => {
 
     try {
       mockedStore.dispatch(
-        await loginWithEmailAndPassword("test", "test", history, () => {})
+        await loginWithEmailAndPassword("test", "test", history)
       );
       expect(auth.signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
       await prom;

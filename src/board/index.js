@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { BoardContainer, FlexContainer } from "./boardStyles";
+import updatePlayersActiveState from "../utils/updatePlayersActiveState";
 import { firestore } from "../api/firebase";
 import { connect } from "react-redux";
 import {
@@ -21,6 +22,7 @@ export const Board = props => {
     selectedChecker,
     checkersPosition,
     nextMove,
+    players,
     from
   } = props.currentGame;
 
@@ -41,6 +43,7 @@ export const Board = props => {
 
   useEffect(
     () => {
+      let currentPlayers = [];
       props.selectGame(props.match.params.id);
       let gameSubscribe = () => {};
       try {
@@ -49,6 +52,7 @@ export const Board = props => {
           .doc(props.match.params.id)
           .onSnapshot(data => {
             props.setNewGameState(data.id, data.data());
+            currentPlayers = data.data().players;
           });
       } catch (error) {
         handleError(error);
@@ -57,9 +61,27 @@ export const Board = props => {
       return () => {
         props.clearCurrentGame();
         gameSubscribe();
+        updatePlayersActiveState(
+          currentPlayers,
+          props.user.email,
+          props.match.params.id,
+          false
+        );
       };
     }, //eslint-disable-next-line
-    []
+    [props.user.email]
+  );
+
+  useEffect(
+    () => {
+      updatePlayersActiveState(
+        players,
+        props.user.email,
+        props.match.params.id,
+        true
+      );
+    }, //eslint-disable-next-line
+    [players]
   );
 
   const renderBoard = () => {
@@ -89,6 +111,7 @@ export const Board = props => {
 const mapStateToProps = state => {
   return {
     currentGame: state.currentGame,
+    user: state.user,
     isActiveTurn:
       state.currentGame.players.filter(
         ({ email, color }) =>

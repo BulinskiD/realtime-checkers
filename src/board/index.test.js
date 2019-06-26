@@ -43,24 +43,18 @@ describe("Board", () => {
         selectedChecker: { col: 2, row: 2 },
         checkersPosition: [{ col: 2, row: 2, color: "black", selected: false }],
         nextMove: false
-      }
+      },
+      user: { email: "test" },
+      setNewGameState,
+      selectGame,
+      setActivePoles,
+      match: { params: { id: "22" } }
     };
   });
 
   it("should render 64 poles and Start game button for given props", () => {
-    const selectedChecker = { col: 2, row: 2, color: "black", selected: false };
-    const currentGame = {
-      status: "not-started",
-      selectedChecker,
-      checkersPosition: [{ col: 2, row: 2, color: "black", selected: false }],
-      nextMove: false
-    };
     const props = {
-      currentGame,
-      setNewGameState,
-      selectGame,
-      setActivePoles,
-      match: { params: { id: 2 } }
+      ...data
     };
     const component = shallow(<Board {...props} />);
     expect(component.find("Connect(Pole)").length).toBe(64);
@@ -70,11 +64,7 @@ describe("Board", () => {
   it("should call firestore subscribe on component load", () => {
     const store = mockStore(data);
     const props = {
-      ...data,
-      setNewGameState,
-      selectGame,
-      setActivePoles,
-      match: { params: { id: "22" } }
+      ...data
     };
 
     mount(
@@ -92,11 +82,7 @@ describe("Board", () => {
     const clearCurrentGame = jest.fn();
     const props = {
       ...data,
-      setNewGameState,
-      selectGame,
-      setActivePoles,
-      clearCurrentGame,
-      match: { params: { id: "22" } }
+      clearCurrentGame
     };
     const component = mount(
       <Provider store={store}>
@@ -112,11 +98,7 @@ describe("Board", () => {
   it("should call setActivePoles when selectedChecker changes", () => {
     const store = mockStore(data);
     const props = {
-      ...data,
-      setNewGameState,
-      selectGame,
-      setActivePoles,
-      match: { params: { id: "22" } }
+      ...data
     };
     mount(
       <Provider store={store}>
@@ -131,11 +113,7 @@ describe("Board", () => {
     const store = mockStore(data);
     data.currentGame.selectedChecker = null;
     const props = {
-      ...data,
-      setNewGameState,
-      selectGame,
-      setActivePoles,
-      match: { params: { id: "22" } }
+      ...data
     };
     mount(
       <Provider store={store}>

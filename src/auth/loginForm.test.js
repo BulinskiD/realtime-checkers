@@ -1,5 +1,4 @@
 import React from "react";
-import { StaticRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import LoginForm from "./loginForm";
@@ -48,8 +47,7 @@ describe("Login", () => {
     expect(loginWithEmailAndPassword).toHaveBeenCalledWith(
       "email",
       "password",
-      history,
-      expect.any(Function)
+      history
     );
   });
 });

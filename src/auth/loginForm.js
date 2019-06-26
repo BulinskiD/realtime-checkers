@@ -15,7 +15,7 @@ const Login = props => {
   const handleLogin = e => {
     e.preventDefault();
     setLoading(true);
-    props.loginWithEmailAndPassword(email, password, props.history, setLoading);
+    props.loginWithEmailAndPassword(email, password, props.history);
   };
 
   return (
@@ -30,6 +30,7 @@ const Login = props => {
             type="email"
             aria-label="email"
             value={email}
+            required
             onChange={e => setEmail(e.target.value)}
           />
           <hr />
@@ -38,6 +39,8 @@ const Login = props => {
             className="mb-4 password"
             type="password"
             value={password}
+            required
+            minLength="6"
             onChange={e => setPassword(e.target.value)}
             placeholder="Hasło"
           />

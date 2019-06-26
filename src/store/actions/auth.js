@@ -41,8 +41,7 @@ export const createUserWithEmailAndPassword = (
 export const loginWithEmailAndPassword = (
   email,
   password,
-  history,
-  setLoading
+  history
 ) => async dispatch => {
   try {
     await auth.signInWithEmailAndPassword(email, password);
@@ -53,7 +52,6 @@ export const loginWithEmailAndPassword = (
       type: LOGIN_FAILED,
       payload: { message }
     });
-    setLoading(false);
   }
 };
 

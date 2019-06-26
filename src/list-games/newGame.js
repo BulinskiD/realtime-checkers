@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import PropTypes from "prop-types";
 import { NewGameForm } from "./gamesStyles";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -8,7 +9,7 @@ import { connect } from "react-redux";
 import { selectGame } from "../store/actions/checkers";
 import signUpToGame from "../utils/signUpToGame";
 
-const NewGame = props => {
+export const NewGame = props => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
 
@@ -17,9 +18,8 @@ const NewGame = props => {
     try {
       const resp = await firestore.collection("games").add({ title });
       props.selectGame(resp.id);
-      signUpToGame(props.user.email, resp.id, []).then(() => {
-        props.history.push("/game/" + resp.id);
-      });
+      await signUpToGame(props.user.email, resp.id, []);
+      props.history.push("/game/" + resp.id);
     } catch (error) {}
     setTitle("");
   };
@@ -33,7 +33,6 @@ const NewGame = props => {
             variant="dark"
             onClick={() => setShow(!show)}
             className="float-right"
-            type="submit"
           >
             {show ? "-" : "+"}
           </Button>
@@ -61,6 +60,11 @@ const NewGame = props => {
       <Button variant="danger">Powróć do gry!</Button>
     </Link>
   );
+};
+
+NewGame.propTypes = {
+  user: PropTypes.object,
+  selectGame: PropTypes.func
 };
 
 const mapStateToProps = state => {
