@@ -36,9 +36,9 @@ describe("Pole", () => {
         id: "2",
         status: "white",
         nextMove: true,
-        isActiveTurn: true,
         checkersPosition: []
       },
+      isActiveTurn: true,
       pole: { color: "black" },
       active: false,
       col: 1,
@@ -66,7 +66,7 @@ describe("Pole", () => {
     const newProps = {
       ...props,
       pole: null,
-      active: false,
+      active: true,
       selectChecker,
       setActivePoles
     };
@@ -97,19 +97,15 @@ describe("Pole", () => {
   it("should set status BLACK_WINNER for given input", async () => {
     const selectChecker = jest.fn();
     const setActivePoles = jest.fn();
-    const props = {
-      id: "2",
-      status: "white",
-      isActiveTurn: true,
-      nextMove: true,
-      checkersPosition: [],
+
+    const newProps = {
+      ...props,
       pole: null,
       active: true,
-      col: 1,
-      row: 0,
       selectChecker,
       setActivePoles
     };
+
     moveChecker.mockReturnValue({
       checkersPosition: [],
       hasNextMove: false,
@@ -120,7 +116,7 @@ describe("Pole", () => {
     update.mockReturnValue(prom);
     checkIfWinner.mockReturnValue(BLACK_WINNER);
 
-    const component = shallow(<Pole {...props} />);
+    const component = shallow(<Pole {...newProps} />);
 
     component.find(".active").simulate("click");
 
@@ -140,16 +136,10 @@ describe("Pole", () => {
 
     const selectChecker = jest.fn();
     const setActivePoles = jest.fn();
-    const props = {
-      id: "2",
-      status: "white",
-      isActiveTurn: true,
-      nextMove: true,
-      checkersPosition: [],
+    const newProps = {
+      ...props,
       pole: null,
       active: true,
-      col: 1,
-      row: 0,
       selectChecker,
       setActivePoles
     };
@@ -162,7 +152,7 @@ describe("Pole", () => {
     const prom = Promise.reject("Error");
     update.mockReturnValue(prom);
 
-    const component = shallow(<Pole {...props} />);
+    const component = shallow(<Pole {...newProps} />);
 
     component.find(".active").simulate("click");
     expect(update).toBeCalledWith({
@@ -195,22 +185,32 @@ describe("MapStateToProps in Pole", () => {
     };
 
     const props = {
-      id: "22",
-      status: "white",
-      nextMove: false,
-      checkersPosition: [{ col: 2, row: 2, color: "black", selected: false }],
+      currentGame: {
+        id: "22",
+        status: "white",
+        nextMove: false,
+        checkersPosition: [{ col: 2, row: 2, color: "black", selected: false }],
+        activePoles: [{ col: 2, row: 2 }],
+        selectedChecker: {}
+      },
       pole: { col: 2, row: 2 },
       active: true,
       col: 2,
-      row: 2,
-      selectedChecker: {}
+      row: 2
     };
 
     getPole.mockReturnValue({ col: 2, row: 2 });
     const store = mockedStore(storeState);
     const component = shallow(<ConnectedPole store={store} col={2} row={2} />);
-    expect(component.find("Pole").props()).toEqual(
-      expect.objectContaining({ ...props })
+    expect(component.find("Pole").props().currentGame).toStrictEqual(
+      props.currentGame
     );
+    expect(component.find("Pole").props().active).toBe(true);
+    expect(component.find("Pole").props().col).toBe(2);
+    expect(component.find("Pole").props().col).toBe(2);
+    expect(component.find("Pole").props().pole).toStrictEqual({
+      col: 2,
+      row: 2
+    });
   });
 });

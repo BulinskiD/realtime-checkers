@@ -45,7 +45,7 @@ export const Board = props => {
             inter
           );
         }, 1000);
-      } else setTimeSinceMove("ended");
+      }
 
       return () => {
         clearInterval(inter);

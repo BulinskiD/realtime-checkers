@@ -144,24 +144,6 @@ describe("Board", () => {
     );
   });
 
-  it("should call setTimeSinceMove with ended when game is ended", () => {
-    data.currentGame.status = BLACK_WINNER;
-    const store = mockStore({ ...data });
-    const props = {
-      ...data
-    };
-
-    let component = {};
-    act(() => {
-      component = mount(
-        <Provider store={store}>
-          <Board {...props} />
-        </Provider>
-      );
-    });
-    expect(component.find(".time").text()).toBe("ended");
-  });
-
   it("shouldn't call setActivePoles when selectedChecker is null", () => {
     const store = mockStore(data);
     data.currentGame.selectedChecker = null;
