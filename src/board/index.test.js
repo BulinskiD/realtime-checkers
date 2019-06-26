@@ -6,7 +6,9 @@ import { Provider } from "react-redux";
 import { firestore } from "../api/firebase";
 import getActivePoles from "../utils/getActivePoles";
 import PlayersManager from "./playersManager";
+import updatePlayersActiveState from "../utils/updatePlayersActiveState";
 
+jest.mock("../utils/updatePlayersActiveState");
 jest.mock("./playersManager");
 jest.mock("../utils/getActivePoles");
 jest.mock("../api/firebase");
