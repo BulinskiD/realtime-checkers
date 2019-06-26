@@ -29,34 +29,30 @@ firestore.collection.mockReturnValue({ doc });
 doc.mockReturnValue({ update });
 
 describe("Pole", () => {
-  it("should render black checker for given props", () => {
-    const props = {
-      id: "2",
-      status: "white",
-      nextMove: true,
-      isActiveTurn: true,
-      checkersPosition: [],
+  let props = {};
+  beforeEach(() => {
+    props = {
+      currentGame: {
+        id: "2",
+        status: "white",
+        nextMove: true,
+        isActiveTurn: true,
+        checkersPosition: []
+      },
       pole: { color: "black" },
       active: false,
       col: 1,
       row: 0
     };
+  });
+  it("should render black checker for given props", () => {
     const component = shallow(<Pole {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   it("should render active pole for given props", () => {
-    const props = {
-      id: "2",
-      status: "white",
-      isActiveTurn: true,
-      nextMove: true,
-      checkersPosition: [],
-      pole: null,
-      active: true,
-      col: 1,
-      row: 0
-    };
+    props.pole = null;
+    props.active = true;
     const component = shallow(<Pole {...props} />);
 
     expect(component.find("Connect(Checker)").exists()).toBeFalsy();
@@ -67,16 +63,10 @@ describe("Pole", () => {
   it("should handle move properly", async () => {
     const selectChecker = jest.fn();
     const setActivePoles = jest.fn();
-    const props = {
-      id: "2",
-      status: "white",
-      isActiveTurn: true,
-      nextMove: true,
-      checkersPosition: [],
+    const newProps = {
+      ...props,
       pole: null,
-      active: true,
-      col: 1,
-      row: 0,
+      active: false,
       selectChecker,
       setActivePoles
     };
@@ -89,7 +79,7 @@ describe("Pole", () => {
     const prom = Promise.resolve("OK");
     update.mockReturnValue(prom);
 
-    const component = shallow(<Pole {...props} />);
+    const component = shallow(<Pole {...newProps} />);
 
     component.find(".active").simulate("click");
 

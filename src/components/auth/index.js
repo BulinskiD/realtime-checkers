@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { userType } from "../../propTypes";
 import RegistrationForm from "./registrationForm";
 import Login from "./loginForm";
 import { LoginContainer, BackgroundContainer } from "../../styles/loginStyles";
@@ -55,7 +56,7 @@ export const Auth = props => {
 Auth.propTypes = {
   createUserWithEmailAndPassword: PropTypes.func,
   loginWithEmailAndPassword: PropTypes.func,
-  user: PropTypes.object
+  user: userType
 };
 
 const mapStateToProps = state => {

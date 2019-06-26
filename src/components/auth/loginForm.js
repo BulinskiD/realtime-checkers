@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { userType } from "../../propTypes";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LoginFormElement } from "../../styles/loginStyles";
@@ -63,7 +64,7 @@ const Login = props => {
 };
 
 Login.propTypes = {
-  user: PropTypes.object,
+  user: userType,
   loginWithEmailAndPassword: PropTypes.func
 };
 

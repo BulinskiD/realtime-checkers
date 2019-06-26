@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import PropTypes from "prop-types";
+import { userType } from "../../propTypes";
 import { LoginFormElement } from "../../styles/loginStyles";
 
 const RegistrationForm = props => {
@@ -86,7 +87,7 @@ const RegistrationForm = props => {
 };
 
 RegistrationForm.propTypes = {
-  user: PropTypes.object,
+  user: userType,
   createUserWithEmailAndPassword: PropTypes.func
 };
 

@@ -36,7 +36,7 @@ export const Board = props => {
       if (status === "black" || status === "white") {
         inter = setInterval(() => {
           const time = Math.ceil((Date.now() - updated) / 1000);
-          if (updated) setTimeSinceMove(time);
+          if (updated) setTimeSinceMove(180 - time);
           endGameAfterTimeout(
             time,
             status,
@@ -130,7 +130,7 @@ export const Board = props => {
 
   return (
     <FlexContainer>
-      <div className="time">{timeSinceMove}</div>
+      <div className="time">Pozostało {timeSinceMove} s</div>
       <PlayersManager gameID={props.match.params.id} />
       <BoardContainer>{renderBoard()}</BoardContainer>
     </FlexContainer>

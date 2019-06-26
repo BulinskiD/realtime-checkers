@@ -63,6 +63,7 @@ PlayersManager.propTypes = {
   user: PropTypes.string,
   gameAvailable: PropTypes.bool,
   canActivateGame: PropTypes.bool,
+  //From parent
   gameID: PropTypes.string
 };
 

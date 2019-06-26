@@ -19,7 +19,6 @@ exports[`Pole should render black checker for given props 1`] = `
 >
   <Connect(Checker)
     color="black"
-    isActiveTurn={true}
     status="white"
   />
 </styled.div>

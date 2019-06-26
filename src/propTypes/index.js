@@ -10,3 +10,30 @@ export const currentGameType = PropTypes.shape({
   selectedChecker: PropTypes.object,
   from: PropTypes.object
 });
+
+export const userType = PropTypes.shape({
+  email: PropTypes.string,
+  active: PropTypes.bool,
+  initial: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
+  error: PropTypes.string,
+  gameID: PropTypes.string
+});
+
+const polePropsType = PropTypes.shape({
+  selected: PropTypes.bool,
+  col: PropTypes.number,
+  row: PropTypes.number,
+  color: PropTypes.string
+});
+
+export const poleType = {
+  currentGame: currentGameType,
+  pole: polePropsType,
+  active: PropTypes.bool,
+  col: PropTypes.number,
+  row: PropTypes.number,
+  isActiveTurn: PropTypes.bool,
+  selectChecker: PropTypes.func,
+  setActivePoles: PropTypes.func
+};

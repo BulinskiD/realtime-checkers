@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Checker from "./checker";
-import PropTypes from "prop-types";
 import { PoleContainer, ActivePlace } from "../../styles/boardStyles";
 import { selectChecker, setActivePoles } from "../../store/actions/checkers";
 import { firestore } from "../../api/firebase";
@@ -12,33 +11,35 @@ import {
 } from "../../utils/utilFunctions";
 import moveChecker from "../../utils/moveChecker";
 import handleError from "../../utils/handleError";
+import { poleType } from "../../propTypes";
 
 export const Pole = props => {
   const { selected, col, row, color, isKing } = props.pole ? props.pole : {};
+  const { currentGame } = props.currentGame;
 
   const handleMove = async () => {
     let oldFrom = {};
     // Save selectedChecker in oldForm
-    Object.assign(oldFrom, props.selectedChecker);
+    Object.assign(oldFrom, props.currentGame.selectedChecker);
 
     const { checkersPosition, hasNextMove, selectedChecker } = moveChecker(
-      props.nextMove,
-      props.checkersPosition,
-      props.selectedChecker,
+      currentGame.nextMove,
+      currentGame.checkersPosition,
+      currentGame.selectedChecker,
       { col: props.col, row: props.row }
     );
-    let status = checkNextStatus(props.status, hasNextMove);
+    let status = checkNextStatus(currentGame.status, hasNextMove);
 
     // If its last move of color, save old from as empty object
     if (!hasNextMove) oldFrom = {};
 
-    const winner = checkIfWinner(checkersPosition, props.status);
+    const winner = checkIfWinner(checkersPosition, currentGame.status);
     if (winner) status = winner;
 
     try {
       await firestore
         .collection("games")
-        .doc(props.id)
+        .doc(currentGame.id)
         .update({
           status,
           checkersPosition,
@@ -62,7 +63,7 @@ export const Pole = props => {
           col={col}
           row={row}
           color={color}
-          status={props.status}
+          status={props.currentGame.status}
         />
       )}
       {!props.pole && props.active && (
@@ -76,21 +77,10 @@ export const Pole = props => {
 };
 
 const mapStateToProps = ({ currentGame }, ownProps) => {
-  const {
-    checkersPosition,
-    activePoles,
-    selectedChecker,
-    id,
-    status,
-    nextMove
-  } = currentGame;
+  const { checkersPosition, activePoles } = currentGame;
   return {
-    id: id,
-    status: status,
-    nextMove: nextMove,
-    checkersPosition: checkersPosition,
+    currentGame: currentGame,
     pole: getPole(ownProps.col, ownProps.row, checkersPosition),
-    selectedChecker: selectedChecker,
     active:
       activePoles &&
       activePoles.filter(
@@ -99,26 +89,7 @@ const mapStateToProps = ({ currentGame }, ownProps) => {
   };
 };
 
-const checkersShape = PropTypes.shape({
-  selected: PropTypes.bool,
-  col: PropTypes.number,
-  row: PropTypes.number,
-  color: PropTypes.string
-});
-
-Pole.propTypes = {
-  id: PropTypes.string,
-  status: PropTypes.string,
-  nextMove: PropTypes.bool,
-  checkersPosition: PropTypes.array,
-  pole: checkersShape,
-  active: PropTypes.bool,
-  col: PropTypes.number,
-  row: PropTypes.number,
-  isActiveTurn: PropTypes.bool,
-  selectChecker: PropTypes.func,
-  setActivePoles: PropTypes.func
-};
+Pole.propTypes = poleType;
 
 export default connect(
   mapStateToProps,
