@@ -7,10 +7,12 @@ import { Provider } from "react-redux";
 import { firestore } from "../../api/firebase";
 import getActivePoles from "../../utils/getActivePoles";
 import PlayersManager from "./playersManager";
+import Chat from "../chat";
 import updatePlayersActiveState from "../../utils/updatePlayersActiveState";
 import endGameAfterTimeout from "../../utils/endGameAfterTimeout";
 import { BLACK_WINNER } from "../../store/constants/actionTypes";
 
+jest.mock("../chat");
 jest.mock("../../utils/endGameAfterTimeout");
 jest.mock("../../utils/updatePlayersActiveState");
 jest.mock("./playersManager");

@@ -5,7 +5,7 @@ export const FlexContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const PlayersManagerContainer = styled.div`
+export const ColumnFlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 25%;

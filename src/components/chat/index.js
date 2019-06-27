@@ -9,21 +9,36 @@ import MessagesList from "./messagesList";
 export const Chat = props => {
   const [chat, setChat] = useState([]);
 
-  useEffect(() => {
-    const chatSubscriber = firestore
-      .collection("game")
-      .doc(props.gameID)
-      .onSnapshot(data => {
-        setChat(data.data());
-      });
+  useEffect(
+    () => {
+      const chatSubscriber = firestore
+        .collection("games")
+        .doc(props.gameID)
+        .collection("chat")
+        .orderBy("created")
+        .onSnapshot(data => {
+          if (data.docs.length > 0) {
+            let messages = [];
+            data.docs.map(item =>
+              messages.push({
+                content: item.data().content,
+                email: item.data().email,
+                created: item.data().created
+              })
+            );
+            setChat(messages);
+          }
+        });
 
-    return () => chatSubscriber();
-  }, []);
+      return () => chatSubscriber();
+    }, //eslint-disable-next-line
+    []
+  );
 
   return (
     <ChatContainer>
-      <MessagesList chat={chat} />
-      <MessageForm />
+      <MessagesList chat={chat} email={props.email} />
+      <MessageForm email={props.email} gameID={props.gameID} />
     </ChatContainer>
   );
 };

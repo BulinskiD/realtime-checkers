@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { BoardContainer, FlexContainer } from "../../styles/boardStyles";
+import {
+  BoardContainer,
+  FlexContainer,
+  ColumnFlexContainer
+} from "../../styles/boardStyles";
 import updatePlayersActiveState from "../../utils/updatePlayersActiveState";
 import endGameAfterTimeout from "../../utils/endGameAfterTimeout";
 import { firestore } from "../../api/firebase";
@@ -12,6 +16,7 @@ import {
   clearCurrentGame
 } from "../../store/actions/checkers";
 import getActivePoles from "../../utils/getActivePoles";
+import Chat from "../chat";
 import Pole from "./pole";
 import PlayersManager from "./playersManager";
 import { currentGameType } from "../../propTypes";
@@ -133,12 +138,15 @@ export const Board = props => {
 
   return (
     <FlexContainer>
-      <PlayersManager
-        gameID={props.match.params.id}
-        timeSinceMove={timeSinceMove}
-        percentage={(timeSinceMove / TIMEOUT_TIME) * 100}
-        history={props.history}
-      />
+      <ColumnFlexContainer>
+        <PlayersManager
+          gameID={props.match.params.id}
+          timeSinceMove={timeSinceMove}
+          percentage={(timeSinceMove / TIMEOUT_TIME) * 100}
+          history={props.history}
+        />
+        <Chat email={props.user.email} gameID={props.match.params.id} />
+      </ColumnFlexContainer>
       <BoardContainer>{renderBoard()}</BoardContainer>
     </FlexContainer>
   );

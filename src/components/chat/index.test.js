@@ -8,8 +8,8 @@ jest.mock("../../api/firebase");
 firestore.collection = jest.fn();
 const doc = jest.fn();
 firestore.collection.mockReturnValue({ doc });
-let item = [{ message: "test", author: "email" }];
-const data = { data: () => item };
+let item = { data: () => ({ content: "test", email: "email", created: 100 }) };
+const data = { docs: () => [item] };
 
 describe("Chat", () => {
   beforeEach(() => {
@@ -22,7 +22,9 @@ describe("Chat", () => {
       func(data);
       return unsubscriber;
     });
-    doc.mockReturnValue({ onSnapshot });
+    const orderBy = jest.fn().mockReturnValue({ onSnapshot });
+    const collection = jest.fn().mockReturnValue({ orderBy });
+    doc.mockReturnValue({ collection });
 
     act(() => {
       const component = mount(<Chat gameID="111" />);

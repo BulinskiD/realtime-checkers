@@ -5,7 +5,7 @@ import { BLACK_WINNER, WHITE_WINNER } from "../../store/constants/actionTypes";
 import leaveGame from "../../utils/leaveGame";
 import Button from "react-bootstrap/Button";
 import {
-  PlayersManagerContainer,
+  ColumnFlexContainer,
   PlayerHolder,
   PlayerItem,
   PlayerHolderTitle,
@@ -20,7 +20,7 @@ export const PlayersManager = props => {
   const { status, players } = props.currentGame;
 
   return (
-    <PlayersManagerContainer>
+    <ColumnFlexContainer>
       <PlayerHolderTitle>Aktywni gracze</PlayerHolderTitle>
       <PlayerHolder>
         {players.map(item => {
@@ -74,7 +74,7 @@ export const PlayersManager = props => {
             <TimeIndicator percentage={props.percentage} />
           </React.Fragment>
         ))}
-    </PlayersManagerContainer>
+    </ColumnFlexContainer>
   );
 };
 

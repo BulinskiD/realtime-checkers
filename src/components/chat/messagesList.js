@@ -1,14 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MessageItem from "./messageItem";
 
-const MessagesList = () => {
-  return <div>MessagesList</div>;
+const MessagesList = props => {
+  return (
+    <React.Fragment>
+      {props.chat.map(item => (
+        <MessageItem email={props.email} message={item} key={item.email} />
+      ))}
+    </React.Fragment>
+  );
 };
 
 MessagesList.propTypes = {
   chat: PropTypes.arrayOf(
     PropTypes.shape({
-      message: PropTypes.string,
+      content: PropTypes.string,
       email: PropTypes.string
     })
   )
