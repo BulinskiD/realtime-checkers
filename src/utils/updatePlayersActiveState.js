@@ -1,4 +1,5 @@
 import { firestore } from "../api/firebase";
+import handleError from "./handleError";
 
 export default async (players, email, gameID, isMounting) => {
   let isChange = false;
@@ -21,7 +22,7 @@ export default async (players, email, gameID, isMounting) => {
         });
     } catch (error) {
       if (error.code !== "not-found") {
-        //Handle error here
+        handleError();
         console.log(error);
       }
       //not-found is emitted when deleting game on leaving last player

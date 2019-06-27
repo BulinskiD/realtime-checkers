@@ -4,7 +4,9 @@ import ConnectedPlayersManager, { PlayersManager } from "./playersManager";
 import { shallow } from "enzyme";
 import startGame from "../../utils/startGame";
 import signUpToGame from "../../utils/signUpToGame";
+import leaveGame from "../../utils/leaveGame";
 
+jest.mock("../../utils/leaveGame");
 jest.mock("../../utils/startGame");
 jest.mock("../../utils/signUpToGame");
 let data;
@@ -59,6 +61,21 @@ describe("PlayersManager", () => {
     const component = shallow(<PlayersManager {...data} />);
     component.find("Button").simulate("click");
     expect(startGame).toHaveBeenCalledWith(data.currentGame, "test");
+  });
+
+  it("Should invoke leaveGame function on leave-game button clicked", () => {
+    data.canActivateGame = true;
+    data.gameAvailable = false;
+    data.canLeaveGame = true;
+    data.currentGame.status = "not-started";
+    data.history = {};
+    const component = shallow(<PlayersManager {...data} />);
+    component.find(".leave-game").simulate("click");
+    expect(leaveGame).toHaveBeenCalledWith(
+      data.currentGame,
+      "test",
+      data.history
+    );
   });
 
   it("Should display list of players", () => {

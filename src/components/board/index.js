@@ -16,6 +16,7 @@ import Pole from "./pole";
 import PlayersManager from "./playersManager";
 import { currentGameType } from "../../propTypes";
 import handleError from "../../utils/handleError";
+import { TIMEOUT_TIME } from "../../config/config-const";
 
 export const Board = props => {
   const { isActiveTurn } = props;
@@ -135,7 +136,7 @@ export const Board = props => {
       <PlayersManager
         gameID={props.match.params.id}
         timeSinceMove={timeSinceMove}
-        percentage={(timeSinceMove / 180) * 100}
+        percentage={(timeSinceMove / TIMEOUT_TIME) * 100}
         history={props.history}
       />
       <BoardContainer>{renderBoard()}</BoardContainer>
