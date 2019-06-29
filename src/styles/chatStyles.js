@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const ChatContainer = styled.div`
   margin-top: 5vh;
   height: 40vh;
+  border: 1px solid black;
+  background-color: white;
   overflow-y: scroll;
 `;
 
@@ -13,7 +15,6 @@ export const Message = styled.div`
   margin-left: ${props => (!props.isActive ? 0 : "15px")};
   margin-top: 5px;
   margin-bottom: 5px;
-  width: 90%;
   border-radius: 3%;
   background-color: ${props =>
     props.isActive ? "rgba(204, 51, 0, .4)" : "rgba(204, 51, 0, 1)"};
