@@ -7,8 +7,23 @@ export const ChatContainer = styled.div`
 `;
 
 export const Message = styled.div`
-  width: 100%;
-  background-color: ${props => (props.isActive ? "red" : "blue")};
-  padding-top: 5%;
-  padding-bottom: 5%;
+  position: relative;
+  color: white;
+  margin-right: ${props => (props.isActive ? 0 : "15px")};
+  margin-left: ${props => (!props.isActive ? 0 : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  border-radius: 3%;
+  background-color: ${props =>
+    props.isActive ? "rgba(204, 51, 0, .4)" : "rgba(204, 51, 0, 1)"};
+  padding: 0 30px 30px 30px;
+  word-wrap: break-word;
+`;
+
+export const MessageAuthor = styled.div`
+  position: absolute;
+  bottom: 5px;
+  right: 2px;
+  font-size: 0.6em;
 `;

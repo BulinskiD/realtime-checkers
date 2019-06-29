@@ -138,7 +138,7 @@ export const Board = props => {
 
   return (
     <FlexContainer>
-      <ColumnFlexContainer>
+      <ColumnFlexContainer width="30%">
         <PlayersManager
           gameID={props.match.params.id}
           timeSinceMove={timeSinceMove}

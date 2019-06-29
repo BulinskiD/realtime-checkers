@@ -2,7 +2,9 @@
 
 exports[`Board should render 64 poles and Start game button for given props 1`] = `
 <styled.div>
-  <styled.div>
+  <styled.div
+    width="30%"
+  >
     <Connect(PlayersManager)
       gameID="22"
       percentage={0}

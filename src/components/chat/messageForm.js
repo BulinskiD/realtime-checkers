@@ -20,6 +20,7 @@ const MessageForm = props => {
           email: props.email,
           created: Date.now()
         });
+      setMessage("");
     } catch (error) {
       handleError(error);
     }

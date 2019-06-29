@@ -1,11 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message } from "../../styles/chatStyles";
+import { Message, MessageAuthor } from "../../styles/chatStyles";
 
 const MessageItem = props => {
   const isActive = props.message.email === props.email;
 
-  return <Message isActive={isActive}>{props.message.content}</Message>;
+  return (
+    <Message isActive={isActive}>
+      {props.message.content}
+      <MessageAuthor>{props.message.email}</MessageAuthor>
+    </Message>
+  );
 };
 
 MessageItem.propTypes = {

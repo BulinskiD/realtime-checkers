@@ -8,7 +8,7 @@ export const FlexContainer = styled.div`
 export const ColumnFlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 25%;
+  width: ${props => (props.width ? props.width : "100%")};
 `;
 
 export const PlayerHolderTitle = styled.h4`

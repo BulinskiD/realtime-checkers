@@ -18,15 +18,16 @@ export const Chat = props => {
         .orderBy("created")
         .onSnapshot(data => {
           if (data.docs.length > 0) {
-            let messages = [];
-            data.docs.map(item =>
-              messages.push({
-                content: item.data().content,
-                email: item.data().email,
-                created: item.data().created
-              })
-            );
+            const messages = data.docs.map(item => ({
+              content: item.data().content,
+              email: item.data().email,
+              created: item.data().created
+            }));
             setChat(messages);
+
+            //Scroll to bottom on new message
+            const messagesContainer = document.getElementById("chat");
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
           }
         });
 
@@ -36,10 +37,12 @@ export const Chat = props => {
   );
 
   return (
-    <ChatContainer>
-      <MessagesList chat={chat} email={props.email} />
+    <React.Fragment>
+      <ChatContainer id="chat">
+        <MessagesList chat={chat} email={props.email} />
+      </ChatContainer>
       <MessageForm email={props.email} gameID={props.gameID} />
-    </ChatContainer>
+    </React.Fragment>
   );
 };
 
