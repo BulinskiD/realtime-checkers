@@ -67,13 +67,12 @@ export const PlayersManager = props => {
         </Button>
       )}
       <GameInfo status={status} />
-      {status === "black" ||
-        (status === "white" && (
-          <React.Fragment>
-            <div>Czas do końca ruchu</div>
-            <TimeIndicator percentage={props.percentage} />
-          </React.Fragment>
-        ))}
+      {(status === "black" || status === "white") && (
+        <React.Fragment>
+          <div>Czas do końca ruchu</div>
+          <TimeIndicator percentage={props.percentage} />
+        </React.Fragment>
+      )}
     </ColumnFlexContainer>
   );
 };
