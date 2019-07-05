@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayersManager Should display list of players 1`] = `
+<styled.div>
+  <styled.h4>
+    Aktywni gracze
+  </styled.h4>
+  <styled.div>
+    <styled.span
+      active={false}
+      key="test"
+    >
+      test
+    </styled.span>
+    <styled.span
+      active={false}
+      key="test2"
+    >
+      test2
+    </styled.span>
+  </styled.div>
+  <Button
+    active={false}
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Dołącz do gry
+  </Button>
+  <GameInfo
+    status="not-started"
+  />
+</styled.div>
+`;
+
+exports[`PlayersManager Should display sign_up button for given props 1`] = `
+<styled.div>
+  <styled.h4>
+    Aktywni gracze
+  </styled.h4>
+  <styled.div />
+  <Button
+    active={false}
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Dołącz do gry
+  </Button>
+  <GameInfo
+    status="not-started"
+  />
+</styled.div>
+`;
+
+exports[`PlayersManager Should display start_game button for given props 1`] = `
+<styled.div>
+  <styled.h4>
+    Aktywni gracze
+  </styled.h4>
+  <styled.div />
+  <Button
+    active={false}
+    className="start-game"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+    variant="primary"
+  >
+    Zacznij grę
+  </Button>
+  <GameInfo
+    status="not-started"
+  />
+</styled.div>
+`;

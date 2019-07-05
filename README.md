@@ -6,10 +6,12 @@ Purpose of this project is to create realtime, online checkers with React, Redux
 
 ## Development:
 
-### comming up:
+### v-0.1.0- Release 05.07.2019:
 
-- Online multiplayer game mode
-- Ability to register new users
+- Added multiplayer support
+- Ability to register new users with firebase auth
+- Added users chat
+- Added active/inactive users detection
 
 ### v-0.0.2- Release 18.06.2019:
 

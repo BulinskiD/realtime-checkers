@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertBox should display Alert when message is !== null 1`] = `
+<Alert
+  className="text-center"
+  closeLabel="Close alert"
+  show={true}
+  transition={[Function]}
+  variant="danger"
+>
+  error message
+</Alert>
+`;

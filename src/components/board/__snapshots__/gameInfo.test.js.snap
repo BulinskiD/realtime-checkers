@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameInfo should match snapshot for given props 1`] = `
+<Fragment>
+  <InfoModal
+    buttonText="Ok"
+    onClose={[Function]}
+    show={false}
+    title="Gra zakończona"
+  />
+  <div />
+</Fragment>
+`;
+
+exports[`GameInfo should render modal on game end 1`] = `
+<Fragment>
+  <InfoModal
+    buttonText="Ok"
+    onClose={[Function]}
+    show={false}
+    title="Gra zakończona"
+  />
+  <div />
+</Fragment>
+`;

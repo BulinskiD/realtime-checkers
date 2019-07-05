@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorChecker should add hover pseudo class for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={true}
+  isKing={false}
+  nextMove={true}
+>
+  <span
+    className="sc-bZQynM sc-gzVnrw dlrJJM"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render black component for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={false}
+  isKing={false}
+  nextMove={false}
+>
+  <span
+    className="sc-bZQynM sc-gzVnrw dnryUV"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render component with king markup 1`] = `
+<Styled(styled.span)
+  color="black"
+  hover={true}
+  isKing={true}
+  nextMove={true}
+>
+  <span
+    className="sc-bZQynM sc-gzVnrw dxRoIb"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`ColorChecker should render white component for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  hover={false}
+  isKing={false}
+  nextMove={false}
+>
+  <span
+    className="sc-bZQynM sc-gzVnrw bdXgyI"
+    color="white"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`PlayerItem should render darker blue color for active player 1`] = `
+<styled.span
+  active={true}
+  color="black"
+>
+  <span
+    className="sc-ifAKCX eVHhAM"
+    color="black"
+  />
+</styled.span>
+`;
+
+exports[`PlayerItem should render dimmer blue color for inactive player 1`] = `
+<styled.span
+  active={false}
+  color="white"
+>
+  <span
+    className="sc-ifAKCX erIbKd"
+    color="white"
+  />
+</styled.span>
+`;
+
+exports[`SelectedChecker should render black selectedChecker with king markup for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  isKing={true}
+>
+  <span
+    className="sc-bZQynM sc-htoDjs eTkGOS"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render black selectedChecker without king markup for given props 1`] = `
+<Styled(styled.span)
+  color="black"
+  isKing={false}
+>
+  <span
+    className="sc-bZQynM sc-htoDjs fNvhGE"
+    color="black"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render white selectedChecker with king markup for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  isKing={true}
+>
+  <span
+    className="sc-bZQynM sc-htoDjs kqXNZe"
+    color="white"
+  />
+</Styled(styled.span)>
+`;
+
+exports[`SelectedChecker should render white selectedChecker without king markup for given props 1`] = `
+<Styled(styled.span)
+  color="white"
+  isKing={false}
+>
+  <span
+    className="sc-bZQynM sc-htoDjs jvFLyS"
+    color="white"
+  />
+</Styled(styled.span)>
+`;
